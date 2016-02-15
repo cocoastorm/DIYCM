@@ -50,9 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AreaEntity.cs" />
     <Compile Include="Documents.cs" />
     <Compile Include="ProjectEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubCategoryEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
