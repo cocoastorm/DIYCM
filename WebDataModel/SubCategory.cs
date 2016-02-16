@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WebDataModel
 {
-    class SubCategoryEntity
+    class SubCategory
     {
         [Key]
         public int SubCategoryId { get; set; }
@@ -22,7 +22,7 @@ namespace WebDataModel
         [ForeignKey("MainCategoryEntity")]
         public int? CategoryId { get; set; }
         [ForeignKey("CategoryId")]
-        public virtual MainCategoryEntity MainCategoryEntity { get; set; }
+        public virtual Category MainCategoryEntity { get; set; }
 
         //TOTAL OF ALL QUOTES
         public decimal BudgetAmount { get; set; }
