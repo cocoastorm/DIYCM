@@ -50,11 +50,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AreaEntity.cs" />
+    <Compile Include="Area.cs" />
     <Compile Include="Documents.cs" />
-    <Compile Include="ProjectEntity.cs" />
+    <Compile Include="Category.cs" />
+    <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SubCategoryEntity.cs" />
+    <Compile Include="QuoteDetail.cs" />
+    <Compile Include="QuoteHeader.cs" />
+    <Compile Include="SubCategory.cs" />
+    <Compile Include="SupplierInvoiceDetail.cs" />
+    <Compile Include="SupplierInvoiceHeader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
