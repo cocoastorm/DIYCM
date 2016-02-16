@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebDataModel {
-    public class ProjectEntity {
+    public class Project {
         [Key]
         public int ProjectId { get; set; }
 
