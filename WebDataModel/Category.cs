@@ -6,14 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebDataModel {
-    public class MainCategoryEntity {
+namespace WebDataModel
+{
+    public class Category
+    {
         [Key]
         public int CategoryId { get; set; }
 
         [ForeignKey("ProjectEntity")]
-        public int ProjectId { get; set; }
-        public ProjectEntity ProjectEntity { get; set; }
+        public int? ProjectId { get; set; }
+        [ForeignKey("ProjectId")]
+        public Project ProjectEntity { get; set; }
 
         [MaxLength(30)]
         public string CategoryName { get; set; }
@@ -26,7 +29,7 @@ namespace WebDataModel {
 
         // TOTAL OF ALL SUB-ACTUAL$
         public decimal ActualAmount { get; set; }
-        
+
         public decimal PercentCompleted { get; set; }
 
         // BudgetAmount - ActualAmount
