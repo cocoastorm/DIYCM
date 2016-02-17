@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebDataModel
 {
-    class SupplierInvoiceHeader
+    public class SupplierInvoiceHeader
     {
         [MaxLength(20)]
         [Key]
@@ -45,6 +45,7 @@ namespace WebDataModel
         [MaxLength(15)]
         public string AddressCountry { get; set; }
 
+        [RegularExpression("Y|N")]
         public Boolean AmountPaid { get; set; }
 
         public DateTime PaymentDate { get; set; }

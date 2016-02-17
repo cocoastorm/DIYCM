@@ -13,9 +13,9 @@ namespace WebDataModel
         [Key]
         public int CategoryId { get; set; }
 
-        [ForeignKey("ProjectEntity")]
+        [ForeignKey("Project")]
         public int? ProjectId { get; set; }
-        [ForeignKey("ProjectId")]
+        
         public Project ProjectEntity { get; set; }
 
         [MaxLength(30)]

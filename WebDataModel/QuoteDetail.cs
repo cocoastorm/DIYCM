@@ -12,23 +12,39 @@ namespace WebDataModel
     {
         [Key]
         public int QuoteDetailId { get; set; }
+
         [MaxLength(4)]
         [ForeignKey("QuoteHeader")]
         public int? QuoteHeaderId { get; set; }
+
+        public QuoteHeader QuoteHeader { get; set; }
+
         [MaxLength(20)]
         public string PartId { get; set; }
+
         [MaxLength(255)]
         public string PartDescription { get; set; }
+
         [MaxLength(6)]
-        //[ForeignKey("MainCategoryEntity")]
+        [ForeignKey("Category")]
         public int? CategoryId { get; set; }
+
+        public Category Category { get; set; }
+
         [MaxLength(4)]
-        //[ForeignKey("SubcategoryEntity")]
+        [ForeignKey("SubCategory")]
         public int? SubCategoryId { get; set; }
+
+        public SubCategory SubCategory { get; set; }
+
         [MaxLength(4)]
-        //[ForeignKey("AreaEntity")]
+        [ForeignKey("Area")]
         public int? AreaId { get; set; }
+
+        public Area Area { get; set; }
+
         public float UnitPrice { get; set; }
+
         public string Notes { get; set; }
     }
 }

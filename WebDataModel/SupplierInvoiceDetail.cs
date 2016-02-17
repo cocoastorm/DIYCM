@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace WebDataModel
 {
-    class SupplierInvoiceDetail
+    public class SupplierInvoiceDetail
     {
         [MaxLength(20)]
         [ForeignKey("SupplierInvoiceHeader")]
         public string InvoiceId { get; set; }
+
+        public SupplierInvoiceHeader SupplierInvoiceHeader { get; set; }
 
         public int LineNumber { get; set; }
 
@@ -23,16 +25,22 @@ namespace WebDataModel
         public string PartDescription { get; set; }
 
         [MaxLength(6)]
-        [ForeignKey("SupplierInvoiceHeader")]
+        [ForeignKey("Category")]
         public int? CategoryId { get; set; }
 
-        [MaxLength(4)]
-        [ForeignKey("SupplierInvoiceHeader")]
-        public int? SubCategoryId { get; set; }
+        public Category Category { get; set; }
 
         [MaxLength(4)]
-        [ForeignKey("SupplierInvoiceHeader")]
+        [ForeignKey("SubCategory")]
+        public int? SubCategoryId { get; set; }
+
+        public SubCategory SubCategory { get; set; }
+        
+        [MaxLength(4)]
+        [ForeignKey("Area")]
         public int? AreaId { get; set; }
+
+        public Area Area { get; set; }
 
         public float UnitPrice { get; set; }
 
