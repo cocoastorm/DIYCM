@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebDataModel
 {
-    public class AreaEntity
+    public class Area
     {           
         [Key]
         [MaxLength(100)]
