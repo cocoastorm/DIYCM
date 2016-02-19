@@ -1,0 +1,8 @@
+﻿# Run these commands in the DataModel project. 
+# This produces the migrations in the WebAPI project.
+
+dnvm use 1.0.0-rc1-update1 -r coreclr -arch x64
+
+dnx ef migrations add ThirdCreate --context DiyCmContext --targetProject DiyCmDataModel
+
+dnx ef database update
