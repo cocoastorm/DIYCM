@@ -74,11 +74,18 @@ namespace DiyCmWebAPI
                 var context = serviceScope.ServiceProvider.GetService<DiyCmContext>();
                 SeedData.InitializeDocuments(context);
                 SeedData.InitializeAreas(context);
-                SeedData.InitializeCategories(context);
+
+
                 SeedData.InitializeProjects(context);
-                SeedData.InitializeQuoteDetails(context);
-                SeedData.InitializeQuoteHeaders(context);
+                SeedData.InitializeCategories(context);
                 SeedData.InitializeSubCategories(context);
+
+
+
+                SeedData.InitializeQuoteHeaders(context);
+                SeedData.InitializeQuoteDetails(context);
+             
+               
                 SeedData.InitializeSupplierInvoiceDetails(context);
                 SeedData.InitializeSupplierInvoiceHeaders(context);
             }

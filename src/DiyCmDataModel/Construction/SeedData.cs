@@ -88,7 +88,9 @@ namespace DiyCmDataModel.Construction
                 {
                     ProjectId = 100,
                     CategoryId = 100,
-                    CategoryName = "Design"
+                    CategoryName = "Design",
+                    Description = "A category"
+
                 });
                 db.Categories.Add(new Category
                 {
@@ -104,6 +106,7 @@ namespace DiyCmDataModel.Construction
                 });
                 db.Categories.Add(new Category
                 {
+                    ProjectId = 100,
                     CategoryId = 130,
                     CategoryName = "Excavation"
                 });
@@ -127,7 +130,8 @@ namespace DiyCmDataModel.Construction
                 });
                 db.Categories.Add(new Category
                 {
-                    ProjectId = 170,
+                    ProjectId = 100,
+                    CategoryId = 170,
                     CategoryName = "Plumbing"
                 });
                 db.Categories.Add(new Category
