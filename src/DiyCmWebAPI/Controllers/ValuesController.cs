@@ -8,11 +8,11 @@ using DiyCmDataModel.Construction;
 namespace DiyCmWebAPI.Controllers
 {
         [Route("api/[controller]")]
-        public class DocumentsController : Controller
+        public class ValuesController : Controller
         {
             private DiyCmContext _context { get; set; }
 
-            public DocumentsController(DiyCmContext context)
+            public ValuesController(DiyCmContext context)
             {
                 _context = context;
             }
