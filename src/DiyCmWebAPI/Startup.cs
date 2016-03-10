@@ -42,6 +42,7 @@ namespace DiyCmWebAPI
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+            services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()));
 
             var connection = Configuration["Data:DefaultConnection:SQLiteConnectionString"];
             connection = connection.Replace("=", "=" + _appEnv.ApplicationBasePath + "/");

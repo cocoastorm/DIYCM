@@ -4,11 +4,13 @@ using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
 using DiyCmDataModel.Construction;
+using Microsoft.AspNet.Cors;
 
 namespace DiyCmWebAPI.Controllers
 {
     [Produces("application/json")]
     [Route("api/Documents")]
+    [EnableCors("AllowAll")]
     public class DocumentsController : Controller
     {
         private DiyCmContext _context;
