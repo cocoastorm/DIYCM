@@ -9,4 +9,16 @@ app.config(function ($routeProvider) {
           controller: 'homeController'
       });
 
+    $routeProvider
+     .when('/projects', {
+         templateUrl: 'views/projects.html',
+         controller: 'homeController'
+     });
+
+    $routeProvider
+    .when('/singleProject', {
+        templateUrl: 'views/singleProject.html',
+        controller: 'homeController'
+    });
+
 });
