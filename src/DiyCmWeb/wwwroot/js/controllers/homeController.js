@@ -3,7 +3,7 @@
 //    $scope.message = 'Everyone come and look!';
 //});
 
-app.controller('homeController', ['$scope', '$http', function ($scope, $http) {
+app.controller('homeController', ['$scope', '$http', 'ProjectsService', function ($scope, $http, ProjectsService) {
     $scope.message = 'Everyone come and look!';
     var onGetAllComplete = function (data) {
         console.log(data);

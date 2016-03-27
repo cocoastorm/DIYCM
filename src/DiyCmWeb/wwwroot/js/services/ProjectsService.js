@@ -1,6 +1,6 @@
 ﻿(function () {
     var ProjectsService = function ($http) {
-        var baseUrl = 'http://diycm-api.azurewebsites.net/api/projects/';
+        var baseUrl = 'http://localhost:49983/api/projects/';
         var _getProject = function (id) {
             return $http.get(baseUrl + id)
              .then(function (response) {
