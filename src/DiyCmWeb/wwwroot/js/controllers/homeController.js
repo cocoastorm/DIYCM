@@ -11,6 +11,8 @@ app.controller('homeController', ['$scope', '$http', 'ProjectsService', function
     var onGetAllError = function (reason) {
         console.log(reason);
     };
-    ProjectsService.getAllProjects()
+    //ProjectsService.getAllProjects()
+    //.then(onGetAllComplete, onGetAllError);
+    ProjectsService.getAllProjectsBudgetActual()
     .then(onGetAllComplete, onGetAllError);
 }]);
