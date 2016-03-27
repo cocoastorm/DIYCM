@@ -4,7 +4,16 @@
   "dependencies": {
     "bootstrap": "3.3.5",
     "jquery": "2.1.4",
-    "jquery-validation": "1.14.0",
-    "jquery-validation-unobtrusive": "3.2.4"
+    "jquery-validation": "^1.15.0",
+    "jquery-validation-unobtrusive": "3.2.4",
+    "jquery-ui": "jqueryui#^1.11.4",
+    "font-awesome": "^4.5.0",
+    "Ionicons": "ionicons#^2.0.1",
+    "morris.js": "^0.5.1",
+    "bootstrap-datepicker": "^1.6.0",
+    "bootstrap-daterangepicker": "^2.1.19",
+    "iCheck": "icheck#^1.0.2",
+    "Chart.js": "chartjs#^1.0.2",
+    "fullcalendar": "^2.6.1"
   }
 }
