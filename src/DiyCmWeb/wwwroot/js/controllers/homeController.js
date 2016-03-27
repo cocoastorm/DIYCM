@@ -13,6 +13,10 @@ app.controller('homeController', ['$scope', '$http', 'ProjectsService', function
     };
     //ProjectsService.getAllProjects()
     //.then(onGetAllComplete, onGetAllError);
-    ProjectsService.getAllProjectsBudgetActual()
+    //ProjectsService.getAllProjectsBudgetActual()
+    //.then(onGetAllComplete, onGetAllError);
+    //ProjectsService.getAllProjectsDetailsCategory()
+    //.then(onGetAllComplete, onGetAllError);
+    ProjectsService.getAllProjectsDetailsSubCategory()
     .then(onGetAllComplete, onGetAllError);
 }]);
