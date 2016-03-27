@@ -91,13 +91,35 @@
                     var categories = response.data;
                     $http.get(baseUrl + 'projects').then(function (response) {
                         projects = response.data;
-                        $http.get(baseUrl + 'quotedetails').then(function(response) {
+                        $http.get(baseUrl + 'quotedetails').then(function (response) {
                             quotedetails = response.data;
-                            subcategories.forEach(function (subcategory) {
-                                categories.forEach(function (category) {
-                                    if (category.CategoryId == subcategory.CategoryId) {
-                                        subcategory.CategoryName = category.CategoryName;
-                                    }
+                            $http.get(baseUrl + 'quoteheaders').then(function (response) {
+                                quoteheaders = response.data;
+                                subcategories.forEach(function (subcategory) {
+                                    categories.forEach(function (category) {
+                                        if (category.CategoryId == subcategory.CategoryId) {
+                                            subcategory.CategoryName = category.CategoryName;
+                                            subcategory.ProjectId = category.ProjectId;
+                                        }
+                                    });
+                                    projects.forEach(function (project) {
+                                        if (subcategory.ProjectId == project.ProjectId) {
+                                            subcategory.ProjectName = project.ProjectName;
+                                        }
+                                    });
+                                    quotedetails.forEach(function (detail) {
+                                        if (detail.SubCategoryId == subcategory.SubCategoryId) {
+                                            subcategory.QuoteHeaderId = detail.QuoteHeaderId;
+                                            subcategory.PartId = detail.PartId;
+                                            subcategory.PartUnitPrice = detail.UnitPrice;
+                                            subcategory.PartDescription = detail.PartDescription;
+                                        }
+                                    })
+                                    quoteheaders.forEach(function (header) {
+                                        if (subcategory.QuoteHeaderId == header.QuoteHeaderId) {
+                                            subcategory.SupplierName = header.Supplier;
+                                        }
+                                    })
                                 });
                             });
                         });
