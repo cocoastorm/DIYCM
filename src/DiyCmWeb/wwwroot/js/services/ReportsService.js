@@ -1,8 +1,17 @@
 ﻿
 (function () {
+
     var projects = null;
-    var ProjectsService = function ($http) {
+    var categories = null;
+    var subcategories = null;
+    var quotedetails = null;
+    var quoteheaders = null;
+    var areas = null;
+
+    var ReportsService = function ($http) {
+
         var baseUrl = 'http://diycm-api.azurewebsites.net/api/';
+
         var _getProject = function (id) {
             return $http.get(baseUrl + id)
              .then(function (response) {
@@ -16,9 +25,8 @@
               });
         };
 
-        //returns project with summed budget and actual from categories api
-        //table
-        //projects.ProjectName | projects.BudgetAmount | projects.ActualAmount
+        //returns a JSON with project and summed up category budgets for the corresponding project -> charts?
+        // | ProjectName | BudgetAmount | ActualAmount |
         var _getAllProjectsBudgetActual = function () {
             return $http.get(baseUrl + 'projects').then(function (response) {
                 projects = response.data;
@@ -35,18 +43,20 @@
                         });
                         project.BudgetAmount = budgetSum;
                         project.ActualAmount = actualSum;
-                    }); 
+                    });
                 });
                 return projects;
             });
         };
 
-        //detailsbycategory
-        //table
-        //categories.ProjectName | categories.CategoryName | categories.PartDescription | categories.PartUnitPrice | categories.SupplierName
-        var _getAllProjectsDetailsCategory = function () {
+        //returns a JSON with all the information for categories details/summary
+        //summary table
+        // | ProjectName | CategoryName | BudgetAmount(cat) | ActualAmount(cat) | PercentCompleted |
+        //details table
+        // | ProjectName | CategoryName | BudgetAmount(cat) | ActualAmount(cat) | PercentCompleted | PartDesccription | PartUnitPrice | SupplierName |
+        var _getCategoryDetailsAndSummary = function () {
             return $http.get(baseUrl + 'categories').then(function (response) {
-                var categories = response.data;
+                categories = response.data;
                 $http.get(baseUrl + 'projects').then(function (response) {
                     projects = response.data;
                     $http.get(baseUrl + 'quotedetails').then(function (response) {
@@ -62,9 +72,11 @@
                                 });
                                 quotedetails.forEach(function (detail) {
                                     if (detail.CategoryId == category.CategoryId) {
-                                        category.PartId = detail.PartId;
-                                        category.PartDescription = detail.PartDescription;
                                         category.QuoteHeaderId = detail.QuoteHeaderId;
+                                        category.PartId = detail.PartId;
+                                        category.PartUnitPrice = detail.UnitPrice;
+                                        category.PartDescription = detail.PartDescription;
+
                                     }
                                 });
                                 quoteheaders.forEach(function (header) {
@@ -81,14 +93,16 @@
             });
         };
 
-        //detailsbysubcategory
-        //table
-        //subcategories.ProjectName | subcategories.SubcategoryName | subcategories.CategoryName | subcategories.SubcategoryBudget/Actual | subcategories.PartDescription 
-        var _getAllProjectsDetailsSubCategory = function () {
+        //returns a JSON with all the information for subcategories details/summmary
+        //summary table
+        // | ProjectName | CategoryName | SubCategoryName | BudgetAmount(subcat) | ActualAmount(subcat) | PercentCompleted |
+        //details tablae
+        // | ProjectName | CategoryName | SubCategoryName | PartDescription | PercentCompleted | PartUnitPrice | PercentDiscount | SupplierName |
+        var _getSubCategoryDetailsAndSummary = function () {
             return $http.get(baseUrl + 'subcategories').then(function (response) {
-                var subcategories = response.data;
+                subcategories = response.data;
                 $http.get(baseUrl + 'categories').then(function (response) {
-                    var categories = response.data;
+                    categories = response.data;
                     $http.get(baseUrl + 'projects').then(function (response) {
                         projects = response.data;
                         $http.get(baseUrl + 'quotedetails').then(function (response) {
@@ -118,6 +132,7 @@
                                     quoteheaders.forEach(function (header) {
                                         if (subcategory.QuoteHeaderId == header.QuoteHeaderId) {
                                             subcategory.SupplierName = header.Supplier;
+                                            subcategory.PercentDiscount = header.PercentDiscount;
                                         }
                                     })
                                 });
@@ -129,14 +144,61 @@
             });
         };
 
+        //returns a JSON with all the information activities (week by week filter?)
+        // | ProjectName | PartDescription | AreaRoom | StartDate | EndDate | SupplierName
+        var _getActivities = function () {
+            return $http.get(baseUrl + 'quoteheaders').then(function (response) {
+                quoteheaders = response.data;
+                $http.get(baseUrl + 'quotedetails').then(function (response) {
+                    quotedetails = response.data;
+                    $http.get(baseUrl + 'categories').then(function (response) {
+                        categories = response.data;
+                        $http.get(baseUrl + 'projects').then(function (response) {
+                            projects = response.data;
+                            $http.get(baseUrl + 'areas').then(function (response) {
+                                areas = response.data;
+                                quoteheaders.forEach(function (header) {
+                                    quoteDetails.forEach(function (detail) {
+                                        if (detail.QuoteHeaderId == header.QuoteHeaderId) {
+                                            header.PartDescription = detail.PartDescription;
+                                            header.CategoryId = detail.CategoryId;
+                                            header.AreaId = detail.AreaId;
+                                        }
+                                    });
+                                    categories.forEach(function (category) {
+                                        if (category.CategoryId == header.CategoryId) {
+                                            header.ProjectId = category.ProjectId;
+                                        }
+                                    });
+                                    projects.forEach(function (project) {
+                                        if (project.ProjectId == header.ProjectId) {
+                                            header.ProjectName = project.ProjectName;
+                                        }
+                                    });
+                                    areas.forEach(function (area) {
+                                        if (area.AreaId == header.AreaId) {
+                                            header.AreaRoom = area.AreaRoom;
+                                        }
+                                    });
+                                })
+                            });
+                        });
+                    });
+                });
+                return quoteheaders;
+            });
+        };
+
         return {
             getProject: _getProject,
+            getAllProjects: _getAllProjects,
+
             getAllProjectsBudgetActual: _getAllProjectsBudgetActual,
-            getAllProjectsDetailsCategory: _getAllProjectsDetailsCategory,
-            getAllProjectsDetailsSubCategory: _getAllProjectsDetailsSubCategory,
-            getAllProjects: _getAllProjects
+            getCategoryDetailsAndSummary: _getCategoryDetailsAndSummary,
+            getSubCategoryDetailsAndSummary: _getSubCategoryDetailsAndSummary,
+            getActivities: _getActivities
         };
     };
     var module = angular.module("diycm");
-    module.factory("ProjectsService", ProjectsService);
+    module.factory("ReportsService", ReportsService);
 }());

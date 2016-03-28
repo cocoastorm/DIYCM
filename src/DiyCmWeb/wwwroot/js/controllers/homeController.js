@@ -3,7 +3,8 @@
 //    $scope.message = 'Everyone come and look!';
 //});
 
-app.controller('homeController', ['$scope', '$http', 'ProjectsService', function ($scope, $http, ProjectsService) {
+app.controller('homeController', ['$scope', '$http', 'ReportsService', function ($scope, $http, ReportsService) {
+
     $scope.message = 'Everyone come and look!';
     var onGetAllComplete = function (data) {
         console.log(data);
@@ -11,12 +12,13 @@ app.controller('homeController', ['$scope', '$http', 'ProjectsService', function
     var onGetAllError = function (reason) {
         console.log(reason);
     };
-    //ProjectsService.getAllProjects()
-    //.then(onGetAllComplete, onGetAllError);
-    //ProjectsService.getAllProjectsBudgetActual()
-    //.then(onGetAllComplete, onGetAllError);
-    //ProjectsService.getAllProjectsDetailsCategory()
-    //.then(onGetAllComplete, onGetAllError);
-    ProjectsService.getAllProjectsDetailsSubCategory()
-    .then(onGetAllComplete, onGetAllError);
+
+    ReportsService.getAllProjectsBudgetActual()
+        .then(onGetAllComplete, onGetAllError);
+    ReportsService.getCategoryDetailsAndSummary()
+        .then(onGetAllComplete, onGetAllError);
+    ReportsService.getSubCategoryDetailsAndSummary()
+        .then(onGetAllComplete, onGetAllError);
+    ReportsService.getActivities()
+        .then(onGetAllComplete, onGetAllError);
 }]);
