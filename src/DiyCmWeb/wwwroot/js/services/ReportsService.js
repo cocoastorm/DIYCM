@@ -158,7 +158,7 @@
                             $http.get(baseUrl + 'areas').then(function (response) {
                                 areas = response.data;
                                 quoteheaders.forEach(function (header) {
-                                    quoteDetails.forEach(function (detail) {
+                                    quotedetails.forEach(function (detail) {
                                         if (detail.QuoteHeaderId == header.QuoteHeaderId) {
                                             header.PartDescription = detail.PartDescription;
                                             header.CategoryId = detail.CategoryId;
