@@ -10,8 +10,8 @@
 
     var ReportsService = function ($http) {
 
-        var baseUrl = 'http://diycm-api.azurewebsites.net/api/';
-        //var baseUrl = 'http://localhost:49983/api';
+        //var baseUrl = 'http://diycm-api.azurewebsites.net/api/';
+        var baseUrl = 'http://localhost:49983/api/';
 
         var _getProject = function (id) {
             return $http.get(baseUrl + id)
@@ -31,6 +31,7 @@
         var _getAllProjectsBudgetActual = function () {
             return $http.get(baseUrl + 'projects').then(function (response) {
                 projects = response.data;
+                console.log(projects);
                 $http.get(baseUrl + 'categories').then(function (response) {
                     var categorybudgets = response.data;
                     projects.forEach(function (project) {
@@ -45,9 +46,8 @@
                         project.BudgetAmount = budgetSum;
                         project.ActualAmount = actualSum;
                     });
+                    return projects;
                 });
-                console.log("budgetactual");
-                return projects;
             });
         };
 
@@ -66,6 +66,7 @@
                         $http.get(baseUrl + 'quoteheaders').then(function (response) {
                             quoteheaders = response.data;
                             categories.forEach(function (category) {
+                                category.ProjetName = '';
                                 projects.forEach(function (project) {
                                     if (project.ProjectId == category.ProjectId) {
                                         category.ProjectId = project.ProjectId;
@@ -91,7 +92,6 @@
 
                     });
                 });
-                console.log("categories");
                 return categories;
             });
         };
@@ -143,7 +143,6 @@
                         });
                     });
                 });
-                console.log("subcategories");
                 return subcategories;
             });
         };
@@ -189,7 +188,6 @@
                         });
                     });
                 });
-                console.log("activities");
                 return quoteheaders;
             });
         };
