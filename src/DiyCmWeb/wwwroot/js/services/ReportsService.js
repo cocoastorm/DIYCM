@@ -8,7 +8,7 @@
     var quoteheaders = null;
     var areas = null;
 
-    var ReportsService = function ($http) {
+    var ReportsService = function ($http, $q) {
 
         //var baseUrl = 'http://diycm-api.azurewebsites.net/api/';
         var baseUrl = 'http://localhost:49983/api/';
@@ -29,25 +29,26 @@
         //returns a JSON with project and summed up category budgets for the corresponding project -> charts?
         // | ProjectName | BudgetAmount | ActualAmount |
         var _getAllProjectsBudgetActual = function () {
-            return $http.get(baseUrl + 'projects').then(function (response) {
-                projects = response.data;
-                console.log(projects);
-                $http.get(baseUrl + 'categories').then(function (response) {
-                    var categorybudgets = response.data;
-                    projects.forEach(function (project) {
-                        var budgetSum = 0;
-                        var actualSum = 0;
-                        categorybudgets.forEach(function (budget) {
-                            if (project.ProjectId == budget.ProjectId) {
-                                budgetSum += budget.BudgetAmount;
-                                actualSum += budget.ActualAmount;
-                            }
-                        });
-                        project.BudgetAmount = budgetSum;
-                        project.ActualAmount = actualSum;
+
+            var reqProjects = $http.get(baseUrl + 'projects');
+            var reqCategories = $http.get(baseUrl + 'categories');
+
+            return $q.all([reqProjects, reqCategories]).then(function (values) {
+                projects = values[0].data;
+                var categorybudgets = values[1].data;
+                projects.forEach(function (project) {
+                    var budgetSum = 0;
+                    var actualSum = 0;
+                    categorybudgets.forEach(function (budget) {
+                        if (project.ProjectId == budget.ProjectId) {
+                            budgetSum += budget.BudgetAmount;
+                            actualSum += budget.ActualAmount;
+                        }
                     });
-                    return projects;
+                    project.BudgetAmount = budgetSum;
+                    project.ActualAmount = actualSum;
                 });
+                return projects;
             });
         };
 
@@ -203,5 +204,5 @@
         };
     };
     var module = angular.module("diycm");
-    module.factory("ReportsService", ReportsService);
+    module.factory("ReportsService", ['$http', '$q', ReportsService]);
 }());

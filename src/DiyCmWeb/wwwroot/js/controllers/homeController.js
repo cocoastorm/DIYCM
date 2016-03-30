@@ -9,33 +9,12 @@ app.controller('homeController', ['$scope', '$http', 'ReportsService', function 
 
     var onGetAllBudgetActual = function (data) {
         $scope.tableProjects = data;
-        //console.log($scope.tableProjects);
+        console.log(data);
     };
-    var onGetAllCategories = function (data) {
-        $scope.tableCategories = data;
-        //console.log($scope.tableCategories);
-    };
-    var onGetAllSubCategories = function (data) {
-        $scope.tableSubCategories = data;
-        //console.log($scope.tableSubCategories);
-    };
-    var onGetAllActivities = function (data) {
-        $scope.tableActivities = data;
-        //console.log($scope.tableActivities);
-    }
     var onGetAllError = function (reason) {
         console.log(reason);
     };
 
     ReportsService.getAllProjectsBudgetActual()
         .then(onGetAllBudgetActual, onGetAllError);
-
-    ReportsService.getCategoryDetailsAndSummary()
-        .then(onGetAllCategories, onGetAllError);
-
-    ReportsService.getSubCategoryDetailsAndSummary()
-        .then(onGetAllSubCategories, onGetAllError);
-
-    ReportsService.getActivities()
-        .then(onGetAllActivities, onGetAllError);
 }]);
