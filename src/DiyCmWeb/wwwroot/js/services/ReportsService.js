@@ -104,7 +104,6 @@
             var reqQuoteDetails = $http.get(baseUrl + 'quotedetails');
             var regQuoteHeaders = $http.get(baseUrl + 'quoteheaders');
 
-
             return $q.all([reqSubCategories, reqCategories, reqProjects, reqQuoteDetails, regQuoteHeaders]).then(function (values) {
                 var subCategories = values[0].data;
                 var categories = values[1].data;
@@ -147,45 +146,44 @@
         //returns a JSON with all the information activities (week by week filter?)
         // | ProjectName | PartDescription | AreaRoom | StartDate | EndDate | SupplierName
         var _getActivities = function () {
-            return $http.get(baseUrl + 'quoteheaders').then(function (response) {
-                quoteheaders = response.data;
-                $http.get(baseUrl + 'quotedetails').then(function (response) {
-                    quotedetails = response.data;
-                    $http.get(baseUrl + 'categories').then(function (response) {
-                        categories = response.data;
-                        $http.get(baseUrl + 'projects').then(function (response) {
-                            projects = response.data;
-                            $http.get(baseUrl + 'areas').then(function (response) {
-                                areas = response.data;
-                                quoteheaders.forEach(function (header) {
-                                    quotedetails.forEach(function (detail) {
-                                        if (detail.QuoteHeaderId == header.QuoteHeaderId) {
-                                            header.PartDescription = detail.PartDescription;
-                                            header.CategoryId = detail.CategoryId;
-                                            header.AreaId = detail.AreaId;
-                                        }
-                                    });
-                                    categories.forEach(function (category) {
-                                        if (category.CategoryId == header.CategoryId) {
-                                            header.ProjectId = category.ProjectId;
-                                        }
-                                    });
-                                    projects.forEach(function (project) {
-                                        if (project.ProjectId == header.ProjectId) {
-                                            header.ProjectName = project.ProjectName;
-                                        }
-                                    });
-                                    areas.forEach(function (area) {
-                                        if (area.AreaId == header.AreaId) {
-                                            header.AreaRoom = area.AreaRoom;
-                                        }
-                                    });
-                                })
-                            });
-                        });
+            var regQuoteHeaders = $http.get(baseUrl + 'quoteheaders');
+            var reqQuoteDetails = $http.get(baseUrl + 'quotedetails');
+            var reqCategories = $http.get(baseUrl + 'categories');
+            var reqProjects = $http.get(baseUrl + 'projects');
+            var reqAreas = $http.get(baseUrl + 'areas');
+
+            return $q.all([regQuoteHeaders, reqQuoteDetails, reqCategories, reqProjects, reqAreas]).then(function (values) {
+                var quoteHeaders = values[0].data;
+                var quoteDetails = values[1].data;
+                var categories = values[2].data;
+                var projects = values[3].data;
+                var areas = values[4].data;
+
+                quoteheaders.forEach(function (header) {
+                    quotedetails.forEach(function (detail) {
+                        if (detail.QuoteHeaderId == header.QuoteHeaderId) {
+                            header.PartDescription = detail.PartDescription;
+                            header.CategoryId = detail.CategoryId;
+                            header.AreaId = detail.AreaId;
+                        }
                     });
-                });
-                return quoteheaders;
+                    categories.forEach(function (category) {
+                        if (category.CategoryId == header.CategoryId) {
+                            header.ProjectId = category.ProjectId;
+                        }
+                    });
+                    projects.forEach(function (project) {
+                        if (project.ProjectId == header.ProjectId) {
+                            header.ProjectName = project.ProjectName;
+                        }
+                    });
+                    areas.forEach(function (area) {
+                        if (area.AreaId == header.AreaId) {
+                            header.AreaRoom = area.AreaRoom;
+                        }
+                    });
+                })
+                return quoteHeaders;
             });
         };
 
