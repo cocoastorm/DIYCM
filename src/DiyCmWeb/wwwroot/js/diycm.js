@@ -19,6 +19,16 @@ app.config(function ($routeProvider) {
         controller: 'singleProjectController',
         title: 'Project Details'
     })
+    .when('/quotes', {
+        templateUrl: 'views/quotes.html',
+        controller: 'homeController',
+        title: 'Quotes'
+    })
+    .when('/quotes-details', {
+        templateUrl: 'views/quotes-details.html',
+        controller: 'homeController',
+        title: 'Quote Details'
+      })
     .when('/categories', {
         templateUrl: 'views/categories.html',
         controller: 'homeController',
@@ -29,7 +39,6 @@ app.config(function ($routeProvider) {
         controller: 'homeController',
         title: 'All Sub-Categories'
     });
-
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });
