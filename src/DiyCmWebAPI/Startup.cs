@@ -42,6 +42,8 @@ namespace DiyCmWebAPI
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+            services.AddSwaggerGen();
+            
             services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()));
 
             var connection = Configuration["Data:DefaultConnection:SQLiteConnectionString"];
@@ -65,7 +67,10 @@ namespace DiyCmWebAPI
             app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseStaticFiles();
-
+            
+            app.UseSwaggerGen();
+ 			app.UseSwaggerUi();
+            
             app.UseMvc();
 
             using (var serviceScope = app.ApplicationServices
