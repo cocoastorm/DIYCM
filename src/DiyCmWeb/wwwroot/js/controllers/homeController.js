@@ -6,19 +6,33 @@
 app.controller('homeController', ['$scope', '$http', 'ReportsService', function ($scope, $http, ReportsService) {
 
     $scope.message = 'Everyone come and look!';
-    var onGetAllComplete = function (data) {
+
+    var onGetAllBudgetActual = function (data) {
+        $scope.tableProjects = data;
         console.log(data);
+    };
+    var onGetAllCategories = function (data) {
+        $scope.tableCategories = data;
+        console.log($scope.tableCategories);
+    };
+    var onGetAllSubCategories = function (data) {
+        $scope.tableSubCategories = data;
+        console.log($scope.tableSubCategories);
+    };
+    var onGetAllActivities = function (data) {
+        $scope.tableActivities = data;
+        console.log($scope.tableActivities);
     };
     var onGetAllError = function (reason) {
         console.log(reason);
     };
 
     ReportsService.getAllProjectsBudgetActual()
-        .then(onGetAllComplete, onGetAllError);
+        .then(onGetAllBudgetActual, onGetAllError);
     ReportsService.getCategoryDetailsAndSummary()
-        .then(onGetAllComplete, onGetAllError);
+       .then(onGetAllCategories, onGetAllError);
     ReportsService.getSubCategoryDetailsAndSummary()
-        .then(onGetAllComplete, onGetAllError);
+        .then(onGetAllSubCategories, onGetAllError);
     ReportsService.getActivities()
-        .then(onGetAllComplete, onGetAllError);
+        .then(onGetAllActivities, onGetAllError);
 }]);
