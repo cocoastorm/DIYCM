@@ -98,47 +98,48 @@
         //details tablae
         // | ProjectName | CategoryName | SubCategoryName | PartDescription | PercentCompleted | PartUnitPrice | PercentDiscount | SupplierName |
         var _getSubCategoryDetailsAndSummary = function () {
-            return $http.get(baseUrl + 'subcategories').then(function (response) {
-                subcategories = response.data;
-                $http.get(baseUrl + 'categories').then(function (response) {
-                    categories = response.data;
-                    $http.get(baseUrl + 'projects').then(function (response) {
-                        projects = response.data;
-                        $http.get(baseUrl + 'quotedetails').then(function (response) {
-                            quotedetails = response.data;
-                            $http.get(baseUrl + 'quoteheaders').then(function (response) {
-                                quoteheaders = response.data;
-                                subcategories.forEach(function (subcategory) {
-                                    categories.forEach(function (category) {
-                                        if (category.CategoryId == subcategory.CategoryId) {
-                                            subcategory.CategoryName = category.CategoryName;
-                                            subcategory.ProjectId = category.ProjectId;
-                                        }
-                                    });
-                                    projects.forEach(function (project) {
-                                        if (subcategory.ProjectId == project.ProjectId) {
-                                            subcategory.ProjectName = project.ProjectName;
-                                        }
-                                    });
-                                    quotedetails.forEach(function (detail) {
-                                        if (detail.SubCategoryId == subcategory.SubCategoryId) {
-                                            subcategory.QuoteHeaderId = detail.QuoteHeaderId;
-                                            subcategory.PartId = detail.PartId;
-                                            subcategory.PartUnitPrice = detail.UnitPrice;
-                                            subcategory.PartDescription = detail.PartDescription;
-                                        }
-                                    })
-                                    quoteheaders.forEach(function (header) {
-                                        if (subcategory.QuoteHeaderId == header.QuoteHeaderId) {
-                                            subcategory.SupplierName = header.Supplier;
-                                            subcategory.PercentDiscount = header.PercentDiscount;
-                                        }
-                                    })
-                                });
-                            });
-                        });
+            var reqSubCategories = $http.get(baseUrl + 'subcategories');
+            var reqCategories = $http.get(baseUrl + 'categories');
+            var reqProjects = $http.get(baseUrl + 'projects');
+            var reqQuoteDetails = $http.get(baseUrl + 'quotedetails');
+            var regQuoteHeaders = $http.get(baseUrl + 'quoteheaders');
+
+
+            return $q.all([reqSubCategories, reqCategories, reqProjects, reqQuoteDetails, regQuoteHeaders]).then(function (values) {
+                var subCategories = values[0].data;
+                var categories = values[1].data;
+                var projects = values[2].data;
+                var quoteDetails = values[3].data;
+                var quoteHeaders = values[4].data;
+
+                subcategories.forEach(function (subcategory) {
+                    categories.forEach(function (category) {
+                        if (category.CategoryId == subcategory.CategoryId) {
+                            subcategory.CategoryName = category.CategoryName;
+                            subcategory.ProjectId = category.ProjectId;
+                        }
                     });
+                    projects.forEach(function (project) {
+                        if (subcategory.ProjectId == project.ProjectId) {
+                            subcategory.ProjectName = project.ProjectName;
+                        }
+                    });
+                    quotedetails.forEach(function (detail) {
+                        if (detail.SubCategoryId == subcategory.SubCategoryId) {
+                            subcategory.QuoteHeaderId = detail.QuoteHeaderId;
+                            subcategory.PartId = detail.PartId;
+                            subcategory.PartUnitPrice = detail.UnitPrice;
+                            subcategory.PartDescription = detail.PartDescription;
+                        }
+                    })
+                    quoteheaders.forEach(function (header) {
+                        if (subcategory.QuoteHeaderId == header.QuoteHeaderId) {
+                            subcategory.SupplierName = header.Supplier;
+                            subcategory.PercentDiscount = header.PercentDiscount;
+                        }
+                    })
                 });
+
                 return subcategories;
             });
         };
