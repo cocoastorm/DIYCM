@@ -30,8 +30,6 @@ app.config(function ($routeProvider) {
         title: 'All Sub-Categories'
     });
 
-});
-
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });
