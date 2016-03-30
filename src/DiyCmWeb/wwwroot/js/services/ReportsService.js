@@ -105,11 +105,11 @@
             var regQuoteHeaders = $http.get(baseUrl + 'quoteheaders');
 
             return $q.all([reqSubCategories, reqCategories, reqProjects, reqQuoteDetails, regQuoteHeaders]).then(function (values) {
-                var subCategories = values[0].data;
+                var subcategories = values[0].data;
                 var categories = values[1].data;
                 var projects = values[2].data;
-                var quoteDetails = values[3].data;
-                var quoteHeaders = values[4].data;
+                var quotedetails = values[3].data;
+                var quoteheaders = values[4].data;
 
                 subcategories.forEach(function (subcategory) {
                     categories.forEach(function (category) {
@@ -153,8 +153,8 @@
             var reqAreas = $http.get(baseUrl + 'areas');
 
             return $q.all([regQuoteHeaders, reqQuoteDetails, reqCategories, reqProjects, reqAreas]).then(function (values) {
-                var quoteHeaders = values[0].data;
-                var quoteDetails = values[1].data;
+                var quoteheaders = values[0].data;
+                var quotedetails = values[1].data;
                 var categories = values[2].data;
                 var projects = values[3].data;
                 var areas = values[4].data;
@@ -183,7 +183,7 @@
                         }
                     });
                 })
-                return quoteHeaders;
+                return quoteheaders;
             });
         };
 
