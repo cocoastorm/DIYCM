@@ -18,8 +18,17 @@ app.config(function ($routeProvider) {
         templateUrl: 'views/singleProject.html',
         controller: 'homeController',
         title: 'Project Details'
+    })
+    .when('/quotes', {
+        templateUrl: 'views/quotes.html',
+        controller: 'homeController',
+        title: 'Quotes'
+    })
+    .when('/quotes-details', {
+        templateUrl: 'views/quotes-details.html',
+        controller: 'homeController',
+        title: 'Quote Details'
     });
-
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });
