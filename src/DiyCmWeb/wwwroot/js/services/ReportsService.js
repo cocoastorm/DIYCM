@@ -11,6 +11,7 @@
     var ReportsService = function ($http) {
 
         var baseUrl = 'http://diycm-api.azurewebsites.net/api/';
+        //var baseUrl = 'http://localhost:49983/api';
 
         var _getProject = function (id) {
             return $http.get(baseUrl + id)
@@ -45,6 +46,7 @@
                         project.ActualAmount = actualSum;
                     });
                 });
+                console.log("budgetactual");
                 return projects;
             });
         };
@@ -89,6 +91,7 @@
 
                     });
                 });
+                console.log("categories");
                 return categories;
             });
         };
@@ -140,6 +143,7 @@
                         });
                     });
                 });
+                console.log("subcategories");
                 return subcategories;
             });
         };
@@ -185,6 +189,7 @@
                         });
                     });
                 });
+                console.log("activities");
                 return quoteheaders;
             });
         };
