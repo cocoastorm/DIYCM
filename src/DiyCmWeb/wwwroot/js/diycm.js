@@ -18,7 +18,19 @@ app.config(function ($routeProvider) {
         templateUrl: 'views/singleProject.html',
         controller: 'singleProjectController',
         title: 'Project Details'
+    })
+    .when('/categories', {
+        templateUrl: 'views/categories.html',
+        controller: 'homeController',
+        title: 'All Categories'
+    })
+    .when('/subCategories', {
+        templateUrl: 'views/subCategories.html',
+        controller: 'homeController',
+        title: 'All Sub-Categories'
     });
+
+});
 
     $routeProvider.otherwise({ redirectTo: "/home" });
 
