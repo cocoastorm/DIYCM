@@ -2,14 +2,14 @@
 
     $scope.message = 'Everyone come and look!';
     var onGetAllComplete = function (data) {
-        console.log(data);
+        //console.log(data);
     };
     var onGetAllError = function (reason) {
         console.log(reason);
     };
 
-    ReportsService.getAllProjectsBudgetActual()
-        .then(onGetAllComplete, onGetAllError);
+    //ReportsService.getAllProjectsBudgetActual()
+    //    .then(onGetAllComplete, onGetAllError);
     ReportsService.getCategoryDetailsAndSummary()
         .then(onGetAllComplete, onGetAllError);
     ReportsService.getSubCategoryDetailsAndSummary()

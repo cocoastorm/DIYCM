@@ -1,4 +1,5 @@
-﻿<aside class="right-side">
+﻿<script>$(function () { $('#tabs').tabs(); });</script>
+<aside class="right-side">
     <section class="content">
 
         <div class="row" style="margin-bottom:5px;">
@@ -47,78 +48,138 @@
                     <header class="panel-heading">
                         Projects
                     </header>
-                    <div class="panel-body table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Project</th>
-                                    <th>Budget</th>
-                                    <th>Deadline</th>
-                                    <th>Status</th>
-                                    <th>Progress</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Renovate House</td>
-                                    <td>$20,000</td>
-                                    <td>10/10/2014</td>
-                                    <td><span class="label label-danger">in progress</span></td>
-                                    <td><span class="badge badge-info">50%</span></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Build Shed</td>
-                                    <td>$2,500</td>
-                                    <td>10/8/2014</td>
-                                    <td><span class="label label-success">completed</span></td>
-                                    <td><span class="badge badge-success">100%</span></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Lorem Ipsum</td>
-                                    <td>$100,000</td>
-                                    <td>10/12/2014</td>
-                                    <td><span class="label label-warning">in progress</span></td>
-                                    <td><span class="badge badge-warning">75%</span></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Lorem Ipsum</td>
-                                    <td>$56,320</td>
-                                    <td>10/01/2015</td>
-                                    <td><span class="label label-info">in progress</span></td>
-                                    <td><span class="badge badge-info">65%</span></td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Lorem Ipsum</td>
-                                    <td>$1000</td>
-                                    <td>01/11/2014</td>
-                                    <td><span class="label label-warning">in progress</span></td>
-                                    <td><span class="badge badge-danger">95%</span></td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Lorem Ipsum</td>
-                                    <td>$575</td>
-                                    <td>01/11/2014</td>
-                                    <td><span class="label label-info">in progress</span></td>
-                                    <td><span class="badge badge-success">95%</span></td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>Lorem Ipsum</td>
-                                    <td>$230</td>
-                                    <td>01/11/2014</td>
-                                    <td><span class="label label-info">in progress</span></td>
-                                    <td><span class="badge badge-success">95%</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <div id="tabs">
+                        <ul>
+                            <li><a href="#div_budget_actual">Budget vs Actual</a></li>
+                            <li><a href="#div_categories_summary">Categories Summary</a></li>
+                            <li><a href="#div_categories_details">Categories Details</a></li>
+                            <li><a href="#div_subcategories_summary">SubCategories Summary</a></li>
+                            <li><a href="#div_subcategories_details">SubCategories Details</a></li>
+                            <li><a href="#div_activities">Activities</a></li>
+                        </ul>
+                       <div class="panel-body table-responsive">
+                                <div id="div_budget_actual">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>Project</th>
+                                            <th>Budget</th>
+                                            <th>Actual</th>
+                                        </tr>
+                                        <tr ng-repeat="p in tableProjects">
+                                            <td>{{ p.ProjectName }}</td>
+                                            <td>{{ p.BudgetAmount }}</td>
+                                            <td>{{ p.ActualAmount }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div id="div_categories_summary">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>Project</th>
+                                            <th>Category</th>
+                                            <th>Budget</th>
+                                            <th>Actual</th>
+                                            <th>% Completed</th>
+                                        </tr>
+                                        <tr ng-repeat="cs in tableCategories">
+                                            <td>{{ cs.ProjectName }}</td>
+                                            <td>{{ cs.CategoryName }}</td>
+                                            <td>{{ cs.BudgetAmount }}</td>
+                                            <td>{{ cs.ActualAmount }}</td>
+                                            <td>{{ cs.PercentCompleted }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div id="div_categories_details">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>Project</th>
+                                            <th>Category</th>
+                                            <th>Budget</th>
+                                            <th>Actual</th>
+                                            <th>% Completed</th>
+                                            <th>Part</th>
+                                            <th>Unit Price</th>
+                                            <th>Supplier</th>
+                                        </tr>
+                                        <tr ng-repeat="cd in tableCategories">
+                                            <td>{{ cd.ProjectName }}</td>
+                                            <td>{{ cd.CategoryName }}</td>
+                                            <td>{{ cd.BudgetAmount }}</td>
+                                            <td>{{ cd.ActualAmount }}</td>
+                                            <td>{{ cd.PercentCompleted }}</td>
+                                            <td>{{ cd.PartDescription }}</td>
+                                            <td>{{ cd.PartUnitPrice }}</td>
+                                            <td>{{ cd.SupplierName }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div id="div_subcategories_summary">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>Project</th>
+                                            <th>Category</th>
+                                            <th>SubCategory</th>
+                                            <th>Budget</th>
+                                            <th>Actual</th>
+                                            <th>% Completed</th>
+                                        </tr>
+                                        <tr ng-repeat="scs in tableSubCategories">
+                                            <td>{{ scs.ProjectName }}</td>
+                                            <td>{{ scs.CategoryName }}</td>
+                                            <td>{{ scs.SubCategoryName }}</td>
+                                            <td>{{ scs.BudgetAmount }}</td>
+                                            <td>{{ scs.ActualAmount }}</td>
+                                            <td>{{ scs.PercentCompleted }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div id="div_subcategories_details">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>Project</th>
+                                            <th>Category</th>
+                                            <th>SubCategory</th>
+                                            <th>Part</th>
+                                            <th>% Completed</th>
+                                            <th>Unit Price</th>
+                                            <th>% Discount</th>
+                                        </tr>
+                                        <tr ng-repeat="scd in tableSubCategories">
+                                            <td>{{ scd.ProjectName }}</td>
+                                            <td>{{ scd.CategoryName }}</td>
+                                            <td>{{ scd.SubCategoryName }}</td>
+                                            <td>{{ scd.PartDescription }}</td>
+                                            <td>{{ scd.PercentCompleted }}</td>
+                                            <td>{{ scd.PartUnitPrice }}</td>
+                                            <td>{{ scd.PercentCompleted }}</td>
+                                            <td>{{ scd.SupplierName }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div id="div_activities">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>Project</th>
+                                            <th>Part</th>
+                                            <th>Area</th>
+                                            <th>Start</th>
+                                            <th>End</th>
+                                            <th>Supplier</th>
+                                        </tr>
+                                        <tr ng-repeat="a in tableActivities">
+                                            <td>{{ a.ProjectName }}</td>
+                                            <td>{{ a.PartDescription }}</td>
+                                            <td>{{ a.AreaRoom }}</td>
+                                            <td>{{ a.StartDate }}</td>
+                                            <td>{{ a.ExpiryDate }}</td>
+                                            <td>{{ a.Supplier }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                        </div>
+                </div>
+
                 </section>
             </div><!--end project list -->
             <div class="col-md-4">
