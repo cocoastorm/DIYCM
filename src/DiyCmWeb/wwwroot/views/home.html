@@ -1,4 +1,13 @@
 ﻿<script>$(function () { $('#tabs').tabs(); });</script>
+<!-- Filter search for projects -->
+<script language="javascript" type="text/javascript">
+    function filter(element) {
+        var value = $(element).val();
+
+    $('tr > td:not(:contains(' + value + '))').hide();
+    $('tr > td:contains(' + value + ')').show();
+}
+</script>
 <aside class="right-side">
     <section class="content">
 
@@ -48,16 +57,18 @@
                     <header class="panel-heading">
                         Projects
                     </header>
-                    <div id="tabs">
-                        <ul>
-                            <li><a href="#div_budget_actual">Budget vs Actual</a></li>
-                            <li><a href="#div_categories_summary">Categories Summary</a></li>
-                            <li><a href="#div_categories_details">Categories Details</a></li>
-                            <li><a href="#div_subcategories_summary">SubCategories Summary</a></li>
-                            <li><a href="#div_subcategories_details">SubCategories Details</a></li>
-                            <li><a href="#div_activities">Activities</a></li>
-                        </ul>
-                       <div class="panel-body table-responsive">
+                    <!-- Input search box for projects -->
+                        <input type="text" onkeyup="filter(this)" placeholder="Search..." />
+                        <div id="tabs">
+                            <ul>
+                                <li><a href="#div_budget_actual">Budget vs Actual</a></li>
+                                <li><a href="#div_categories_summary">Categories Summary</a></li>
+                                <li><a href="#div_categories_details">Categories Details</a></li>
+                                <li><a href="#div_subcategories_summary">SubCategories Summary</a></li>
+                                <li><a href="#div_subcategories_details">SubCategories Details</a></li>
+                                <li><a href="#div_activities">Activities</a></li>
+                            </ul>
+                            <div class="panel-body table-responsive">
                                 <div id="div_budget_actual">
                                     <table class="table table-hover">
                                         <tr>
@@ -177,10 +188,10 @@
                                         </tr>
                                     </table>
                                 </div>
+                            </div>
                         </div>
-                </div>
 
-                </section>
+</section>
             </div><!--end project list -->
             <div class="col-md-4">
                 <section class="panel">
