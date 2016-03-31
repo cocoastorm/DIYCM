@@ -4,8 +4,8 @@
     function filter(element) {
         var value = $(element).val();
 
-    $('#filter > td:not(:contains(' + value + '))').hide();
-    $('#filter > td:contains(' + value + ')').show();
+    $('tr[name="filter"]:not(:contains(' + value + '))').hide();
+    $('tr[name="filter"]:contains(' + value + ')').show();
 }
 </script>
 <aside class="right-side">
@@ -76,7 +76,7 @@
                                             <th>Budget</th>
                                             <th>Actual</th>
                                         </tr>
-                                        <tr id="filter" ng-repeat="p in tableProjects">
+                                        <tr name="filter" ng-repeat="p in tableProjects">
                                             <td>{{ p.ProjectName }}</td>
                                             <td>{{ p.BudgetAmount }}</td>
                                             <td>{{ p.ActualAmount }}</td>
@@ -92,7 +92,7 @@
                                             <th>Actual</th>
                                             <th>% Completed</th>
                                         </tr>
-                                        <tr ng-repeat="cs in tableCategories">
+                                        <tr name="filter" ng-repeat="cs in tableCategories">
                                             <td>{{ cs.ProjectName }}</td>
                                             <td>{{ cs.CategoryName }}</td>
                                             <td>{{ cs.BudgetAmount }}</td>
@@ -113,7 +113,7 @@
                                             <th>Unit Price</th>
                                             <th>Supplier</th>
                                         </tr>
-                                        <tr ng-repeat="cd in tableCategories">
+                                        <tr name="filter" ng-repeat="cd in tableCategories">
                                             <td>{{ cd.ProjectName }}</td>
                                             <td>{{ cd.CategoryName }}</td>
                                             <td>{{ cd.BudgetAmount }}</td>
@@ -135,7 +135,7 @@
                                             <th>Actual</th>
                                             <th>% Completed</th>
                                         </tr>
-                                        <tr ng-repeat="scs in tableSubCategories">
+                                        <tr name="filter" ng-repeat="scs in tableSubCategories">
                                             <td>{{ scs.ProjectName }}</td>
                                             <td>{{ scs.CategoryName }}</td>
                                             <td>{{ scs.SubCategoryName }}</td>
@@ -156,7 +156,7 @@
                                             <th>Unit Price</th>
                                             <th>% Discount</th>
                                         </tr>
-                                        <tr ng-repeat="scd in tableSubCategories">
+                                        <tr name="filter" ng-repeat="scd in tableSubCategories">
                                             <td>{{ scd.ProjectName }}</td>
                                             <td>{{ scd.CategoryName }}</td>
                                             <td>{{ scd.SubCategoryName }}</td>
@@ -178,7 +178,7 @@
                                             <th>End</th>
                                             <th>Supplier</th>
                                         </tr>
-                                        <tr ng-repeat="a in tableActivities">
+                                        <tr name="filter" ng-repeat="a in tableActivities">
                                             <td>{{ a.ProjectName }}</td>
                                             <td>{{ a.PartDescription }}</td>
                                             <td>{{ a.AreaRoom }}</td>
