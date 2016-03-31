@@ -4,8 +4,8 @@
     function filter(element) {
         var value = $(element).val();
 
-    $('tr > td:not(:contains(' + value + '))').hide();
-    $('tr > td:contains(' + value + ')').show();
+    $('#filter > td:not(:contains(' + value + '))').hide();
+    $('#filter > td:contains(' + value + ')').show();
 }
 </script>
 <aside class="right-side">
@@ -76,7 +76,7 @@
                                             <th>Budget</th>
                                             <th>Actual</th>
                                         </tr>
-                                        <tr ng-repeat="p in tableProjects">
+                                        <tr id="filter" ng-repeat="p in tableProjects">
                                             <td>{{ p.ProjectName }}</td>
                                             <td>{{ p.BudgetAmount }}</td>
                                             <td>{{ p.ActualAmount }}</td>
