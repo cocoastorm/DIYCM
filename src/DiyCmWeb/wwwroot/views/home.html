@@ -2,10 +2,13 @@
 <!-- Filter search for projects -->
 <script language="javascript" type="text/javascript">
     function filter(element) {
-        var value = $(element).val();
+        var value = $(element).val().toLowerCase();
+        var condition = $('tr[name="filter"]');
 
-    $('tr[name="filter"]:not(:contains(' + value + '))').hide();
-    $('tr[name="filter"]:contains(' + value + ')').show();
+        condition.hide();
+        condition.filter(function () {
+            return $(this).text().toLowerCase().indexOf(value) > -1;
+        }).show();
 }
 </script>
 <aside class="right-side">
