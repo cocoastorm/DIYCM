@@ -12,7 +12,7 @@ namespace DiyCmDataModel.Construction
         [Key]
         public int CategoryId { get; set; }
 
-        //[ForeignKey("Project")]
+        [ForeignKey("Project")]
         public int ProjectId { get; set; }
 
         public Project ProjectEntity { get; set; }

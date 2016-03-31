@@ -13,10 +13,12 @@ namespace DiyCmDataModel.Construction
         public int QuoteDetailId { get; set; }
 
         [MaxLength(4)]
-       // [ForeignKey("QuoteHeader")]
+        [ForeignKey("QuoteHeader")]
         public int QuoteHeaderId { get; set; }
 
         public QuoteHeader QuoteHeader { get; set; }
+
+        public int LineNumber { get; set; }
 
         [MaxLength(20)]
         public string PartId { get; set; }
@@ -25,24 +27,26 @@ namespace DiyCmDataModel.Construction
         public string PartDescription { get; set; }
 
         [MaxLength(6)]
-        //[ForeignKey("Category")]
+        [ForeignKey("Category")]
         public int CategoryId { get; set; }
 
         public Category Category { get; set; }
 
         [MaxLength(4)]
-        //[ForeignKey("SubCategory")]
+        [ForeignKey("SubCategory")]
         public int SubCategoryId { get; set; }
 
         public SubCategory SubCategory { get; set; }
 
         [MaxLength(4)]
-       // [ForeignKey("Area")]
+        [ForeignKey("Area")]
         public int AreaId { get; set; }
 
         public Area Area { get; set; }
 
         public decimal UnitPrice { get; set; }
+
+        public int Quantity { get; set; }
 
         public string Notes { get; set; }
     }

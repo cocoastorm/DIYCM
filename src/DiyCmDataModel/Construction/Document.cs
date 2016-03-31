@@ -13,6 +13,7 @@ namespace DiyCmDataModel.Construction
         [MaxLength(15)]
         public string DocumentType { get; set; }
 
-        public string Hyperlink { get; set; }
+        public string Title { get; set; }
+        //public string Hyperlink { get; set; }
     }
 }
