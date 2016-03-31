@@ -60,6 +60,22 @@ namespace DiyCmWebAPI.Controllers
                 return HttpBadRequest();
             }
 
+            // Get the old price so we can check the difference and update accordingly.
+            decimal oldPrice = _context.QuoteDetails.Where(q => q.QuoteDetailId == id).FirstOrDefault().UnitPrice;
+            decimal deltaPrice = quoteDetail.UnitPrice - oldPrice;
+
+            var subCategory = _context.SubCategories.Where(s => s.SubCategoryId == quoteDetail.SubCategoryId).FirstOrDefault();
+            // Update the budget
+            subCategory.BudgetAmount += deltaPrice;
+            // Update the variance amount
+            var oldVariance = subCategory.VarianceAmount;
+            subCategory.VarianceAmount = subCategory.ActualAmount - subCategory.BudgetAmount;
+            var deltaVariance = subCategory.VarianceAmount - oldVariance;
+            // Update the main category
+            var category = _context.Categories.Where(c => c.CategoryId == subCategory.CategoryId).FirstOrDefault();
+            category.BudgetAmount += deltaPrice;
+            category.VarianceAmount += deltaVariance;
+
             _context.Entry(quoteDetail).State = EntityState.Modified;
 
             try
@@ -91,6 +107,18 @@ namespace DiyCmWebAPI.Controllers
             }
 
             _context.QuoteDetails.Add(quoteDetail);
+            // Update the subcategory budget
+            var subCategory = _context.SubCategories.Where(s => s.SubCategoryId == quoteDetail.SubCategoryId).FirstOrDefault();
+            subCategory.BudgetAmount += quoteDetail.UnitPrice;
+            // Calculate variance amount
+            var oldVariance = subCategory.VarianceAmount;
+            subCategory.VarianceAmount = subCategory.ActualAmount - subCategory.BudgetAmount;
+            var deltaVariance = subCategory.VarianceAmount - oldVariance;
+            // Update the main category
+            var category = _context.Categories.Where(c => c.CategoryId == subCategory.CategoryId).FirstOrDefault();
+            category.BudgetAmount += quoteDetail.UnitPrice;
+            category.VarianceAmount += deltaVariance;
+
             try
             {
                 _context.SaveChanges();
@@ -124,6 +152,18 @@ namespace DiyCmWebAPI.Controllers
             {
                 return HttpNotFound();
             }
+
+            // Update the subcategory budget
+            var subCategory = _context.SubCategories.Where(s => s.SubCategoryId == quoteDetail.SubCategoryId).FirstOrDefault();
+            subCategory.BudgetAmount -= quoteDetail.UnitPrice;
+            // Calculate variance amount
+            var oldVariance = subCategory.VarianceAmount;
+            subCategory.VarianceAmount = subCategory.ActualAmount - subCategory.BudgetAmount;
+            var deltaVariance = subCategory.VarianceAmount - oldVariance;
+            // Update the main category
+            var category = _context.Categories.Where(c => c.CategoryId == subCategory.CategoryId).FirstOrDefault();
+            category.BudgetAmount -= quoteDetail.UnitPrice;
+            category.VarianceAmount += deltaVariance;
 
             _context.QuoteDetails.Remove(quoteDetail);
             _context.SaveChanges();
