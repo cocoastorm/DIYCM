@@ -131,6 +131,13 @@ namespace DiyCmWebAPI.Controllers
             return Ok(project);
         }
 
+        // GET: api/Homepage
+        [HttpGet]
+        [Route("api/Homepage")]
+        public IEnumerable<Project> GetHomepage() {
+            return _context.Projects;
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
