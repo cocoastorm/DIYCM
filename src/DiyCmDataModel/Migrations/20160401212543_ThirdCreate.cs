@@ -4,7 +4,7 @@ using Microsoft.Data.Entity.Migrations;
 
 namespace DiyCmDataModel.Migrations
 {
-    public partial class FourthCreate : Migration
+    public partial class ThirdCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,6 +20,19 @@ namespace DiyCmDataModel.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Area", x => x.AreaId);
+                });
+            migrationBuilder.CreateTable(
+                name: "Document",
+                columns: table => new
+                {
+                    DocumentId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DocumentType = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Document", x => x.DocumentId);
                 });
             migrationBuilder.CreateTable(
                 name: "Project",
@@ -65,32 +78,6 @@ namespace DiyCmDataModel.Migrations
                     table.PrimaryKey("PK_QuoteHeader", x => x.QuoteHeaderId);
                 });
             migrationBuilder.CreateTable(
-                name: "SupplierInvoiceHeader",
-                columns: table => new
-                {
-                    QuoteHeaderId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    AddressCity = table.Column<string>(nullable: true),
-                    AddressCountry = table.Column<string>(nullable: true),
-                    AddressPostalCode = table.Column<string>(nullable: true),
-                    AddressProvince = table.Column<string>(nullable: true),
-                    AddressStreet = table.Column<string>(nullable: true),
-                    AmountPaid = table.Column<char>(nullable: false),
-                    ContactName = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false),
-                    InvoiceId = table.Column<string>(nullable: true),
-                    PaymentDate = table.Column<DateTime>(nullable: false),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    ReferredBy = table.Column<string>(nullable: true),
-                    SH_AMOUNT = table.Column<decimal>(nullable: false),
-                    SH_AMOUNT_PAID = table.Column<decimal>(nullable: false),
-                    SupplierName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SupplierInvoiceHeader", x => x.QuoteHeaderId);
-                });
-            migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
                 {
@@ -112,6 +99,38 @@ namespace DiyCmDataModel.Migrations
                         column: x => x.ProjectId,
                         principalTable: "Project",
                         principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+            migrationBuilder.CreateTable(
+                name: "SupplierInvoiceHeader",
+                columns: table => new
+                {
+                    InvoiceId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    AddressCity = table.Column<string>(nullable: true),
+                    AddressCountry = table.Column<string>(nullable: true),
+                    AddressPostalCode = table.Column<string>(nullable: true),
+                    AddressProvince = table.Column<string>(nullable: true),
+                    AddressStreet = table.Column<string>(nullable: true),
+                    AmountPaid = table.Column<char>(nullable: false),
+                    ContactName = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    PaymentDate = table.Column<DateTime>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    QuoteHeaderId = table.Column<int>(nullable: false),
+                    ReferredBy = table.Column<string>(nullable: true),
+                    SH_AMOUNT = table.Column<decimal>(nullable: false),
+                    SH_AMOUNT_PAID = table.Column<decimal>(nullable: false),
+                    SupplierName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SupplierInvoiceHeader", x => x.InvoiceId);
+                    table.ForeignKey(
+                        name: "FK_SupplierInvoiceHeader_QuoteHeader_QuoteHeaderId",
+                        column: x => x.QuoteHeaderId,
+                        principalTable: "QuoteHeader",
+                        principalColumn: "QuoteHeaderId",
                         onDelete: ReferentialAction.Cascade);
                 });
             migrationBuilder.CreateTable(
@@ -146,9 +165,11 @@ namespace DiyCmDataModel.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     AreaId = table.Column<int>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
+                    LineNumber = table.Column<int>(nullable: false),
                     Notes = table.Column<string>(nullable: true),
                     PartDescription = table.Column<string>(nullable: true),
                     PartId = table.Column<string>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false),
                     QuoteHeaderId = table.Column<int>(nullable: false),
                     SubCategoryId = table.Column<int>(nullable: false),
                     UnitPrice = table.Column<decimal>(nullable: false)
@@ -185,15 +206,15 @@ namespace DiyCmDataModel.Migrations
                 name: "SupplierInvoiceDetail",
                 columns: table => new
                 {
-                    InvoiceId = table.Column<string>(nullable: false),
+                    InvoiceId = table.Column<int>(nullable: false),
                     LineNumber = table.Column<int>(nullable: false),
                     AreaId = table.Column<int>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
                     Notes = table.Column<string>(nullable: true),
                     PartDescription = table.Column<string>(nullable: true),
                     PartNumber = table.Column<string>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false),
                     SubCategoryId = table.Column<int>(nullable: false),
-                    SupplierInvoiceHeaderQuoteHeaderId = table.Column<int>(nullable: true),
                     UnitPrice = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
@@ -212,28 +233,29 @@ namespace DiyCmDataModel.Migrations
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_SupplierInvoiceDetail_SupplierInvoiceHeader_InvoiceId",
+                        column: x => x.InvoiceId,
+                        principalTable: "SupplierInvoiceHeader",
+                        principalColumn: "InvoiceId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_SupplierInvoiceDetail_SubCategory_SubCategoryId",
                         column: x => x.SubCategoryId,
                         principalTable: "SubCategory",
                         principalColumn: "SubCategoryId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SupplierInvoiceDetail_SupplierInvoiceHeader_SupplierInvoiceHeaderQuoteHeaderId",
-                        column: x => x.SupplierInvoiceHeaderQuoteHeaderId,
-                        principalTable: "SupplierInvoiceHeader",
-                        principalColumn: "QuoteHeaderId",
-                        onDelete: ReferentialAction.Restrict);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable("Document");
             migrationBuilder.DropTable("QuoteDetail");
             migrationBuilder.DropTable("SupplierInvoiceDetail");
-            migrationBuilder.DropTable("QuoteHeader");
             migrationBuilder.DropTable("Area");
-            migrationBuilder.DropTable("SubCategory");
             migrationBuilder.DropTable("SupplierInvoiceHeader");
+            migrationBuilder.DropTable("SubCategory");
+            migrationBuilder.DropTable("QuoteHeader");
             migrationBuilder.DropTable("Category");
             migrationBuilder.DropTable("Project");
         }
