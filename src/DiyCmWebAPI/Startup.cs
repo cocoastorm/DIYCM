@@ -92,8 +92,9 @@ namespace DiyCmWebAPI
                 SeedData.InitializeQuoteDetails(context);
              
                
-                SeedData.InitializeSupplierInvoiceDetails(context);
+
                 SeedData.InitializeSupplierInvoiceHeaders(context);
+                SeedData.InitializeSupplierInvoiceDetails(context);
             }
 
         }

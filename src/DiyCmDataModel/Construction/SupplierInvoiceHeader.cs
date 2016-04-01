@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,13 +11,16 @@ namespace DiyCmDataModel.Construction
     {
         [MaxLength(20)]
         [Key]
-        public string InvoiceId { get; set; }
+        public int InvoiceId { get; set; }
 
         [MaxLength(50)]
         public string SupplierName { get; set; }
 
         [MaxLength(4)]
+        [ForeignKey("QuoteHeader")]
         public int QuoteHeaderId { get; set; }
+
+        public QuoteHeader QuoteHeader { get; set; }
 
         public DateTime Date { get; set; }
 
