@@ -9,7 +9,6 @@ namespace DiyCmDataModel.Construction
 {
     public class SupplierInvoiceHeader
     {
-        [MaxLength(20)]
         [Key]
         public int InvoiceId { get; set; }
 

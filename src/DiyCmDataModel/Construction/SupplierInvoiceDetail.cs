@@ -10,7 +10,6 @@ namespace DiyCmDataModel.Construction
     public class SupplierInvoiceDetail
     {
         [Key, Column(Order = 0)]
-        [MaxLength(20)]
         [ForeignKey("SupplierInvoiceHeader")]
         public int InvoiceId { get; set; }
 
