@@ -29,7 +29,7 @@ namespace DiyCmWebAPI.Controllers
 
         // GET: api/SupplierInvoiceDetails/5
         [HttpGet("{id}", Name = "GetSupplierInvoiceDetail")]
-        public IActionResult GetSupplierInvoiceDetail([FromRoute] string id)
+        public IActionResult GetSupplierInvoiceDetail([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
@@ -48,7 +48,7 @@ namespace DiyCmWebAPI.Controllers
 
         // PUT: api/SupplierInvoiceDetails/5
         [HttpPut("{id}")]
-        public IActionResult PutSupplierInvoiceDetail(string id, [FromBody] SupplierInvoiceDetail supplierInvoiceDetail)
+        public IActionResult PutSupplierInvoiceDetail(int id, [FromBody] SupplierInvoiceDetail supplierInvoiceDetail)
         {
             if (!ModelState.IsValid)
             {
@@ -138,7 +138,7 @@ namespace DiyCmWebAPI.Controllers
 
         // DELETE: api/SupplierInvoiceDetails/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteSupplierInvoiceDetail(string id)
+        public IActionResult DeleteSupplierInvoiceDetail(int id)
         {
             if (!ModelState.IsValid)
             {
@@ -178,7 +178,7 @@ namespace DiyCmWebAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool SupplierInvoiceDetailExists(string id)
+        private bool SupplierInvoiceDetailExists(int id)
         {
             return _context.SupplierInvoiceDetails.Count(e => e.InvoiceId == id) > 0;
         }

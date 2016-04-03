@@ -8,7 +8,7 @@ namespace DiyCmDataModel.Construction
 {
     public class QuoteHeader
     {
-        [MaxLength(4)]
+        [Key]
         public int QuoteHeaderId { get; set; }
 
         [MaxLength(50)]

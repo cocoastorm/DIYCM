@@ -1,5 +1,5 @@
 ﻿dnvm use 1.0.0-rc1-update1 -r coreclr -arch x64
 
-dnx ef migrations add FourthCreate --context DiyCmContext --targetProject DiyCmWebAPI
+dnx ef migrations add FifthCreate --context DiyCmContext --targetProject DiyCmDataModel
 
 dnx ef database update

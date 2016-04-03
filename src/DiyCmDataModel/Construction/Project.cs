@@ -9,7 +9,6 @@ namespace DiyCmDataModel.Construction
     public class Project
     {
         [Key]
-        [MaxLength(4)]
         public int ProjectId { get; set; }
 
         [MaxLength(100)]
