@@ -33,55 +33,42 @@
         <!-- Main row -->
         <div class="row">
             <div class="col-md-8">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Projects
-                    </header>
-                    <div class="panel-body table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Project</th>
-                                    <th>Projected Start Date</th>
-                                    <th>Actual Start Date</th>
-                                    <th>Projected Finish Date</th>
-                                    <th>Actual Finish Date</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Renovate House</td>
-                                    <td>10/10/2014</td>
-                                    <td>14/10/2014</td>
-                                    <td>16/12/2014</td>
-                                    <td>5/01/2015</td>
-                                    <td><a href="#/singleProject"><span class="label label-info">Edit</span></a></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Build Cat Tree</td>
-                                    <td>22/03/2015</td>
-                                    <td>23/03/2015</td>
-                                    <td>16/04/2015</td>
-                                    <td>5/04/2015</td>
-                                    <td><a href="#/singleProject"><span class="label label-info">Edit</span></a></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Renovate Kitchen</td>
-                                    <td>10/12/2015</td>
-                                    <td>22/12/2015</td>
-                                    <td>01/02/2016</td>
-                                    <td>15/02/2016</td>
-                                    <td><a href="#/singleProject"><span class="label label-info">Edit</span></a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
+
+                    <div class="panel-group container" id="accordion" style="padding-left:0; padding-right:0; margin: 0 auto; width: 100%">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse1">
+                                    <h4 class="panel-title">
+                                        Project 1
+                                    </h4>
+                                </a>
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="col-md-7">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, dignissimos qui ab. Cupiditate obcaecati eos incidunt, sed. Nemo perspiciatis fuga commodi deserunt rem, atque impedit libero officia sapiente delectus beatae odit cum vel explicabo assumenda placeat tempora reiciendis suscipit est ab rerum dicta iste, at vero. Repellat pariatur voluptas vitae.</p>
+                                    </div>
+                                    <div class="col-md-2 col-md-offset-1 col-xs-6">
+                                        <dl>
+                                            <dt>ProjectStartDate</dt>
+                                            <dd>mm/dd/yyyy</dd>
+                                            <dt>ActualStartDate</dt>
+                                            <dd>mm/dd/yyyy</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-md-2 col-xs-6">
+                                        <dl>
+                                            <dt>ProjectFinishedDate</dt>
+                                            <dd>mm/dd/yyyy</dd>
+                                            <dt>ActualFinishedDate</dt>
+                                            <dd>mm/dd/yyyy</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+
             </div><!--end project list -->
             <div class="col-md-4">
                 <section class="panel">
