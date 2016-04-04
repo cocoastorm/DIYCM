@@ -135,10 +135,15 @@
     <script src="lib/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
     <!-- Bootstrap -->
     <script src="lib/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- Handles deprecated global moment -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
+    <script>
+    moment().format();
+    </script>
     <!-- daterangepicker -->
     <script src="lib/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
     <!-- Chart -->
-    <script src="lib/Chart.js/Chart.min.js" type="text/javascript"></script>
+    <script src="lib/Chart.js/Chart.js" type="text/javascript"></script> <!-- there is no minified version -->
     <!-- iCheck -->
     <script src="lib/iCheck/icheck.min.js" type="text/javascript"></script>
     <!-- calendar -->
