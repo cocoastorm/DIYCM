@@ -9,13 +9,12 @@
     background: #39435C !important;
 }
 
-/*@media screen and (max-width: 500px){*/
-    .panel-heading {
-        
-
-    }
-/*}*/
-
 h4.panel-title {
     color: white !important;
+}
+
+/* white background date picker */
+.ui-datepicker {
+    background: white;
+    border: solid 1px black;
 }
