@@ -18,5 +18,4 @@
 
 h4.panel-title {
     color: white !important;
-    overflow: overlay; /* forces edit button to stay within div */
 }
