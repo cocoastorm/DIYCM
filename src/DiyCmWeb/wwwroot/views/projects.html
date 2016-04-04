@@ -6,7 +6,7 @@
                 <div class="sm-st clearfix">
                     <span class="sm-st-icon st-red"><i class="fa fa-folder-open"></i></span>
                     <div class="sm-st-info">
-                        <span>3</span>
+                        <span>{{tableProjects.length}}</span>
                         Number of Projects
                     </div>
                 </div>
@@ -27,37 +27,41 @@
             <div class="col-md-8">
 
                     <div class="panel-group container" id="accordion" style="padding-left:0; padding-right:0; margin: 0 auto; width: 100%">
-                        <div class="panel panel-default">
+                        <div class="panel panel-default" ng-repeat="p in allProjects">
+
+                            <!-- Start of 1 Project -->
                             <div class="panel-heading">
                                 <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse1">
                                     <h4 class="panel-title">
-                                        Project 1
+                                        {{p.ProjectName}}
                                     </h4>
                                 </a>
                             </div>
                             <div id="collapse1" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <div class="col-md-7">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, dignissimos qui ab. Cupiditate obcaecati eos incidunt, sed. Nemo perspiciatis fuga commodi deserunt rem, atque impedit libero officia sapiente delectus beatae odit cum vel explicabo assumenda placeat tempora reiciendis suscipit est ab rerum dicta iste, at vero. Repellat pariatur voluptas vitae.</p>
+                                        <p>{{p.Description}}</p>
                                     </div>
                                     <div class="col-md-2 col-md-offset-1 col-xs-6">
                                         <dl>
                                             <dt>ProjectStartDate</dt>
-                                            <dd>mm/dd/yyyy</dd>
+                                            <dd>{{p.ProjectedStartDate}}</dd>
                                             <dt>ActualStartDate</dt>
-                                            <dd>mm/dd/yyyy</dd>
+                                            <dd>{{p.ActualStartDate}}</dd>
                                         </dl>
                                     </div>
                                     <div class="col-md-2 col-xs-6">
                                         <dl>
                                             <dt>ProjectFinishedDate</dt>
-                                            <dd>mm/dd/yyyy</dd>
+                                            <dd>{{p.ProjectedFinishDate}}</dd>
                                             <dt>ActualFinishedDate</dt>
                                             <dd>mm/dd/yyyy</dd>
                                         </dl>
                                     </div>
                                 </div>
                             </div>
+                            <!-- End of 1 Project -->
+
                         </div>
                       </div>
 

@@ -14,7 +14,7 @@
              });
         };
         var _getAllProjects = function () {
-            return $http.get(baseUrl)
+            return $http.get(baseUrl + "projects")
               .then(function (response) {
                   return response.data;
               });
