@@ -44,17 +44,17 @@
                                         <div class="col-md-2 col-md-offset-1 col-xs-6">
                                             <dl>
                                                 <dt>ProjectStartDate</dt>
-                                                <dd>{{p.ProjectedStartDate}}</dd>
+                                                <dd class="pstartDate">{{p.ProjectedStartDate}}</dd>
                                                 <dt>ActualStartDate</dt>
-                                                <dd>{{p.ActualStartDate}}</dd>
+                                                <dd class="astartDate">{{p.ActualStartDate}}</dd>
                                             </dl>
                                         </div>
                                         <div class="col-md-2 col-xs-6">
                                             <dl>
                                                 <dt>ProjectFinishedDate</dt>
-                                                <dd>{{p.ProjectedFinishDate}}</dd>
+                                                <dd class="pfinishDate">{{p.ProjectedFinishDate}}</dd>
                                                 <dt>ActualFinishedDate</dt>
-                                                <dd>{{p.ActualFinishDate}}</dd>
+                                                <dd class="afinishDate">{{p.ActualFinishDate}}</dd>
                                             </dl>
                                         </div>
                                         <span class="pull-right hidden-xs hidden-sm btn btn-default project-btn" data-id="{{p.ProjectId}}" onclick="editProject(this);"><i class="fa fa-pencil-square fa-4x"></i></span>
@@ -92,7 +92,6 @@
 
         // change project description
         var desc             = project.find(".project-description");
-        // console.log(desc);
         var desc_text_backup = desc.text();
 
         desc.html("<textarea id='desc'>" + desc_text_backup + "</textarea>");
@@ -100,7 +99,45 @@
         // change project button to save
         var btn             = project.find(".project-btn");
         var editBtn         = $(btn.children()[0]);
-        editBtn.removeClass("fa-pencil-square");
-        editBtn.addClass("fa-floppy-o");
+        editBtn.removeClass("fa-pencil-square").addClass("fa-floppy-o");
+
+        // grab ProjectedStartDate
+        var pstartDateStr = project.find(".pstartDate").text();
+        var pstartDate = new Date(pstartDateStr);
+        // console.log("Date String: " + pstartDateStr);
+        console.log(pstartDate);
+
+        // grab ActualStartDate
+        var astartDateStr = project.find(".astartDate").text();
+        var astartDate = new Date(astartDateStr);
+        // console.log("Date String: " + astartDateStr);
+        console.log(astartDate);
+
+        // grab ProjectedFinishDate
+        var pfinishDateStr = project.find(".pfinishDate").text();
+        var pfinishDate = new Date(pfinishDateStr);
+        // console.log("Date String: " + pfinishDateStr);
+        console.log(pfinishDate);
+
+        // grab ActualFinishDate
+        var afinishDateStr = project.find(".afinishDate").text();
+        var afinishDate = new Date(afinishDateStr);
+        // console.log("Date String: " + afinishDateStr);
+        console.log(afinishDate);
+
+        // a["key"] = val;
+        // $.each(a, function(i,v){})
+        dates = {
+          ".pstartDate" : pstartDate,
+          ".astartDate" : astartDate,
+          ".pfinishDate" : pfinishDate,
+          ".afinishDate" : afinishDate
+        };
+        console.log(dates);
+
+        // $.each(dates, function(index, value) {
+        //
+        // });
+
     }
 </script>
