@@ -28,55 +28,43 @@
 
                     <div class="panel-group container" id="accordion" style="padding-left:0; padding-right:0; margin: 0 auto; width: 100%">
                         <div class="panel panel-default" ng-repeat="p in allProjects">
+                            <div id="project-{{p.ProjectId}}"><!-- Start of 1 Project -->
+                                
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse1">
+                                        <h4 class="panel-title">{{p.ProjectName}}
 
-                            <!-- Start of 1 Project -->
-                            <div class="panel-heading">
-                                <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse1">
-                                    <h4 class="panel-title">
-                                        {{p.ProjectName}}
-
-                                        <span class="pull-right hidden-md hidden-lg"><i class="fa fa-pencil-square"></i></span>
-                                    </h4>
-                                </a>
-                            </div>
-                            <div id="collapse1" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <div class="col-md-7">
-                                        <p>{{p.Description}}</p>
-                                    </div>
-                                    <div class="col-md-2 col-md-offset-1 col-xs-6">
-                                        <dl>
-                                            <dt>ProjectStartDate</dt>
-                                            <dd>{{p.ProjectedStartDate}}</dd>
-                                            <dt>ActualStartDate</dt>
-                                            <dd>{{p.ActualStartDate}}</dd>
-                                        </dl>
-                                    </div>
-                                    <div class="col-md-2 col-xs-6">
-                                        <dl>
-                                            <dt>ProjectFinishedDate</dt>
-                                            <dd>{{p.ProjectedFinishDate}}</dd>
-                                            <dt>ActualFinishedDate</dt>
-                                            <dd>
-                                                <input class="datepicker" type="text" data-date-format="mm/dd/yyyy">
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                    <style>
-                                        .ui-datepicker {
-                                            background: white;
-                                            border: solid 1px black;
-                                        }
-                                    </style>
-                                    <script>
-                                        $(".datepicker").datepicker();
-                                    </script>
-
-                                    <span class="pull-right hidden-xs hidden-sm btn btn-default"><i class="fa fa-pencil-square fa-4x"></i></span>
+                                            <span class="pull-right hidden-md hidden-lg"><i class="fa fa-pencil-square"></i></span>
+                                        </h4>
+                                    </a>
                                 </div>
-                            </div>
-                            <!-- End of 1 Project -->
+                                <div id="collapse1" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="col-md-7">
+                                            <p>{{p.Description}}</p>
+                                        </div>
+                                        <div class="col-md-2 col-md-offset-1 col-xs-6">
+                                            <dl>
+                                                <dt>ProjectStartDate</dt>
+                                                <dd>{{p.ProjectedStartDate}}</dd>
+                                                <dt>ActualStartDate</dt>
+                                                <dd>{{p.ActualStartDate}}</dd>
+                                            </dl>
+                                        </div>
+                                        <div class="col-md-2 col-xs-6">
+                                            <dl>
+                                                <dt>ProjectFinishedDate</dt>
+                                                <dd>{{p.ProjectedFinishDate}}</dd>
+                                                <dt>ActualFinishedDate</dt>
+                                                <dd>{{p.ActualFinishDate}}</dd>
+                                            </dl>
+                                        </div>
 
+                                        <span class="pull-right hidden-xs hidden-sm btn btn-default" data-id="{{p.ProjectId}}" onclick="editProject(this);"><i class="fa fa-pencil-square fa-4x"></i></span>
+                                    </div>
+                                </div>
+                                
+                            </div><!-- End of 1 Project -->
                         </div>
                       </div>
 
@@ -85,3 +73,19 @@
         </div><!-- end main row -->
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
+
+<script>
+    function editProject (This) {
+        var id = $(This).attr('data-id');
+        var project = $("#project-" + id);
+        //console.log(project);
+
+        var children = project.children();
+
+        var name_cont        = $(children[0]);
+        var name_backup      = name_cont.find(".panel-title");
+        var name_text_backup = name_backup.text();
+        
+        name_cont.html("<input value='" + name_text_backup + "'/>");
+    }
+</script>
