@@ -32,8 +32,7 @@
                             <!-- Start of 1 Project -->
                                 <div class="panel-heading">
                                     <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse1">
-                                        <h4 class="panel-title">{{p.ProjectName}}
-                                            <span class="pull-right hidden-md hidden-lg"><i class="fa fa-pencil-square"></i></span>
+                                        <h4 class="panel-title">{{p.ProjectName}}<span class="pull-right hidden-md hidden-lg"><i class="fa fa-pencil-square"></i></span>
                                         </h4>
                                     </a>
                                 </div>
@@ -86,6 +85,8 @@
         var name_backup      = name_cont.find(".panel-title");
         var name_text_backup = name_backup.text();
         
-        name_cont.html("<input value='" + name_text_backup + "'/>");
+        name_cont.html("<input id='name' value='" + name_text_backup + "'/>");
+
+        $("#name").attr({ width: 'auto', size: $("#name").val().length });
     }
 </script>
