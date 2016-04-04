@@ -21,7 +21,7 @@ app.config(function ($routeProvider) {
     })
     .when('/quotes', {
         templateUrl: 'views/quotes.html',
-        controller: 'homeController',
+        controller: 'quoteheadersController',
         title: 'Quotes'
     })
     .when('/quotes-details', {

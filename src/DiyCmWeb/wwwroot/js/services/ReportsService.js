@@ -1,12 +1,11 @@
-﻿
 (function () {
 
     var areas = null;
 
     var ReportsService = function ($http, $q) {
 
-        //var baseUrl = 'http://diycm-api.azurewebsites.net/api/';
-        var baseUrl = 'http://localhost:49983/api/';
+        var baseUrl = 'http://diycm-api.azurewebsites.net/api/';
+        //var baseUrl = 'http://localhost:49983/api/';
 
         var _getProject = function (id) {
             return $http.get(baseUrl + id)
@@ -15,11 +14,18 @@
              });
         };
         var _getAllProjects = function () {
-            return $http.get(baseUrl)
+            return $http.get(baseUrl + "projects")
               .then(function (response) {
                   return response.data;
               });
         };
+        var _getAllQuoteHeaders = function () {
+            return $http.get(baseUrl + "QuoteHeaders")
+              .then(function (response) {
+                  return response.data;
+              });
+        };
+
 
         //returns a JSON with project and summed up category budgets for the corresponding project -> charts?
         // | ProjectName | BudgetAmount | ActualAmount |
@@ -194,7 +200,8 @@
             getAllProjectsBudgetActual: _getAllProjectsBudgetActual,
             getCategoryDetailsAndSummary: _getCategoryDetailsAndSummary,
             getSubCategoryDetailsAndSummary: _getSubCategoryDetailsAndSummary,
-            getActivities: _getActivities
+            getActivities: _getActivities,
+            getAllQuoteHeaders: _getAllQuoteHeaders
         };
     };
     var module = angular.module("diycm");

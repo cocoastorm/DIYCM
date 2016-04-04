@@ -8,8 +8,8 @@ using DiyCmDataModel.Construction;
 namespace DiyCmDataModel.Migrations
 {
     [DbContext(typeof(DiyCmContext))]
-    [Migration("20160301221039_FourthCreate")]
-    partial class FourthCreate
+    [Migration("20160401212543_ThirdCreate")]
+    partial class ThirdCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,7 +63,7 @@ namespace DiyCmDataModel.Migrations
                     b.Property<string>("DocumentType")
                         .HasAnnotation("MaxLength", 15);
 
-                    b.Property<string>("Hyperlink");
+                    b.Property<string>("Title");
 
                     b.HasKey("DocumentId");
                 });
@@ -102,6 +102,8 @@ namespace DiyCmDataModel.Migrations
                     b.Property<int>("CategoryId")
                         .HasAnnotation("MaxLength", 6);
 
+                    b.Property<int>("LineNumber");
+
                     b.Property<string>("Notes");
 
                     b.Property<string>("PartDescription")
@@ -109,6 +111,8 @@ namespace DiyCmDataModel.Migrations
 
                     b.Property<string>("PartId")
                         .HasAnnotation("MaxLength", 20);
+
+                    b.Property<int>("Quantity");
 
                     b.Property<int>("QuoteHeaderId")
                         .HasAnnotation("MaxLength", 4);
@@ -195,7 +199,7 @@ namespace DiyCmDataModel.Migrations
 
             modelBuilder.Entity("DiyCmDataModel.Construction.SupplierInvoiceDetail", b =>
                 {
-                    b.Property<string>("InvoiceId")
+                    b.Property<int>("InvoiceId")
                         .HasAnnotation("MaxLength", 20);
 
                     b.Property<int>("LineNumber");
@@ -214,10 +218,10 @@ namespace DiyCmDataModel.Migrations
                     b.Property<string>("PartNumber")
                         .HasAnnotation("MaxLength", 20);
 
+                    b.Property<int>("Quantity");
+
                     b.Property<int>("SubCategoryId")
                         .HasAnnotation("MaxLength", 4);
-
-                    b.Property<int?>("SupplierInvoiceHeaderQuoteHeaderId");
 
                     b.Property<decimal>("UnitPrice");
 
@@ -226,9 +230,9 @@ namespace DiyCmDataModel.Migrations
 
             modelBuilder.Entity("DiyCmDataModel.Construction.SupplierInvoiceHeader", b =>
                 {
-                    b.Property<int>("QuoteHeaderId")
+                    b.Property<int>("InvoiceId")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("MaxLength", 4);
+                        .HasAnnotation("MaxLength", 20);
 
                     b.Property<string>("AddressCity")
                         .HasAnnotation("MaxLength", 30);
@@ -252,13 +256,13 @@ namespace DiyCmDataModel.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<string>("InvoiceId")
-                        .HasAnnotation("MaxLength", 20);
-
                     b.Property<DateTime>("PaymentDate");
 
                     b.Property<string>("PhoneNumber")
                         .HasAnnotation("MaxLength", 13);
+
+                    b.Property<int>("QuoteHeaderId")
+                        .HasAnnotation("MaxLength", 4);
 
                     b.Property<string>("ReferredBy")
                         .HasAnnotation("MaxLength", 50);
@@ -270,7 +274,7 @@ namespace DiyCmDataModel.Migrations
                     b.Property<string>("SupplierName")
                         .HasAnnotation("MaxLength", 50);
 
-                    b.HasKey("QuoteHeaderId");
+                    b.HasKey("InvoiceId");
                 });
 
             modelBuilder.Entity("DiyCmDataModel.Construction.Category", b =>
@@ -316,13 +320,20 @@ namespace DiyCmDataModel.Migrations
                         .WithMany()
                         .HasForeignKey("CategoryId");
 
+                    b.HasOne("DiyCmDataModel.Construction.SupplierInvoiceHeader")
+                        .WithMany()
+                        .HasForeignKey("InvoiceId");
+
                     b.HasOne("DiyCmDataModel.Construction.SubCategory")
                         .WithMany()
                         .HasForeignKey("SubCategoryId");
+                });
 
-                    b.HasOne("DiyCmDataModel.Construction.SupplierInvoiceHeader")
+            modelBuilder.Entity("DiyCmDataModel.Construction.SupplierInvoiceHeader", b =>
+                {
+                    b.HasOne("DiyCmDataModel.Construction.QuoteHeader")
                         .WithMany()
-                        .HasForeignKey("SupplierInvoiceHeaderQuoteHeaderId");
+                        .HasForeignKey("QuoteHeaderId");
                 });
         }
     }

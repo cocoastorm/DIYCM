@@ -8,7 +8,7 @@ namespace DiyCmDataModel.Construction
 {
     public class Document
     {
-        [MaxLength(10)]
+        [Key]
         public int DocumentId { get; set; }
         [MaxLength(15)]
         public string DocumentType { get; set; }

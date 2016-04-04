@@ -1,11 +1,18 @@
-﻿<script>$(function () { $('#tabs').tabs(); });</script>
+﻿<script>
+    $('#myTabs a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })</script>
 <!-- Filter search for projects -->
 <script language="javascript" type="text/javascript">
     function filter(element) {
-        var value = $(element).val();
+        var value = $(element).val().toLowerCase();
+        var condition = $('tr[name="filter"]');
 
-    $('tr[name="filter"]:not(:contains(' + value + '))').hide();
-    $('tr[name="filter"]:contains(' + value + ')').show();
+        condition.hide();
+        condition.filter(function () {
+            return $(this).text().toLowerCase().indexOf(value) > -1;
+        }).show();
 }
 </script>
 <aside class="right-side">
@@ -43,8 +50,8 @@
                 <div class="sm-st clearfix">
                     <span class="sm-st-icon st-green"><i class="fa fa-paperclip"></i></span>
                     <div class="sm-st-info">
-                        <span>2</span>
-                        Projects
+                        <span>{{tableProjects.length}}</span>
+                        Project(s)
                     </div>
                 </div>
             </div>
@@ -59,135 +66,148 @@
                     </header>
                     <!-- Input search box for projects -->
                         <input type="text" onkeyup="filter(this)" placeholder="Search..." />
-                        <div id="tabs">
-                            <ul>
-                                <li><a href="#div_budget_actual">Budget vs Actual</a></li>
-                                <li><a href="#div_categories_summary">Categories Summary</a></li>
-                                <li><a href="#div_categories_details">Categories Details</a></li>
-                                <li><a href="#div_subcategories_summary">SubCategories Summary</a></li>
-                                <li><a href="#div_subcategories_details">SubCategories Details</a></li>
-                                <li><a href="#div_activities">Activities</a></li>
-                            </ul>
-                            <div class="panel-body table-responsive">
-                                <div id="div_budget_actual">
-                                    <table class="table table-hover">
-                                        <tr>
-                                            <th>Project</th>
-                                            <th>Budget</th>
-                                            <th>Actual</th>
-                                        </tr>
-                                        <tr name="filter" ng-repeat="p in tableProjects">
-                                            <td>{{ p.ProjectName }}</td>
-                                            <td>{{ p.BudgetAmount }}</td>
-                                            <td>{{ p.ActualAmount }}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div id="div_categories_summary">
-                                    <table class="table table-hover">
-                                        <tr>
-                                            <th>Project</th>
-                                            <th>Category</th>
-                                            <th>Budget</th>
-                                            <th>Actual</th>
-                                            <th>% Completed</th>
-                                        </tr>
-                                        <tr name="filter" ng-repeat="cs in tableCategories">
-                                            <td>{{ cs.ProjectName }}</td>
-                                            <td>{{ cs.CategoryName }}</td>
-                                            <td>{{ cs.BudgetAmount }}</td>
-                                            <td>{{ cs.ActualAmount }}</td>
-                                            <td>{{ cs.PercentCompleted }}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div id="div_categories_details">
-                                    <table class="table table-hover">
-                                        <tr>
-                                            <th>Project</th>
-                                            <th>Category</th>
-                                            <th>Budget</th>
-                                            <th>Actual</th>
-                                            <th>% Completed</th>
-                                            <th>Part</th>
-                                            <th>Unit Price</th>
-                                            <th>Supplier</th>
-                                        </tr>
-                                        <tr name="filter" ng-repeat="cd in tableCategories">
-                                            <td>{{ cd.ProjectName }}</td>
-                                            <td>{{ cd.CategoryName }}</td>
-                                            <td>{{ cd.BudgetAmount }}</td>
-                                            <td>{{ cd.ActualAmount }}</td>
-                                            <td>{{ cd.PercentCompleted }}</td>
-                                            <td>{{ cd.PartDescription }}</td>
-                                            <td>{{ cd.PartUnitPrice }}</td>
-                                            <td>{{ cd.SupplierName }}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div id="div_subcategories_summary">
-                                    <table class="table table-hover">
-                                        <tr>
-                                            <th>Project</th>
-                                            <th>Category</th>
-                                            <th>SubCategory</th>
-                                            <th>Budget</th>
-                                            <th>Actual</th>
-                                            <th>% Completed</th>
-                                        </tr>
-                                        <tr name="filter" ng-repeat="scs in tableSubCategories">
-                                            <td>{{ scs.ProjectName }}</td>
-                                            <td>{{ scs.CategoryName }}</td>
-                                            <td>{{ scs.SubCategoryName }}</td>
-                                            <td>{{ scs.BudgetAmount }}</td>
-                                            <td>{{ scs.ActualAmount }}</td>
-                                            <td>{{ scs.PercentCompleted }}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div id="div_subcategories_details">
-                                    <table class="table table-hover">
-                                        <tr>
-                                            <th>Project</th>
-                                            <th>Category</th>
-                                            <th>SubCategory</th>
-                                            <th>Part</th>
-                                            <th>% Completed</th>
-                                            <th>Unit Price</th>
-                                            <th>% Discount</th>
-                                        </tr>
-                                        <tr name="filter" ng-repeat="scd in tableSubCategories">
-                                            <td>{{ scd.ProjectName }}</td>
-                                            <td>{{ scd.CategoryName }}</td>
-                                            <td>{{ scd.SubCategoryName }}</td>
-                                            <td>{{ scd.PartDescription }}</td>
-                                            <td>{{ scd.PercentCompleted }}</td>
-                                            <td>{{ scd.PartUnitPrice }}</td>
-                                            <td>{{ scd.PercentCompleted }}</td>
-                                            <td>{{ scd.SupplierName }}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div id="div_activities">
-                                    <table class="table table-hover">
-                                        <tr>
-                                            <th>Project</th>
-                                            <th>Part</th>
-                                            <th>Area</th>
-                                            <th>Start</th>
-                                            <th>End</th>
-                                            <th>Supplier</th>
-                                        </tr>
-                                        <tr name="filter" ng-repeat="a in tableActivities">
-                                            <td>{{ a.ProjectName }}</td>
-                                            <td>{{ a.PartDescription }}</td>
-                                            <td>{{ a.AreaRoom }}</td>
-                                            <td>{{ a.StartDate }}</td>
-                                            <td>{{ a.ExpiryDate }}</td>
-                                            <td>{{ a.Supplier }}</td>
-                                        </tr>
-                                    </table>
-                                </div>
+                        <ul id="myTabs" class="nav nav-tabs">
+                            <li role="presentation"><a href="#div_budget_actual" aria-controls="div_budget_actual" role="tab" data-toggle="tab">Budget vs Actual</a></li>
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Categories <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li role="presentation"><a href="#div_categories_summary" aria-controls="div_categories_summary" role="tab" data-toggle="tab">Categories Summary</a></li>
+                                    <li role="presentation"><a href="#div_categories_details" aria-controls="div_categories_details" role="tab" data-toggle="tab">Categories Details</a></li>
+                                </ul>
+                            </li>
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Sub-Categories <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li role="presentation"><a href="#div_subcategories_summary" aria-controls="div_subcategories_summary" role="tab" data-toggle="tab">SubCategories Summary</a></li>
+                                    <li role="presentation"><a href="#div_subcategories_details" aria-controls="div_subcategories_details" role="tab" data-toggle="tab">SubCategories Details</a></li>
+                                </ul>
+                            </li>
+                            <li role="presentation"><a href="#div_activities" aria-controls="div_activities" role="tab" data-toggle="tab">Activities</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="div_budget_actual">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>Project</th>
+                                        <th>Budget</th>
+                                        <th>Actual</th>
+                                    </tr>
+                                    <tr name="filter" ng-repeat="p in tableProjects">
+                                        <td>{{ p.ProjectName }}</td>
+                                        <td>{{ p.BudgetAmount }}</td>
+                                        <td>{{ p.ActualAmount }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="div_categories_summary">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>Project</th>
+                                        <th>Category</th>
+                                        <th>Budget</th>
+                                        <th>Actual</th>
+                                        <th>% Completed</th>
+                                    </tr>
+                                    <tr name="filter" ng-repeat="cs in tableCategories">
+                                        <td>{{ cs.ProjectName }}</td>
+                                        <td>{{ cs.CategoryName }}</td>
+                                        <td>{{ cs.BudgetAmount }}</td>
+                                        <td>{{ cs.ActualAmount }}</td>
+                                        <td>{{ cs.PercentCompleted }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="div_categories_details">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>Project</th>
+                                        <th>Category</th>
+                                        <th>Budget</th>
+                                        <th>Actual</th>
+                                        <th>% Completed</th>
+                                        <th>Part</th>
+                                        <th>Unit Price</th>
+                                        <th>Supplier</th>
+                                    </tr>
+                                    <tr name="filter" ng-repeat="cd in tableCategories">
+                                        <td>{{ cd.ProjectName }}</td>
+                                        <td>{{ cd.CategoryName }}</td>
+                                        <td>{{ cd.BudgetAmount }}</td>
+                                        <td>{{ cd.ActualAmount }}</td>
+                                        <td>{{ cd.PercentCompleted }}</td>
+                                        <td>{{ cd.PartDescription }}</td>
+                                        <td>{{ cd.PartUnitPrice }}</td>
+                                        <td>{{ cd.SupplierName }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="div_subcategories_summary">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>Project</th>
+                                        <th>Category</th>
+                                        <th>SubCategory</th>
+                                        <th>Budget</th>
+                                        <th>Actual</th>
+                                        <th>% Completed</th>
+                                    </tr>
+                                    <tr name="filter" ng-repeat="scs in tableSubCategories">
+                                        <td>{{ scs.ProjectName }}</td>
+                                        <td>{{ scs.CategoryName }}</td>
+                                        <td>{{ scs.SubCategoryName }}</td>
+                                        <td>{{ scs.BudgetAmount }}</td>
+                                        <td>{{ scs.ActualAmount }}</td>
+                                        <td>{{ scs.PercentCompleted }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="div_subcategories_details">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>Project</th>
+                                        <th>Category</th>
+                                        <th>SubCategory</th>
+                                        <th>Part</th>
+                                        <th>% Completed</th>
+                                        <th>Unit Price</th>
+                                        <th>% Discount</th>
+                                        <th>Supplier</th>
+                                    </tr>
+                                    <tr name="filter" ng-repeat="scd in tableSubCategories">
+                                        <td>{{ scd.ProjectName }}</td>
+                                        <td>{{ scd.CategoryName }}</td>
+                                        <td>{{ scd.SubCategoryName }}</td>
+                                        <td>{{ scd.PartDescription }}</td>
+                                        <td>{{ scd.PercentCompleted }}</td>
+                                        <td>{{ scd.PartUnitPrice }}</td>
+                                        <td>{{ scd.PercentCompleted }}</td>
+                                        <td>{{ scd.SupplierName }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="div_activities">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>Project</th>
+                                        <th>Part</th>
+                                        <th>Area</th>
+                                        <th>Start</th>
+                                        <th>End</th>
+                                        <th>Supplier</th>
+                                    </tr>
+                                    <tr name="filter" ng-repeat="a in tableActivities">
+                                        <td>{{ a.ProjectName }}</td>
+                                        <td>{{ a.PartDescription }}</td>
+                                        <td>{{ a.AreaRoom }}</td>
+                                        <td>{{ a.StartDate }}</td>
+                                        <td>{{ a.ExpiryDate }}</td>
+                                        <td>{{ a.Supplier }}</td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
 
