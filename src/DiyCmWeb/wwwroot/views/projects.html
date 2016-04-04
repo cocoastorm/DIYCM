@@ -4,7 +4,7 @@
         <div class="row" style="margin-bottom:5px;">
             <div class="col-md-4">
                 <div class="sm-st clearfix">
-                    <span class="sm-st-icon st-red"><i class="fa fa-folder-open"></i></span>
+                    <span class="sm-st-icon st-violet"><i class="fa fa-folder-open"></i></span>
                     <div class="sm-st-info">
                         <span>3</span>
                         Number of Projects
@@ -32,6 +32,7 @@
                                 <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse1">
                                     <h4 class="panel-title">
                                         Project 1
+                                        <span class="pull-right hidden-md hidden-lg"><i class="fa fa-pencil-square"></i></span>
                                     </h4>
                                 </a>
                             </div>
@@ -53,9 +54,22 @@
                                             <dt>ProjectFinishedDate</dt>
                                             <dd>mm/dd/yyyy</dd>
                                             <dt>ActualFinishedDate</dt>
-                                            <dd>mm/dd/yyyy</dd>
+                                            <dd>
+                                                <input class="datepicker" type="text" data-date-format="mm/dd/yyyy">
+                                            </dd>
                                         </dl>
                                     </div>
+                                    <style>
+                                        .ui-datepicker {
+                                            background: white;
+                                            border: solid 1px black;
+                                        }
+                                    </style>
+                                    <script>
+                                        $(".datepicker").datepicker();
+                                    </script>
+
+                                    <span class="pull-right hidden-xs hidden-sm btn btn-default"><i class="fa fa-pencil-square fa-4x"></i></span>
                                 </div>
                             </div>
                         </div>
