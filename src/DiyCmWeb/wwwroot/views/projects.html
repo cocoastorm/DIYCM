@@ -6,7 +6,7 @@
                 <div class="sm-st clearfix">
                     <span class="sm-st-icon st-violet"><i class="fa fa-folder-open"></i></span>
                     <div class="sm-st-info">
-                        <span>{{tableProjects.length}}</span>
+                        <span>{{allProjects.length}}</span>
                         Number of Projects
                     </div>
                 </div>
@@ -31,7 +31,7 @@
 
                             <!-- Start of 1 Project -->
                             <div class="panel-heading">
-                                <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse1">
+                                <a data-toggle="collapse" data-parent="#accordion" data-target="#{{p.ProjectId}}">
                                     <h4 class="panel-title">
                                         {{p.ProjectName}}
 
@@ -39,7 +39,7 @@
                                     </h4>
                                 </a>
                             </div>
-                            <div id="collapse1" class="panel-collapse collapse">
+                            <div id="{{p.ProjectId}}" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <div class="col-md-7">
                                         <p>{{p.Description}}</p>
@@ -83,5 +83,8 @@
             </div><!--end project list -->
            
         </div><!-- end main row -->
+
+
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
+
