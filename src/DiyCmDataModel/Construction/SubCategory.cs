@@ -18,7 +18,7 @@ namespace DiyCmDataModel.Construction
         [MaxLength(100)]
         public String Description { get; set; }
 
-       // [ForeignKey("Category")]
+        [ForeignKey("Category")]
         public int CategoryId { get; set; }
 
         public Category Category { get; set; }

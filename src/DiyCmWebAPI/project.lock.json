@@ -16410,9 +16410,9 @@
       "serviceable": true,
       "sha512": "B+h4HHUnCSN/d4DIxW89B6q4efcZzQjajQb1yrlALEeZuCBDIzO0nrEdRZsRSNqJaNzmxRu/OsYqrZVOORUrGw==",
       "files": [
-        "EntityFramework.Sqlite.7.0.0-rc1-final.nupkg",
-        "EntityFramework.Sqlite.7.0.0-rc1-final.nupkg.sha512",
-        "EntityFramework.Sqlite.nuspec",
+        "EntityFramework.SQLite.7.0.0-rc1-final.nupkg",
+        "EntityFramework.SQLite.7.0.0-rc1-final.nupkg.sha512",
+        "EntityFramework.SQLite.nuspec",
         "lib/dotnet5.4/EntityFramework.Sqlite.dll",
         "lib/dotnet5.4/EntityFramework.Sqlite.xml",
         "lib/net451/EntityFramework.Sqlite.dll",
@@ -22321,10 +22321,10 @@
       "Microsoft.AspNet.Mvc.TagHelpers >= 6.0.0-rc1-final",
       "Microsoft.AspNet.Tooling.Razor >= 1.0.0-rc1-final",
       "Microsoft.Extensions.Configuration.UserSecrets >= 1.0.0-rc1-final",
-      "DiyCmDataModel >= 1.0.0-*",
       "EntityFramework.MicrosoftSqlServer >= 7.0.0-rc1-final",
       "Swashbuckle.SwaggerUi >= 6.0.0-rc1-final",
-      "Swashbuckle.SwaggerGen >= 6.0.0-rc1-final"
+      "Swashbuckle.SwaggerGen >= 6.0.0-rc1-final",
+      "DiyCmDataModel >= 1.0.0-*"
     ],
     "DNX,Version=v4.5.1": [],
     "DNXCore,Version=v5.0": []

@@ -2,124 +2,138 @@
     <section class="content">
     <h1>PROJECTS</h1>
         <div class="row" style="margin-bottom:5px;">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="sm-st clearfix">
-                    <span class="sm-st-icon st-red"><i class="fa fa-check-square-o"></i></span>
+                    <span class="sm-st-icon st-violet"><i class="fa fa-folder-open"></i></span>
                     <div class="sm-st-info">
-                        <span>3</span>
+                        <span>{{allProjects.length}}</span>
                         Number of Projects
                     </div>
                 </div>
             </div>
-            <div class="col-md-5">
-                <div class="sm-st clearfix">
-                    <span class="sm-st-icon st-violet"><i class="fa fa-paperclip"></i></span>
-                    <div class="sm-st-info">
-                        <span>Renovate Kitchen</span>
-                        Most Recent Project
-                    </div>
-                </div>
-            </div>
+
             <div class="col-md-4">
                 <div class="sm-st clearfix">
-                    <span class="sm-st-icon st-green"><i class="fa fa-plus"></i></span>
+                    <span class="sm-st-icon st-green" data-toggle="modal" data-target="#projectModal"><i class="fa fa-plus"></i></span>
                     <div class="sm-st-info">
                         <span>Add A Project</span>
                     </div>
                 </div>
             </div>
+            <div ng-include="'views/projectsModal.html'"></div>
+
         </div>
 
         <!-- Main row -->
         <div class="row">
             <div class="col-md-8">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Projects
-                    </header>
-                    <div class="panel-body table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Project</th>
-                                    <th>Projected Start Date</th>
-                                    <th>Actual Start Date</th>
-                                    <th>Projected Finish Date</th>
-                                    <th>Actual Finish Date</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Renovate House</td>
-                                    <td>10/10/2014</td>
-                                    <td>14/10/2014</td>
-                                    <td>16/12/2014</td>
-                                    <td>5/01/2015</td>
-                                    <td><a href="#/singleProject"><span class="label label-info">Edit</span></a></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Build Cat Tree</td>
-                                    <td>22/03/2015</td>
-                                    <td>23/03/2015</td>
-                                    <td>16/04/2015</td>
-                                    <td>5/04/2015</td>
-                                    <td><a href="#/singleProject"><span class="label label-info">Edit</span></a></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Renovate Kitchen</td>
-                                    <td>10/12/2015</td>
-                                    <td>22/12/2015</td>
-                                    <td>01/02/2016</td>
-                                    <td>15/02/2016</td>
-                                    <td><a href="#/singleProject"><span class="label label-info">Edit</span></a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-            </div><!--end project list -->
-            <div class="col-md-4">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Recent Invoices
-                    </header>
-                    <div class="panel-body" id="noti-box">
 
-                        <div class="alert alert-block alert-danger">
-                            <button data-dismiss="alert" class="close close-sm" type="button">
-                                <i class="fa fa-times"></i>
-                            </button>
-                            <strong>Albert Way</strong> <br />
-                            Yo you owe me money!
+                    <div class="panel-group container" id="accordion" style="padding-left:0; padding-right:0; margin: 0 auto; width: 100%">
+                        <div class="panel panel-default" ng-repeat="p in allProjects">
+                            <div id="project-{{p.ProjectId}}" class="project">
+                            <!-- Start of 1 Project -->
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse1">
+                                        <h4 class="panel-title">{{p.ProjectName}}<span class="pull-right hidden-md hidden-lg"><i class="fa fa-pencil-square"></i></span>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="col-md-7">
+                                            <p class="project-description">{{p.Description}}</p>
+                                        </div>
+                                        <div class="col-md-2 col-md-offset-1 col-xs-6">
+                                            <dl>
+                                                <dt>ProjectStartDate</dt>
+                                                <dd class="dateStr">{{p.ProjectedStartDate}}</dd>
+                                                <p class="input-group date-picker hide">
+                                                  <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="p.ProjectedStartDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" popup-placement="top" />
+                                                  <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                  </span>
+                                                </p>
+                                                <dt>ActualStartDate</dt>
+                                                <dd class="dateStr">{{p.ActualStartDate}}</dd>
+                                                <p class="input-group date-picker hide">
+                                                  <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="p.ActualStartDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" popup-placement="top" />
+                                                  <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                  </span>
+                                                </p>
+                                            </dl>
+                                        </div>
+                                        <div class="col-md-2 col-xs-6">
+                                            <dl>
+                                                <dt>ProjectFinishedDate</dt>
+                                                <dd class="dateStr">{{p.ProjectedFinishDate}}</dd>
+                                                <p class="input-group date-picker hide">
+                                                  <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="p.ProjectedFinishDate" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" popup-placement="top" />
+                                                  <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" ng-click="open3()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                  </span>
+                                                </p>
+                                                <dt>ActualFinishedDate</dt>
+                                                <dd class="dateStr">{{p.ActualFinishDate}}</dd>
+                                                <p class="input-group date-picker hide">
+                                                  <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="p.ActualFinishDate" is-open="popup4.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" popup-placement="top" />
+                                                  <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" ng-click="open4()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                  </span>
+                                                </p>
+                                            </dl>
+                                        </div>
+                                        <span class="pull-right hidden-xs hidden-sm btn btn-default project-btn" data-id="{{p.ProjectId}}" onclick="editProject(this);"><i class="fa fa-pencil-square fa-4x"></i></span>
+                                    </div>
+                                </div>
+                            </div><!-- End of 1 Project -->
                         </div>
-                        <div class="alert alert-success">
-                            <button data-dismiss="alert" class="close close-sm" type="button">
-                                <i class="fa fa-times"></i>
-                            </button>
-                            <strong>Jarry Mason</strong> <br/>
-                            I make money, you make money, I got money under the stairs and the ladies dig me.
-                        </div>
-                        <div class="alert alert-info">
-                            <button data-dismiss="alert" class="close close-sm" type="button">
-                                <i class="fa fa-times"></i>
-                            </button>
-                            <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-                        </div>
-                        <div class="alert alert-warning">
-                            <button data-dismiss="alert" class="close close-sm" type="button">
-                                <i class="fa fa-times"></i>
-                            </button>
-                            <strong>Warning!</strong> Best check yo self, you're not looking too good.
-                        </div>
-                    </div>
-                </section>
-            </div>
+                      </div>
+
+            </div><!--end project list -->
 
         </div><!-- end main row -->
+
+
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
+
+
+<script>
+    function editProject (This) {
+        var id = $(This).attr('data-id');
+        var project = $("#project-" + id);
+        // console.log(project);
+
+        var children = project.children();
+
+        // change project title
+        var name_cont        = $(children[0]);
+        var name_backup      = name_cont.find(".panel-title");
+        var name_text_backup = name_backup.text();
+
+        name_cont.html("<input id='name' value='" + name_text_backup + "'/>");
+
+        $("#name").attr({ width: 'auto', size: $("#name").val().length });
+
+        // change project description
+        var desc             = project.find(".project-description");
+        var desc_text_backup = desc.text();
+
+        desc.html("<textarea id='desc'>" + desc_text_backup + "</textarea>");
+
+        // change project button to save
+        var btn             = project.find(".project-btn");
+        var editBtn         = $(btn.children()[0]);
+        editBtn.removeClass("fa-pencil-square").addClass("fa-floppy-o");
+
+        // toggle date-picker
+        var datepicker = $(".date-picker");
+        var pickers = project.find(datepicker);
+        var datelabel = $(".dateStr");
+        var labels = project.find(datelabel);
+
+        $(pickers).toggleClass("hide");
+        $(labels).toggleClass("hide");
+    }
+</script>

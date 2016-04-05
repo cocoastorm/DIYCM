@@ -29,7 +29,7 @@ namespace DiyCmWebAPI.Controllers
 
         // GET: api/SupplierInvoiceDetails/5
         [HttpGet("{id}", Name = "GetSupplierInvoiceDetail")]
-        public IActionResult GetSupplierInvoiceDetail([FromRoute] string id)
+        public IActionResult GetSupplierInvoiceDetail([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
@@ -48,7 +48,7 @@ namespace DiyCmWebAPI.Controllers
 
         // PUT: api/SupplierInvoiceDetails/5
         [HttpPut("{id}")]
-        public IActionResult PutSupplierInvoiceDetail(string id, [FromBody] SupplierInvoiceDetail supplierInvoiceDetail)
+        public IActionResult PutSupplierInvoiceDetail(int id, [FromBody] SupplierInvoiceDetail supplierInvoiceDetail)
         {
             if (!ModelState.IsValid)
             {
@@ -59,6 +59,20 @@ namespace DiyCmWebAPI.Controllers
             {
                 return HttpBadRequest();
             }
+            // Get the old price so we can check the difference and update accordingly.
+            decimal oldPrice = _context.SupplierInvoiceDetails.Where(i => i.InvoiceId == id).FirstOrDefault().UnitPrice;
+            decimal deltaPrice = supplierInvoiceDetail.UnitPrice - oldPrice;
+            // Update the actual amount
+            var subCategory =  _context.SubCategories.Where(s => s.SubCategoryId == supplierInvoiceDetail.SubCategoryId).FirstOrDefault();
+            subCategory.ActualAmount += deltaPrice;
+            // Calculate variance amount
+            var oldVariance = subCategory.VarianceAmount;
+            subCategory.VarianceAmount = subCategory.ActualAmount - subCategory.BudgetAmount;
+            var deltaVariance = subCategory.VarianceAmount - oldVariance;
+            // Update the main category
+            var category = _context.Categories.Where(c => c.CategoryId == subCategory.CategoryId).FirstOrDefault();
+            category.ActualAmount += deltaPrice;
+            category.VarianceAmount += deltaVariance;
 
             _context.Entry(supplierInvoiceDetail).State = EntityState.Modified;
 
@@ -91,6 +105,18 @@ namespace DiyCmWebAPI.Controllers
             }
 
             _context.SupplierInvoiceDetails.Add(supplierInvoiceDetail);
+            // Update the actual amount
+            var subCategory =  _context.SubCategories.Where(s => s.SubCategoryId == supplierInvoiceDetail.SubCategoryId).FirstOrDefault();
+            subCategory.ActualAmount += supplierInvoiceDetail.UnitPrice;
+            // Calculate variance amount
+            var oldVariance = subCategory.VarianceAmount;
+            subCategory.VarianceAmount = subCategory.ActualAmount - subCategory.BudgetAmount;
+            var deltaVariance = subCategory.VarianceAmount - oldVariance;
+            // Update the main category
+            var category = _context.Categories.Where(c => c.CategoryId == subCategory.CategoryId).FirstOrDefault();
+            category.ActualAmount += supplierInvoiceDetail.UnitPrice;
+            category.VarianceAmount += deltaVariance;
+
             try
             {
                 _context.SaveChanges();
@@ -112,7 +138,7 @@ namespace DiyCmWebAPI.Controllers
 
         // DELETE: api/SupplierInvoiceDetails/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteSupplierInvoiceDetail(string id)
+        public IActionResult DeleteSupplierInvoiceDetail(int id)
         {
             if (!ModelState.IsValid)
             {
@@ -124,6 +150,18 @@ namespace DiyCmWebAPI.Controllers
             {
                 return HttpNotFound();
             }
+
+            // Update the actual amount
+            var subCategory =  _context.SubCategories.Where(s => s.SubCategoryId == supplierInvoiceDetail.SubCategoryId).FirstOrDefault();
+            subCategory.ActualAmount -= supplierInvoiceDetail.UnitPrice;
+            // Calculate variance amount
+            var oldVariance = subCategory.VarianceAmount;
+            subCategory.VarianceAmount = subCategory.ActualAmount - subCategory.BudgetAmount;
+            var deltaVariance = subCategory.VarianceAmount - oldVariance;
+            // Update the main category
+            var category = _context.Categories.Where(c => c.CategoryId == subCategory.CategoryId).FirstOrDefault();
+            category.ActualAmount -= supplierInvoiceDetail.UnitPrice;
+            category.VarianceAmount += deltaVariance;
 
             _context.SupplierInvoiceDetails.Remove(supplierInvoiceDetail);
             _context.SaveChanges();
@@ -140,7 +178,7 @@ namespace DiyCmWebAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool SupplierInvoiceDetailExists(string id)
+        private bool SupplierInvoiceDetailExists(int id)
         {
             return _context.SupplierInvoiceDetails.Count(e => e.InvoiceId == id) > 0;
         }
