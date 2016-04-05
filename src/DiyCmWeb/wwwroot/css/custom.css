@@ -1,0 +1,38 @@
+﻿a[data-toggle=collapse] {
+    color: black
+}
+
+/* Notifications */
+#notifications-container{font-family:'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;-webkit-font-smoothing:antialiased;position:fixed;height:100%;top:0px;right:0px;width:22%;background:#39435C;z-index:2}#notifications-container button.notifications-accordion{background-color:#425164;color:#fff;cursor:pointer;padding:18px;width:100%;text-align:left;border:none;outline:none;transition:0.4s}#notifications-container button.notifications-accordion.active,#notifications-container button.accordion:hover{background-color:#ddd; color:black}#notifications-container div.notifications-panel{background-color:white;max-height:0;overflow:hidden;transition:0.6s ease-in-out;opacity:0;line-height:1.6em;background:#F9F9F9;padding:0 18px;border-left:4px solid #DDD;box-shadow:0 1px 1px rgba(0,0,0,0.125)}#notifications-container div.notifications-panel:before{position:absolute;top:50%;margin-top:-17px;left:-17px;background-color:#DDD;color:#FFF;width:30px;max-height:0px;border-radius:100%;text-align:center;line-height:30px;font-weight:bold;font-family:Georgia;text-shadow:1px 1px rgba(0,0,0,0.5)}#notifications-container div.notifications-panel.show{opacity:1;max-height:500px}#notifications-container button.notifications-accordion:after{content:'\02795';font-size:13px;color:#777;float:right;margin-left:5px}#notifications-container button.notifications-accordion.active:after{content:"\2796"}#notifications-container .status-info{border-color:#0074D9 !important}#notifications-container .status-warning{border-color:#FFDC00 !important}#notifications-container .status-danger{border-color:#FF4136 !important}#notifications-container .status-success{border-color:#2ECC40 !important}
+
+.panel-heading {
+    background: #39435C !important;
+}
+
+h4.panel-title {
+    color: white !important;
+}
+
+/* white background date picker */
+.ui-datepicker {
+    background: white;
+    border: solid 1px black;
+}
+
+/* hackyhack for calendar */
+.datepicker {
+  position: relative;
+}
+.datepicker .dropdown-menu {
+   left: auto !important;
+   right: 0px;
+ }
+
+.st-green:hover {
+    background: #387577;
+    border:solid 3px black;
+}
+
+.st-green:active {
+    background: #1C3A3B;
+}

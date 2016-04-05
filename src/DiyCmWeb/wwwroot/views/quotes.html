@@ -1,25 +1,17 @@
-<aside class="right-side">
+<aside class="right-side" style="margin-right: 20px">
     <section class="content">
     <h1>QUOTES</h1>
         <div class="row" style="margin-bottom:5px;">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="sm-st clearfix">
                     <span class="sm-st-icon st-red"><i class="fa fa-check-square-o"></i></span>
                     <div class="sm-st-info">
-                        <span>2</span>
+                        <span>{{allQuoteHeaders.length}}</span>
                         Number of Quotes
                     </div>
                 </div>
             </div>
-            <div class="col-md-5">
-                <div class="sm-st clearfix">
-                    <span class="sm-st-icon st-violet"><i class="fa fa-paperclip"></i></span>
-                    <div class="sm-st-info">
-                        <span>Edit a Quote</span>
-                        Most Recent Quote
-                    </div>
-                </div>
-            </div>
+
             <div class="col-md-4">
                 <div class="sm-st clearfix">
                     <span class="sm-st-icon st-green"><i class="fa fa-plus"></i></span>
@@ -31,64 +23,80 @@
         </div>
 
         <!-- Main row -->
-        <div class="row">
-            <div class="col-md-12">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Quotes
-                    </header>
-                    <div class="panel-body table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Quote</th>
-                                    <th>Supplier</th>
-                                    <th>Date</th>
-                                    <th>Start Date</th>
-                                    <th>Contact</th>
-                                    <th>Phone</th>
-                                    <th>Referred</th>
-                                    <th>Address</th>
-                                    <th>Expiry</th>
-                                    <th>Discount</th>
-                                    <th>Acceptance</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>12345</td>
-                                    <td>John's Plumbing</td>
-                                    <td>January 15, 2016</td>
-                                    <td>March 20, 2016</td>
-                                    <td>John Smith</td>
-                                    <td>(604) 555-5254</td>
-                                    <td>Billy</td>
-                                    <td>123 Main Street, Surrey BC, V3L 3M3</td>
-                                    <td>January 31, 2016</td>
-                                    <td>5%</td>
-                                    <td></td>
-                                    <td><a href="#/quotes-details"><span class="label label-info">Edit</span></a></td>
-                                </tr>
-                                <tr>
-                                    <td>67891</td>
-                                    <td>Gassy Works</td>
-                                    <td>January 30, 2016</td>
-                                    <td>April 1, 2016</td>
-                                    <td>Gas Doe</td>
-                                    <td>(604) 555-5254</td>
-                                    <td>Bob</td>
-                                    <td>123 Main Street, Surrey BC, V3L 3M3</td>
-                                    <td>January 31, 2016</td>
-                                    <td>15%</td>
-                                    <td></td>
-                                    <td><a href="#/quotes-details"><span class="label label-info">Edit</span></a></td>
-                                </tr>
-                            </tbody>
-                        </table>
+        <div class="row col-md-8">
+        <div class="panel-group" id="accordion" style="padding-left:0; padding-right:0; margin: 0 auto; width: 100%">
+            <div class="panel panel-default"  ng-repeat="q in allQuoteHeaders">
+              <div class="panel-heading">
+                <a data-toggle="collapse" data-parent="#accordion" data-target="#{{q.QuoteHeaderId}}">
+                  <h4 class="panel-title">
+                    Quote {{q.QuoteHeaderId}}
+                  <span class="pull-right hidden-md hidden-lg"><i class="fa fa-pencil-square"></i></span>
+                  </h4>
+                </a>
+              </div>
+              <div id="{{q.QuoteHeaderId}}" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-md-7 col-xs-7">
+                      <dl>
+                        <dt>Supplier</dt>
+                        <dd>{{q.Supplier}}</dd>
+                        <dt>AddressStreet</dt>
+                        <dd>{{q.AddressStreet}}</dd>
+                        <dt>AddressCity</dt>
+                        <dd>{{q.AddressCity}}</dd>
+                        <dt>AddressProvince</dt>
+                        <dd>{{q.AddressProvince}}</dd>
+                        <dt>AddressPostalCode</dt>
+                        <dd>{{q.AddressPostalCode}}</dd>
+                        <dt>AddressCountry</dt>
+                        <dd>{{q.AddressCountry}}</dd>
+                      </dl>
                     </div>
-                </section>
-            </div><!--end quotes list -->
-        </div><!-- end main row -->
+
+                    <div class="col-md-5 col-xs-5">
+                      <dl>
+                        <dt>Date</dt>
+                        <dd>{{q.Date}}</dd>
+                        <dt>StartDate</dt>
+                        <dd>{{q.StartDate}}</dd>
+                        <dt>ExpiryDate</dt>
+                        <dd>{{q.ExpiryDate}}</dd>
+                      </dl>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="col-md-7 col-xs-12">
+                      <dl>
+                        <dt>Notes:</dt>
+                        <dd>{{p.notes}}</dd>
+                      </dl>
+                    </div>
+                    <div class="col-md-5 col-xs-12">
+                      <dl>
+                        <dt>ReferredBy:</dt>
+                        <dd>{{q.ReferredBy}}</dd>
+                        <dt>PercentDiscount:</dt>
+                        <dd>{{q.PercentDiscount}}</dd>
+                      </dl>
+                      <div class="checkbox">
+                      </div>
+
+                        <div ng-if="q.IsAccept == 'Y'">
+                            <label><input type="checkbox" value="" checked>Accepted</label>
+                        </div>
+                        <div ng-if="q.IsAccept == 'N' ">
+                            <label><input type="checkbox" value="" >Accepted</label>
+                        </div>
+
+                      <span class="pull-right hidden-xs hidden-sm btn btn-default"><i class="fa fa-pencil-square fa-4x"></i></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            </div>
     </section><!-- /.content -->
 </aside><!-- /.right-side -->

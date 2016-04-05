@@ -25,6 +25,10 @@
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <!-- Theme style -->
     <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <!-- custom -->
+    <link href="css/custom.css" rel="stylesheet" type="text/css" />
+
+    <link rel="shortcut icon"  href="img/House.png"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -128,6 +132,28 @@
         </div>
     </div><!-- ./wrapper -->
 
+    <div id="notifications-container">
+        <h3 class="text-center" style="color:white;">Notifications</h3>
+        <br>
+        <button class="notifications-accordion">Invoices</button>
+        <div class="notifications-panel status-info">
+            <p>Lorem ipsum...</p>
+        </div>
+
+        <button class="notifications-accordion">Quotes</button>
+        <div class="notifications-panel status-danger">
+            <p>Lorem ipsum...</p>
+        </div>
+
+        <button class="notifications-accordion">Other</button>
+        <div class="notifications-panel status-success">
+            <ul class="list-unstyled">
+                <li>Lorem ipsum dolor.</li>
+                <li>Aspernatur, natus, ullam!</li>
+                <li>Possimus, at soluta.</li>
+            </ul>
+        </div>
+    </div><!-- notifications -->
 
     <!-- jQuery 2.0.2 -->
     <script src="lib/jquery/dist/jquery.js" type="text/javascript"></script>
@@ -135,10 +161,15 @@
     <script src="lib/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
     <!-- Bootstrap -->
     <script src="lib/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- Handles deprecated global moment -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
+    <script>
+    moment().format();
+    </script>
     <!-- daterangepicker -->
     <script src="lib/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
     <!-- Chart -->
-    <script src="lib/Chart.js/Chart.min.js" type="text/javascript"></script>
+    <script src="lib/Chart.js/Chart.js" type="text/javascript"></script> <!-- there is no minified version -->
     <!-- iCheck -->
     <script src="lib/iCheck/icheck.min.js" type="text/javascript"></script>
     <!-- calendar -->
@@ -148,11 +179,55 @@
 
     <!-- Angular JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-animate.js" type="text/javascript"></script>
     <script src="https://code.angularjs.org/1.4.5/angular-route.js" type="text/javascript"></script>
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.2.5.js" type="text/javascript"></script>
     <script src="js/diycm.js"></script>
     <script src="js/angular-local-storage.min.js"></script>
     <script src="js/services/ReportsService.js"></script>
     <script src="js/controllers/sidebarController.js"></script>
     <script src="js/controllers/homeController.js"></script>
+    <script src="js/controllers/projectsController.js"></script>
+    <script src="js/controllers/quoteheadersController.js"></script>
+
+
+    <script>
+        var notifications; //stores content of notifications ( makes notifications small )
+        var acc;
+
+        // click on notifications
+        $("#notifications-container").click(function (e) {
+            var t = $(this);
+            if (!$(event.target).hasClass("notifications-accordion") && // click on button
+                !$(event.target).hasClass("notifications-panel") && // click on contents
+                !$(event.target).parent().hasClass("notifications-panel") && // content child supports nest <p>
+                !$(event.target).parent().parent().hasClass("notifications-panel")) // contents child's child <ul> <li>
+            {// if not content of a notification
+                if (t.width() != 20) {
+                    notifications = t.html(); // save html
+                    t.html(""); // clear
+                    t.animate({ width: '20px' }, "slow"); // shrink
+                }
+                else {
+                    t.html(notifications); // restore html
+                    t.animate({ width: '22%' }, "slow"); // grow
+                }
+            }
+            else // content of a notification
+            {
+                /* Toggle between adding and removing the "active" and "show" classes when the user clicks on one of the "Section" buttons. The "active" class is used to add a background color to the current button when its belonging panel is open. The "show" class is used to open the specific accordion panel */
+                acc = document.getElementsByClassName("notifications-accordion");
+                var i;
+
+                for (i = 0; i < acc.length; i++) {
+                    acc[i].onclick = function () {
+                        this.classList.toggle("active"); // highlights tab
+                        this.nextElementSibling.classList.toggle("show"); // shows content
+                    }
+                }
+            }
+        });
+
+    </script>
 </body>
 </html>
