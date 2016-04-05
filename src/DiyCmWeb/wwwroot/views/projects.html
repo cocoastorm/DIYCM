@@ -14,12 +14,14 @@
 
             <div class="col-md-4">
                 <div class="sm-st clearfix">
-                    <span class="sm-st-icon st-green"><i class="fa fa-plus"></i></span>
+                    <span class="sm-st-icon st-green" data-toggle="modal" data-target="#projectModal"><i class="fa fa-plus"></i></span>
                     <div class="sm-st-info">
                         <span>Add A Project</span>
                     </div>
                 </div>
             </div>
+            <div ng-include="'views/projectsModal.html'"></div>
+
         </div>
 
         <!-- Main row -->
@@ -77,7 +79,7 @@
     function editProject (This) {
         var id = $(This).attr('data-id');
         var project = $("#project-" + id);
-        //console.log(project);
+        console.log(project);
 
         var children = project.children();
 
