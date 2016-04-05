@@ -13,23 +13,43 @@
                     </div>
                     <div class="form-group">
                         <label for="p-description-text" class="control-label">Description:</label>
-                        <textarea class="form-control" id="description-text"></textarea>
+                        <textarea class="form-control" id="project-description"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="p-start-date" class="control-label">Project Start Date:</label>
-                        <input type="date" id="p-start-date">
+                        <p class="input-group date-picker">
+                          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" popup-placement="top" />
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                        </p>
                     </div>
                     <div class="form-group">
                         <label for="a-start-date" class="control-label">Actual Start Date:</label>
-                        <input type="date" id="a-start-date">
+                        <p class="input-group date-picker">
+                          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" popup-placement="top" />
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                        </p>
                     </div>
                     <div class="form-group">
                         <label for="p-end-date" class="control-label">Project End Date:</label>
-                        <input type="date" id="p-end-date">
+                        <p class="input-group date-picker">
+                          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" popup-placement="top" />
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open3()"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                        </p>
                     </div>
                     <div class="form-group">
                         <label for="a-end-date" class="control-label">Actual End Date:</label>
-                        <input type="date" id="a-end-date">
+                        <p class="input-group date-picker">
+                          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup4.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" popup-placement="top" />
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open4()"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                        </p>
                     </div>
                 </form>
             </div>
