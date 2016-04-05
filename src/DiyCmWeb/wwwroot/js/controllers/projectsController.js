@@ -6,6 +6,7 @@
         $scope.tableProjects = data;
         console.log(data);
     };
+
     var onGetAllProjects = function (data) {
         $scope.allProjects = data;
         console.log(data);
@@ -14,8 +15,30 @@
     var onGetAllComplete = function (data) {
         //console.log(data);
     };
+
     var onGetAllError = function (reason) {
         console.log(reason);
+    };
+
+    var onAddProject = function (data) {
+      $scope.newProject = data;
+      console.log(data);
+    };
+
+    var onAddProjectError = function (reason) {
+      console.log(reason);
+    }
+
+    $scope.addProject = function () {
+      var data = {
+        "ProjectName": $scope.project.Name,
+        "Description": $scope.project.Description,
+        "ProjectedStartDate": $scope.project.ProjectedStartDate,
+        "ActualStartDate": $scope.project.ActualEndDate,
+        "ProjectedEndDate": $scope.project.ProjectedEndDate,
+        "ActualEndDate": $scope.project.ActualEndDate
+      };
+      console.log(data);
     };
 
     ReportsService.getAllProjectsBudgetActual()
@@ -31,6 +54,7 @@
     ReportsService.getActivities()
         .then(onGetAllComplete, onGetAllError);
 
+// DatePicker
       $scope.today = function() {
         $scope.dt = new Date();
       };

@@ -13,8 +13,16 @@
                  return response.data;
              });
         };
+
+        var _addProject = function (data) {
+           return $http.post(baseUrl + "Projects", data)
+             .then(function (response) {
+                 return response.data;
+             });
+       };
+
         var _getAllProjects = function () {
-            return $http.get(baseUrl + "projects")
+            return $http.get(baseUrl + "Projects")
               .then(function (response) {
                   return response.data;
               });
@@ -195,6 +203,7 @@
 
         return {
             getProject: _getProject,
+            addProject: _addProject,
             getAllProjects: _getAllProjects,
 
             getAllProjectsBudgetActual: _getAllProjectsBudgetActual,
