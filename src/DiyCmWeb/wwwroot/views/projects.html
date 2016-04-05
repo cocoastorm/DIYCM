@@ -14,12 +14,14 @@
 
             <div class="col-md-4">
                 <div class="sm-st clearfix">
-                    <span class="sm-st-icon st-green"><i class="fa fa-plus"></i></span>
+                    <span class="sm-st-icon st-green" data-toggle="modal" data-target="#projectModal"><i class="fa fa-plus"></i></span>
                     <div class="sm-st-info">
                         <span>Add A Project</span>
                     </div>
                 </div>
             </div>
+            <div ng-include="'views/projectsModal.html'"></div>
+
         </div>
 
         <!-- Main row -->
