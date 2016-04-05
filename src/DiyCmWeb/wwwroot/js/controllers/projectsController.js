@@ -31,12 +31,12 @@
 
     $scope.addProject = function () {
       var data = {
-        "ProjectName": $scope.project.Name,
-        "Description": $scope.project.Description,
-        "ProjectedStartDate": $scope.project.ProjectedStartDate,
-        "ActualStartDate": $scope.project.ActualEndDate,
-        "ProjectedEndDate": $scope.project.ProjectedEndDate,
-        "ActualEndDate": $scope.project.ActualEndDate
+        ProjectName: $scope.project.Name,
+        Description: $scope.project.Description,
+        ProjectedStartDate: $scope.project.ProjectedStartDate,
+        ActualStartDate: $scope.project.ActualEndDate,
+        ProjectedEndDate: $scope.project.ProjectedEndDate,
+        ActualEndDate: $scope.project.ActualEndDate
       };
       console.log(data);
     };
