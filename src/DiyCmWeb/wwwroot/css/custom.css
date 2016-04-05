@@ -18,3 +18,12 @@ h4.panel-title {
     background: white;
     border: solid 1px black;
 }
+
+/* hackyhack for calendar */
+.datepicker {
+  position: relative;
+}
+.datepicker .dropdown-menu {
+   left: auto !important;
+   right: 0px;
+ }

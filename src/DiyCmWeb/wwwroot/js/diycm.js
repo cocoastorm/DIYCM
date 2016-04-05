@@ -1,4 +1,4 @@
-﻿var app = angular.module('diycm', ['ngRoute', 'LocalStorageModule']);
+﻿var app = angular.module('diycm', ['ngRoute', 'LocalStorageModule', 'ngAnimate', 'ui.bootstrap']);
 
 // setup the routing
 app.config(function ($routeProvider) {
