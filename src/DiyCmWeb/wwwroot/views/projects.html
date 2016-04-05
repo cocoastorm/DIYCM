@@ -44,17 +44,41 @@
                                         <div class="col-md-2 col-md-offset-1 col-xs-6">
                                             <dl>
                                                 <dt>ProjectStartDate</dt>
-                                                <dd class="pstartDate">{{p.ProjectedStartDate}}</dd>
+                                                <dd class="dateStr">{{p.ProjectedStartDate}}</dd>
+                                                <p class="input-group date-picker hide">
+                                                  <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="p.ProjectedStartDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                                  <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                  </span>
+                                                </p>
                                                 <dt>ActualStartDate</dt>
-                                                <dd class="astartDate">{{p.ActualStartDate}}</dd>
+                                                <dd class="dateStr">{{p.ActualStartDate}}</dd>
+                                                <p class="input-group date-picker hide">
+                                                  <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="p.ActualStartDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                                  <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                  </span>
+                                                </p>
                                             </dl>
                                         </div>
                                         <div class="col-md-2 col-xs-6">
                                             <dl>
                                                 <dt>ProjectFinishedDate</dt>
-                                                <dd class="pfinishDate">{{p.ProjectedFinishDate}}</dd>
+                                                <dd class="dateStr">{{p.ProjectedFinishDate}}</dd>
+                                                <p class="input-group date-picker hide">
+                                                  <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="p.ProjectedFinishDate" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                                  <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" ng-click="open3()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                  </span>
+                                                </p>
                                                 <dt>ActualFinishedDate</dt>
-                                                <dd class="afinishDate">{{p.ActualFinishDate}}</dd>
+                                                <dd class="dateStr">{{p.ActualFinishDate}}</dd>
+                                                <p class="input-group date-picker hide">
+                                                  <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="p.ActualFinishDate" is-open="popup4.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                                  <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" ng-click="open4()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                  </span>
+                                                </p>
                                             </dl>
                                         </div>
                                         <span class="pull-right hidden-xs hidden-sm btn btn-default project-btn" data-id="{{p.ProjectId}}" onclick="editProject(this);"><i class="fa fa-pencil-square fa-4x"></i></span>
@@ -101,43 +125,13 @@
         var editBtn         = $(btn.children()[0]);
         editBtn.removeClass("fa-pencil-square").addClass("fa-floppy-o");
 
-        // grab ProjectedStartDate
-        var pstartDateStr = project.find(".pstartDate").text();
-        var pstartDate = new Date(pstartDateStr);
-        // console.log("Date String: " + pstartDateStr);
-        console.log(pstartDate);
+        // toggle date-picker
+        var datepicker = $(".date-picker");
+        var pickers = project.find(datepicker);
+        var datelabel = $(".dateStr");
+        var labels = project.find(datelabel);
 
-        // grab ActualStartDate
-        var astartDateStr = project.find(".astartDate").text();
-        var astartDate = new Date(astartDateStr);
-        // console.log("Date String: " + astartDateStr);
-        console.log(astartDate);
-
-        // grab ProjectedFinishDate
-        var pfinishDateStr = project.find(".pfinishDate").text();
-        var pfinishDate = new Date(pfinishDateStr);
-        // console.log("Date String: " + pfinishDateStr);
-        console.log(pfinishDate);
-
-        // grab ActualFinishDate
-        var afinishDateStr = project.find(".afinishDate").text();
-        var afinishDate = new Date(afinishDateStr);
-        // console.log("Date String: " + afinishDateStr);
-        console.log(afinishDate);
-
-        // a["key"] = val;
-        // $.each(a, function(i,v){})
-        dates = {
-          ".pstartDate" : pstartDate,
-          ".astartDate" : astartDate,
-          ".pfinishDate" : pfinishDate,
-          ".afinishDate" : afinishDate
-        };
-        console.log(dates);
-
-        // $.each(dates, function(index, value) {
-        //
-        // });
-
+        $(pickers).toggleClass("hide");
+        $(labels).toggleClass("hide");
     }
 </script>
