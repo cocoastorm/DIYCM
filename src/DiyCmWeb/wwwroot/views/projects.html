@@ -32,13 +32,13 @@
                         <div class="panel panel-default" ng-repeat="p in allProjects">
                             <div id="project-{{p.ProjectId}}" class="project">
                             <!-- Start of 1 Project -->
-                                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapse1">
+                                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#{{p.ProjectId}}">
                                     <a >
                                         <h4 class="panel-title">{{p.ProjectName}}<span class="pull-right hidden-md hidden-lg"><i class="fa fa-pencil-square"></i></span>
                                         </h4>
                                     </a>
                                 </div>
-                                <div id="collapse1" class="panel-collapse collapse">
+                                <div id="{{p.ProjectId}}" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="col-md-7">
                                             <p class="project-description">{{p.Description}}</p>
