@@ -27,3 +27,12 @@ h4.panel-title {
    left: auto !important;
    right: 0px;
  }
+
+.st-green:hover {
+    background: #387577;
+    border:solid 3px black;
+}
+
+.st-green:active {
+    background: #1C3A3B;
+}

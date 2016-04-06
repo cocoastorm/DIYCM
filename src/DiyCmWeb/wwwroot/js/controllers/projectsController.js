@@ -38,7 +38,8 @@
         ProjectedEndDate: $scope.project.ProjectedEndDate,
         ActualEndDate: $scope.project.ActualEndDate
       };
-      console.log(data);
+      ReportsService.addProject(data)
+        .then(onAddProject, onAddProjectError);
     };
 
     ReportsService.getAllProjectsBudgetActual()
@@ -71,7 +72,7 @@
       };
 
       $scope.dateOptions = {
-        dateDisabled: disabled,
+        // dateDisabled: disabled,
         formatYear: 'yy',
         maxDate: new Date(2020, 5, 22),
         minDate: new Date(),
