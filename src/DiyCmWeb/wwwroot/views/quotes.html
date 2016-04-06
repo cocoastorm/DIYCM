@@ -26,8 +26,8 @@
         <div class="row col-md-8">
         <div class="panel-group" id="accordion" style="padding-left:0; padding-right:0; margin: 0 auto; width: 100%">
             <div class="panel panel-default"  ng-repeat="q in allQuoteHeaders">
-              <div class="panel-heading">
-                <a data-toggle="collapse" data-parent="#accordion" data-target="#{{q.QuoteHeaderId}}">
+              <div class="panel-heading"  data-toggle="collapse" data-parent="#accordion" data-target="#{{q.QuoteHeaderId}}">
+                <a>
                   <h4 class="panel-title">
                     Quote {{q.QuoteHeaderId}}
                   <span class="pull-right hidden-md hidden-lg"><i class="fa fa-pencil-square"></i></span>
