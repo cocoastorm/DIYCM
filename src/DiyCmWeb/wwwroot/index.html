@@ -135,22 +135,36 @@
     <div id="notifications-container">
         <h3 class="text-center" style="color:white;">Notifications</h3>
         <br>
-        <button class="notifications-accordion">Invoices</button>
-        <div class="notifications-panel status-info">
-            <p>Lorem ipsum...</p>
-        </div>
-
-        <button class="notifications-accordion">Quotes</button>
+        <button class="notifications-accordion">Projects - Over Budget</button>
         <div class="notifications-panel status-danger">
-            <p>Lorem ipsum...</p>
+            <dl>
+				<dt>My First Projecyt</dt>
+				<dd style="color:red"> -$6,333<span style="color:black"> over budget :(</span></dd>
+			</dl>
         </div>
 
-        <button class="notifications-accordion">Other</button>
-        <div class="notifications-panel status-success">
+        <button class="notifications-accordion">Projects - Close to Budget</button>
+        <div class="notifications-panel status-warning">
+			<ul class="list-unstyled">
+				<li><b>My First Project</b></li>
+				<li>Actual Budget: $96,000</li>
+				<li>Budget: $100,000</li>
+			</ul>
+        </div>
+
+		<button class="notifications-accordion">Unpaid Invoices</button>
+		<div class="notifications-panel status-danger">
+			<ul class="list-unstyled">
+				<li><a href="javascript:void(0)">#4542</a> expires: <b>June 12, 2013</b></li>
+				<li><a href="javascript:void(0)">#123</a> expires: <b>December 21, 2020</b></li>
+			</ul>
+			<p></p>
+		</div>
+
+        <button class="notifications-accordion">Unaccepted Quotes</button>
+        <div class="notifications-panel status-warning">
             <ul class="list-unstyled">
-                <li>Lorem ipsum dolor.</li>
-                <li>Aspernatur, natus, ullam!</li>
-                <li>Possimus, at soluta.</li>
+                <li><a href="javascript:void(0)">#9777</a> Bathroom</li>
             </ul>
         </div>
     </div><!-- notifications -->
