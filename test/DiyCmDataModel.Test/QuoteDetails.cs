@@ -1,4 +1,0 @@
-﻿namespace DiyCmDataModel.Test.Construction
-{
-   
-}
