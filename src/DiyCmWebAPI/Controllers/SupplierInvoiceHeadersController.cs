@@ -5,6 +5,7 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
 using DiyCmDataModel.Construction;
 using Microsoft.AspNet.Cors;
+using System;
 
 namespace DiyCmWebAPI.Controllers
 {
@@ -24,7 +25,155 @@ namespace DiyCmWebAPI.Controllers
         [HttpGet]
         public IEnumerable<SupplierInvoiceHeader> GetSupplierInvoiceHeaders()
         {
+            /*
+            var listOfQuotes = _context.QuoteHeaders;
+            foreach(QuoteHeader quote in listOfQuotes)
+            {
+                if(quote.IsAccept != null) // check if yes or no but seeded database is wrong, delete
+                {
+                    SupplierInvoiceHeader invoiceHeader = getInvoiceHeader(quote);
+                    var listOfValidInvoiceDetails = getInvoiceDetail(quote, invoiceHeader);
+                    
+                    _context.SupplierInvoiceHeaders.Add(invoiceHeader);
+                    foreach (SupplierInvoiceDetail invoiceDetail in listOfValidInvoiceDetails)
+                    {
+                        _context.SupplierInvoiceDetails.Add(invoiceDetail);
+                    }
+                    try
+                    {
+                        _context.SaveChanges();
+                    }
+                    catch (DbUpdateException)
+                    {
+                        if (SupplierInvoiceHeaderExists(invoiceHeader.QuoteHeaderId))
+                        {
+                            return new HttpStatusCodeResult(StatusCodes.Status409Conflict);
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    
+                }
+            }
+
+            */
+
+
             return _context.SupplierInvoiceHeaders;
+        }
+
+        public SupplierInvoiceHeader getInvoiceHeader(QuoteHeader quote)
+        {
+            var curDay = DateTime.Now.ToString("M/d/yyyy");
+            DateTime startDate = DateTime.Parse(curDay);
+            DateTime expiryDate = startDate.AddDays(30);
+            SupplierInvoiceHeader invoiceHeader = new SupplierInvoiceHeader()
+            {
+                InvoiceId = quote.QuoteHeaderId.ToString(),
+                SupplierName = quote.Supplier,
+                QuoteHeaderId = quote.QuoteHeaderId,
+                Date = quote.Date,
+                ContactName = quote.ContactName,
+                PhoneNumber = quote.PhoneNumber,
+                ReferredBy = quote.ReferredBy,
+                AddressCity = quote.AddressCity,
+                AddressStreet = quote.AddressStreet,
+                AddressCountry = quote.AddressCountry,
+                AddressPostalCode = quote.AddressPostalCode,
+                AddressProvince = quote.AddressProvince,
+                AmountPaid = 'N',
+                PaymentDate = expiryDate,
+                SH_AMOUNT_PAID = 0,
+                SH_AMOUNT = getTotalQuote(quote.QuoteHeaderId)
+            };
+            return invoiceHeader;
+        }
+
+        public List<SupplierInvoiceDetail> getInvoiceDetail(QuoteHeader quote, SupplierInvoiceHeader invoiceHeader)
+        {
+            var listOfQuoteDetails = _context.QuoteDetails;
+            var lineNumber = 0;
+            List<SupplierInvoiceDetail> validInvoiceDetail = new List<SupplierInvoiceDetail>();
+
+            foreach (QuoteDetail quoteDetail in listOfQuoteDetails)
+            {
+                if (quoteDetail.QuoteHeaderId == quote.QuoteHeaderId)
+                {
+                    SupplierInvoiceDetail invoiceDetail = new SupplierInvoiceDetail()
+                    {
+                        InvoiceId = quote.QuoteHeaderId.ToString(),
+                        SupplierInvoiceHeader = invoiceHeader,
+                        LineNumber = lineNumber,
+                        PartNumber = quoteDetail.PartId,
+                        PartDescription = quoteDetail.PartDescription,
+                        Area = quoteDetail.Area,
+                        AreaId = quoteDetail.AreaId,
+                        Category = quoteDetail.Category,
+                        CategoryId = quoteDetail.CategoryId,
+                        Notes = quoteDetail.Notes,
+                        SubCategory = quoteDetail.SubCategory,
+                        SubCategoryId = quoteDetail.SubCategoryId,
+                        UnitPrice = quoteDetail.UnitPrice
+                    };
+                    lineNumber++;
+                    validInvoiceDetail.Add(invoiceDetail);
+                }
+            }
+
+            return validInvoiceDetail;
+        }
+
+        public decimal getTotalQuote(int quoteHeaderId)
+        {
+            var listOfQuoteDetails = _context.QuoteDetails;
+            decimal total = 0;
+            foreach(QuoteDetail quoteDetail in listOfQuoteDetails)
+            {
+                if(quoteDetail.QuoteHeaderId == quoteHeaderId)
+                    total += (quoteDetail.UnitPrice);
+            }
+            return total;
+        }
+
+        [Route("update")]
+        // GET: api/SupplierInvoiceHeaders/update
+        public string update(string id)
+        {
+            var listOfQuotes = _context.QuoteHeaders;
+            foreach (QuoteHeader quote in listOfQuotes)
+            {
+                if (quote.IsAccept == 'Y' || quote.IsAccept == 'y') // check if yes or no but seeded database is wrong, delete
+                {
+                    SupplierInvoiceHeader invoiceHeader = getInvoiceHeader(quote);
+                    var listOfValidInvoiceDetails = getInvoiceDetail(quote, invoiceHeader);
+
+                    _context.SupplierInvoiceHeaders.Add(invoiceHeader);
+                    foreach (SupplierInvoiceDetail invoiceDetail in listOfValidInvoiceDetails)
+                    {
+                        _context.SupplierInvoiceDetails.Add(invoiceDetail);
+                    }
+                    try
+                    {
+                        _context.SaveChanges();
+                    }
+                    catch (DbUpdateException)
+                    {
+                        if (SupplierInvoiceHeaderExists(invoiceHeader.QuoteHeaderId))
+                        {
+                            return "ERROR: EXIST";
+                            //return new HttpStatusCodeResult(StatusCodes.Status409Conflict);
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+
+                }
+            }
+            return "Updated";
         }
 
         // GET: api/SupplierInvoiceHeaders/5

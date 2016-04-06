@@ -14,7 +14,6 @@ namespace DiyCmDataModel.Construction
         //[ForeignKey("SupplierInvoiceHeader")]
         public string InvoiceId { get; set; }
 
-
         public SupplierInvoiceHeader SupplierInvoiceHeader { get; set; }
 
         [Key, Column(Order = 1)]
