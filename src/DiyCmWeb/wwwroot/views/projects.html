@@ -28,8 +28,8 @@
         <div class="row">
             <div class="col-md-8">
 
-                    <div class="panel-group container" id="accordion" ng-controller="projectsController" style="padding-left:0; padding-right:0; margin: 0 auto; width: 100%">
-                        <div class="panel panel-default" ng-repeat="p in allProjects">
+                    <div class="panel-group container" id="accordion" style="padding-left:0; padding-right:0; margin: 0 auto; width: 100%">
+                        <div class="panel panel-default" ng-repeat="p in allProjects" ng-controller="projectsController">
                             <div id="project-{{p.ProjectId}}" class="project">
                             <!-- Start of 1 Project -->
                                 <div class="panel-heading">
@@ -88,7 +88,7 @@
                                             </dl>
                                         </div>
                                         <span class="pull-right hidden-xs hidden-sm btn btn-default project-btn" data-id="{{p.ProjectId}}" ng-hide="editorEnabled == p.ProjectId" ng-click="enableEditor(p.ProjectId)"><i class="fa fa-pencil-square fa-4x"></i></span>
-                                        <span class="pull-right hidden-xs hidden-sm btn btn-default project-btn" data-id="{{p.ProjectId}}" ng-show="editorEnabled == p.ProjectId" ng-click="save()"><i class="fa fa-floppy-o fa-4x"></i></span>
+                                        <span class="pull-right hidden-xs hidden-sm btn btn-default project-btn" data-id="{{p.ProjectId}}" ng-show="editorEnabled == p.ProjectId" ng-click="editProject()"><i class="fa fa-floppy-o fa-4x"></i></span>
                                     </div>
                                 </div>
                             </div><!-- End of 1 Project -->

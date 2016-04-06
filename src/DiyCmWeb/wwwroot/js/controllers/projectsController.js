@@ -32,6 +32,7 @@
 
     var onEditProject = function (data) {
       $scope.newProject = data;
+      $scope.disableEditor();
       console.log(data);
     };
 
@@ -55,16 +56,16 @@
     $scope.editProject = function () {
       var data = {
         ProjectId: $scope.p.ProjectId,
-        ProjectName: $scope.p.Name,
+        ProjectName: $scope.p.ProjectName,
         Description: $scope.p.Description,
         ProjectedStartDate: $scope.p.ProjectedStartDate,
-        ActualStartDate: $scope.p.ActualEndDate,
-        ProjectedEndDate: $scope.p.ProjectedEndDate,
-        ActualEndDate: $scope.p.ActualEndDate
+        ActualStartDate: $scope.p.ActualStartDate,
+        ProjectedFinishDate: $scope.p.ProjectedFinishDate,
+        ActualFinishDate: $scope.p.ActualFinishDate
       };
       console.log(data);
-      // ReportsService.editProject(data, data.ProjectId)
-      //   .then(onEditProject, onEditProjectError);
+      ReportsService.editProject(data, data.ProjectId)
+        .then(onEditProject, onEditProjectError);
     };
 
     $scope.enableEditor = function(id) {
@@ -73,10 +74,6 @@
 
     $scope.disableEditor = function() {
       $scope.editorEnabled = false;
-    };
-
-    $scope.save = function() {
-      $scope.disableEditor();
     };
 
     ReportsService.getAllProjectsBudgetActual()
