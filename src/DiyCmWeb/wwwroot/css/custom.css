@@ -9,6 +9,10 @@
     background: #39435C !important;
 }
 
+.panel-heading:hover {
+    background: #11141B !important;
+}
+
 h4.panel-title {
     color: white !important;
 }
