@@ -15,17 +15,11 @@
         };
 
         var _addProject = function (data) {
+          $.support.cors = true;
            return $http.post(baseUrl + "Projects", data)
              .then(function (response) {
                  return response.data;
              });
-       };
-
-       var _editProject = function (id, data) {
-         return $http.put(baseUrl + "Projects/" + id, data)
-          .then(function (response) {
-              return response.data;
-          });
        };
 
         var _getAllProjects = function () {
