@@ -15,8 +15,9 @@ namespace DiyCmDataModel.Construction
         public DbSet<QuoteDetail> QuoteDetails { get; set; }
         public DbSet<QuoteHeader> QuoteHeaders { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
-        public DbSet<SupplierInvoiceDetail> SupplierInvoiceDetails { get; set; }
         public DbSet<SupplierInvoiceHeader> SupplierInvoiceHeaders { get; set; }
+        public DbSet<SupplierInvoiceDetail> SupplierInvoiceDetails { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -34,9 +35,9 @@ namespace DiyCmDataModel.Construction
 
             builder.Entity<SubCategory>().HasKey(m => m.SubCategoryId);
 
-            builder.Entity<SupplierInvoiceDetail>().HasKey(m => new { m.InvoiceId, m.LineNumber });
 
-            builder.Entity<SupplierInvoiceHeader>().HasKey(m => m.QuoteHeaderId);
+            builder.Entity<SupplierInvoiceHeader>().HasKey(m => m.InvoiceId);
+            builder.Entity<SupplierInvoiceDetail>().HasKey(m => new { m.InvoiceId, m.LineNumber });
             base.OnModelCreating(builder);
 
           

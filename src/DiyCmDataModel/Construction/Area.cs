@@ -9,7 +9,6 @@ namespace DiyCmDataModel.Construction
     public class Area
     {
         [Key]
-        [MaxLength(100)]
         public int AreaId { get; set; }
 
         [MaxLength(50)]
