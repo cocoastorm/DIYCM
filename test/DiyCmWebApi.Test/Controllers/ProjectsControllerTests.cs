@@ -32,8 +32,7 @@ namespace DiyCmWebApi.Test.Controllers
         public async Task Test_get()
         {
             // Arrange
-            File.Delete("DIYCM.sqlite");
-            File.Copy("DIYCM-clean.sqlite", "DIYCM.sqlite");
+            Utility.Utility.RefreshDatabase();
 
             Project project1 = new Project
             {
@@ -67,8 +66,7 @@ namespace DiyCmWebApi.Test.Controllers
         public async Task Test_post()
         {
             // Arrange
-            File.Delete("DIYCM.sqlite");
-            File.Copy("DIYCM-clean.sqlite", "DIYCM.sqlite");
+            Utility.Utility.RefreshDatabase();
 
             Project project1 = new Project
             {
@@ -98,8 +96,7 @@ namespace DiyCmWebApi.Test.Controllers
         public async Task Test_delete()
         {
             // Arrange
-            File.Delete("DIYCM.sqlite");
-            File.Copy("DIYCM-clean.sqlite", "DIYCM.sqlite");
+            Utility.Utility.RefreshDatabase();
 
             Project project1 = new Project
             {
