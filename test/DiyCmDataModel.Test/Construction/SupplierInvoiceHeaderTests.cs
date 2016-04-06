@@ -40,12 +40,6 @@ namespace DiyCmDataModel.Test.Construction
             Assert.Equal("QuoteHeaderId", property);
         }
         [Fact]
-        public void Have_InvoiceDate_Property()
-        {
-            string property = ReflectionUtility.GetPropertyName((SupplierInvoiceHeader x) => x.Date);
-            Assert.Equal("InvoiceDate", property);
-        }
-        [Fact]
         public void Have_ContactName_Property()
         {
             string property = ReflectionUtility.GetPropertyName((SupplierInvoiceHeader x) => x.ContactName);
