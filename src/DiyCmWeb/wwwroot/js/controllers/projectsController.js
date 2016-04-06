@@ -67,9 +67,8 @@
       //   .then(onEditProject, onEditProjectError);
     };
 
-    $scope.enableEditor = function() {
-      $scope.editorEnabled = true;
-      $scope.editableTitle = $scope.title;
+    $scope.enableEditor = function(id) {
+      $scope.editorEnabled = id;
     };
 
     $scope.disableEditor = function() {
