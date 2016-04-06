@@ -27,9 +27,8 @@
         <!-- Main row -->
         <div class="row">
             <div class="col-md-8">
-
-                    <div class="panel-group container" id="accordion" style="padding-left:0; padding-right:0; margin: 0 auto; width: 100%">
-                        <div class="panel panel-default" ng-repeat="p in allProjects">
+                    <div class="panel-group container" id="accordion" style="padding-left:0; padding-right:0; margin: 0 auto; width: 100%" ng-controller="projectsController">
+                        <div class="panel panel-default" ng-repeat="p in allProjects" ng-show="edit">
                             <div id="project-{{p.ProjectId}}" class="project">
                             <!-- Start of 1 Project -->
                                 <div class="panel-heading">
@@ -47,15 +46,51 @@
                                             <dl>
                                                 <dt>ProjectStartDate</dt>
                                                 <dd class="dateStr">{{p.ProjectedStartDate}}</dd>
-                                                <p class="input-group date-picker hide">
+
+                                                <dt>ActualStartDate</dt>
+                                                <dd class="dateStr">{{p.ActualStartDate}}</dd>
+
+                                            </dl>
+                                        </div>
+                                        <div class="col-md-2 col-xs-6">
+                                            <dl>
+                                                <dt>ProjectFinishedDate</dt>
+                                                <dd class="dateStr">{{p.ProjectedFinishDate}}</dd>
+
+                                                <dt>ActualFinishedDate</dt>
+                                                <dd class="dateStr">{{p.ActualFinishDate}}</dd>
+                                            </dl>
+                                        </div>
+                                        <span class="pull-right hidden-xs hidden-sm btn btn-default project-btn" data-id="{{p.ProjectId}}" ng-click="editClickProject(p.ProjectId);"><i class="fa fa-pencil-square fa-4x"></i></span>
+                                    </div>
+                                </div>
+                            </div><!-- End of 1 Project -->
+                        </div>
+
+                        <div class="panel panel-default" ng-hide="edit" ng-repeat="p in allProjects">
+                            <div id="edit-project-{{p.ProjectId}}" class="project">
+                            <!-- Start of 1 Project -->
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse2">
+                                        <h4 class="panel-title"><input type="text" ng-model="p.ProjectName" style="color: black;" /></h4>
+                                    </a>
+                                </div>
+                                <div id="collapse2" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="col-md-7">
+                                            <input type="text" ng-model="p.Description" />
+                                        </div>
+                                        <div class="col-md-2 col-md-offset-1 col-xs-6">
+                                            <dl>
+                                                <dt>ProjectStartDate</dt>
+                                                <p class="input-group date-picker">
                                                   <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="p.ProjectedStartDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" popup-placement="top" />
                                                   <span class="input-group-btn">
                                                     <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                                                   </span>
                                                 </p>
                                                 <dt>ActualStartDate</dt>
-                                                <dd class="dateStr">{{p.ActualStartDate}}</dd>
-                                                <p class="input-group date-picker hide">
+                                                <p class="input-group date-picker">
                                                   <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="p.ActualStartDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" popup-placement="top" />
                                                   <span class="input-group-btn">
                                                     <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -66,16 +101,14 @@
                                         <div class="col-md-2 col-xs-6">
                                             <dl>
                                                 <dt>ProjectFinishedDate</dt>
-                                                <dd class="dateStr">{{p.ProjectedFinishDate}}</dd>
-                                                <p class="input-group date-picker hide">
+                                                <p class="input-group date-picker">
                                                   <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="p.ProjectedFinishDate" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" popup-placement="top" />
                                                   <span class="input-group-btn">
                                                     <button type="button" class="btn btn-default" ng-click="open3()"><i class="glyphicon glyphicon-calendar"></i></button>
                                                   </span>
                                                 </p>
                                                 <dt>ActualFinishedDate</dt>
-                                                <dd class="dateStr">{{p.ActualFinishDate}}</dd>
-                                                <p class="input-group date-picker hide">
+                                                <p class="input-group date-picker">
                                                   <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="p.ActualFinishDate" is-open="popup4.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" popup-placement="top" />
                                                   <span class="input-group-btn">
                                                     <button type="button" class="btn btn-default" ng-click="open4()"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -83,7 +116,7 @@
                                                 </p>
                                             </dl>
                                         </div>
-                                        <span class="pull-right hidden-xs hidden-sm btn btn-default project-btn" data-id="{{p.ProjectId}}" onclick="editProject(this);"><i class="fa fa-pencil-square fa-4x"></i></span>
+                                        <span class="pull-right hidden-xs hidden-sm btn btn-default project-btn" data-id="{{p.ProjectId}}" ng-click="editProject();"><i class="fa fa-floppy-o fa-4x"></i></span>
                                     </div>
                                 </div>
                             </div><!-- End of 1 Project -->
@@ -103,7 +136,14 @@
     function editProject (This) {
         var id = $(This).attr('data-id');
         var project = $("#project-" + id);
+        var btn     = project.find(".project-btn");
+        var editBtn = $(btn.children()[0]);
         // console.log(project);
+
+        console.log(editBtn);
+        if($(editBtn).hasClass("fa-floppy-o")) {
+          $scope.editProject();
+        } else {
 
         var children = project.children();
 
@@ -123,8 +163,6 @@
         desc.html("<textarea id='desc'>" + desc_text_backup + "</textarea>");
 
         // change project button to save
-        var btn             = project.find(".project-btn");
-        var editBtn         = $(btn.children()[0]);
         editBtn.removeClass("fa-pencil-square").addClass("fa-floppy-o");
 
         // toggle date-picker
@@ -135,5 +173,6 @@
 
         $(pickers).toggleClass("hide");
         $(labels).toggleClass("hide");
+      }
     }
 </script>

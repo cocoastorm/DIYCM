@@ -29,6 +29,15 @@
       console.log(reason);
     }
 
+    var onEditProject = function (data) {
+      $scope.newProject = data;
+      console.log(data);
+    };
+
+    var onEditProjectError = function (reason) {
+      console.log(reason);
+    }
+
     $scope.addProject = function () {
       var data = {
         ProjectName: $scope.project.Name,
@@ -40,6 +49,28 @@
       };
       ReportsService.addProject(data)
         .then(onAddProject, onAddProjectError);
+    };
+
+    $scope.editProject = function () {
+      var data = {
+        ProjectId: $scope.p.ProjectId,
+        ProjectName: $scope.p.Name,
+        Description: $scope.p.Description,
+        ProjectedStartDate: $scope.p.ProjectedStartDate,
+        ActualStartDate: $scope.p.ActualEndDate,
+        ProjectedEndDate: $scope.p.ProjectedEndDate,
+        ActualEndDate: $scope.p.ActualEndDate
+      };
+      console.log(data);
+      // ReportsService.editProject(data, data.ProjectId)
+      //   .then(onEditProject, onEditProjectError);
+    };
+
+    $scope.editClickProject = function (id) {
+      $scope.edit = false;
+      var btn = angular.element("#edit-project-" + id);
+      btn.find("[data-target='#collapse2']").click();
+      // console.log(btn);
     };
 
     ReportsService.getAllProjectsBudgetActual()
@@ -54,6 +85,9 @@
         .then(onGetAllComplete, onGetAllError);
     ReportsService.getActivities()
         .then(onGetAllComplete, onGetAllError);
+
+//
+$scope.edit = true;
 
 // DatePicker
       $scope.today = function() {
