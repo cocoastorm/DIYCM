@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Data.Entity;
 using DiyCmDataModel.Construction;
+using DiyCmDataModel.User;
 
 namespace DiyCmWebAPI
 {
@@ -51,6 +52,11 @@ namespace DiyCmWebAPI
             services.AddEntityFramework()
               .AddSqlite()
               .AddDbContext<DiyCmContext>(options => options.UseSqlite(connection));
+
+            services.AddEntityFramework()
+                .AddSqlite()
+                .AddDbContext<UserContext>(options => options.UseSqlite(connection));
+
 
         }
 
@@ -95,6 +101,8 @@ namespace DiyCmWebAPI
 
                 SeedData.InitializeSupplierInvoiceHeaders(context);
                 SeedData.InitializeSupplierInvoiceDetails(context);
+                var userContext = serviceScope.ServiceProvider.GetService<UserContext>();
+                SeedUser.InitializeUsers(userContext);
             }
 
         }

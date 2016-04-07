@@ -9,11 +9,13 @@ namespace DiyCmDataModel.User
     public class UserContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<User>().HasKey(m => m.userid);
+            base.OnModelCreating(builder);
+        }
     }
 
-    protected override void OnModelCreating(ModelBuilder builder)
-    {
-        builder.Entity<User>().HasKey(m => m.userid);
-        base.OnModelCreating(builder);
-    }
+
 }
