@@ -15,11 +15,20 @@
         };
 
         var _addProject = function (data) {
+          $.support.cors = true;
            return $http.post(baseUrl + "Projects", data)
              .then(function (response) {
                  return response.data;
              });
        };
+
+       var _editProject = function (data, id) {
+         $.support.cors = true;
+          return $http.put(baseUrl + "Projects/" + id, data)
+            .then(function (response) {
+                return response.data;
+            });
+      };
 
         var _getAllProjects = function () {
             return $http.get(baseUrl + "Projects")
@@ -204,6 +213,7 @@
         return {
             getProject: _getProject,
             addProject: _addProject,
+            editProject: _editProject,
             getAllProjects: _getAllProjects,
 
             getAllProjectsBudgetActual: _getAllProjectsBudgetActual,

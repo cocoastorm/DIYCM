@@ -1,6 +1,7 @@
 ﻿app.controller('projectsController', ['$scope', '$http', 'ReportsService', function ($scope, $http, ReportsService) {
 
     $scope.message = 'Everyone come and look!';
+    $scope.editorEnabled = false;
 
     var onGetAllBudgetActual = function (data) {
         $scope.tableProjects = data;
@@ -29,16 +30,50 @@
       console.log(reason);
     }
 
+    var onEditProject = function (data) {
+      $scope.newProject = data;
+      $scope.disableEditor();
+      console.log(data);
+    };
+
+    var onEditProjectError = function (reason) {
+      console.log(reason);
+    }
+
     $scope.addProject = function () {
       var data = {
-        "ProjectName": $scope.project.Name,
-        "Description": $scope.project.Description,
-        "ProjectedStartDate": $scope.project.ProjectedStartDate,
-        "ActualStartDate": $scope.project.ActualEndDate,
-        "ProjectedEndDate": $scope.project.ProjectedEndDate,
-        "ActualEndDate": $scope.project.ActualEndDate
+        ProjectName: $scope.project.Name,
+        Description: $scope.project.Description,
+        ProjectedStartDate: $scope.project.ProjectedStartDate,
+        ActualStartDate: $scope.project.ActualEndDate,
+        ProjectedEndDate: $scope.project.ProjectedEndDate,
+        ActualEndDate: $scope.project.ActualEndDate
+      };
+      ReportsService.addProject(data)
+        .then(onAddProject, onAddProjectError);
+    };
+
+    $scope.editProject = function () {
+      var data = {
+        ProjectId: $scope.p.ProjectId,
+        ProjectName: $scope.p.ProjectName,
+        Description: $scope.p.Description,
+        ProjectedStartDate: $scope.p.ProjectedStartDate,
+        ActualStartDate: $scope.p.ActualStartDate,
+        ProjectedFinishDate: $scope.p.ProjectedFinishDate,
+        ActualFinishDate: $scope.p.ActualFinishDate
       };
       console.log(data);
+      ReportsService.editProject(data, data.ProjectId)
+        .then(onEditProject, onEditProjectError);
+    };
+
+    $scope.enableEditor = function(id) {
+      $scope.editorEnabled = id;
+    };
+
+    $scope.disableEditor = function() {
+      $scope.editorEnabled = false;
     };
 
     ReportsService.getAllProjectsBudgetActual()
@@ -71,7 +106,7 @@
       };
 
       $scope.dateOptions = {
-        dateDisabled: disabled,
+        // dateDisabled: disabled,
         formatYear: 'yy',
         maxDate: new Date(2020, 5, 22),
         minDate: new Date(),
