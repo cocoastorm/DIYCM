@@ -4,8 +4,8 @@
 
     var ReportsService = function ($http, $q) {
 
-        //var baseUrl = 'http://diycm-api.azurewebsites.net/api/';
-        var baseUrl = 'http://localhost:49983/api/';
+        var baseUrl = 'http://diycm-api.azurewebsites.net/api/';
+        // var baseUrl = 'http://localhost:49983/api/';
 
         var _getProject = function (id) {
             return $http.get(baseUrl + id)
