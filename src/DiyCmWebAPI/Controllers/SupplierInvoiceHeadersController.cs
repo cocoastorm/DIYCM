@@ -25,42 +25,43 @@ namespace DiyCmWebAPI.Controllers
         [HttpGet]
         public IEnumerable<SupplierInvoiceHeader> GetSupplierInvoiceHeaders()
         {
-            /*
-            var listOfQuotes = _context.QuoteHeaders;
-            foreach(QuoteHeader quote in listOfQuotes)
-            {
-                if(quote.IsAccept != null) // check if yes or no but seeded database is wrong, delete
-                {
-                    SupplierInvoiceHeader invoiceHeader = getInvoiceHeader(quote);
-                    var listOfValidInvoiceDetails = getInvoiceDetail(quote, invoiceHeader);
-                    
-                    _context.SupplierInvoiceHeaders.Add(invoiceHeader);
-                    foreach (SupplierInvoiceDetail invoiceDetail in listOfValidInvoiceDetails)
-                    {
-                        _context.SupplierInvoiceDetails.Add(invoiceDetail);
-                    }
-                    try
-                    {
-                        _context.SaveChanges();
-                    }
-                    catch (DbUpdateException)
-                    {
-                        if (SupplierInvoiceHeaderExists(invoiceHeader.QuoteHeaderId))
-                        {
-                            return new HttpStatusCodeResult(StatusCodes.Status409Conflict);
-                        }
-                        else
-                        {
-                            throw;
-                        }
-                    }
-                    
-                }
-            }
+            /*   
+               var listOfQuotes = _context.QuoteHeaders;
+               foreach(QuoteHeader quote in listOfQuotes)
+               {
+                   if(quote.IsAccept != null) // check if yes or no but seeded database is wrong, delete
+                   {
+                       SupplierInvoiceHeader invoiceHeader = getInvoiceHeader(quote);
+                       var listOfValidInvoiceDetails = getInvoiceDetail(quote, invoiceHeader);
 
-            */
+                       _context.SupplierInvoiceHeaders.Add(invoiceHeader);
+                       foreach (SupplierInvoiceDetail invoiceDetail in listOfValidInvoiceDetails)
+                       {
+                           _context.SupplierInvoiceDetails.Add(invoiceDetail);
+                       }
+                       try
+                       {
+                           _context.SaveChanges();
+                       }
+                       catch (DbUpdateException)
+                       {
+                           if (SupplierInvoiceHeaderExists(invoiceHeader.QuoteHeaderId))
+                           {
+                               //return new HttpStatusCodeResult(StatusCodes.Status409Conflict);
+                           }
+                           else
+                           {
+                               throw;
+                           }
+                       }
+
+                   }
+               }
+
+               */
 
 
+            //return _context.SupplierInvoiceHeaders;
             return _context.SupplierInvoiceHeaders;
         }
 
@@ -71,7 +72,7 @@ namespace DiyCmWebAPI.Controllers
             DateTime expiryDate = startDate.AddDays(30);
             SupplierInvoiceHeader invoiceHeader = new SupplierInvoiceHeader()
             {
-                InvoiceId = quote.QuoteHeaderId.ToString(),
+                InvoiceId = quote.QuoteHeaderId,
                 SupplierName = quote.Supplier,
                 QuoteHeaderId = quote.QuoteHeaderId,
                 Date = quote.Date,
@@ -142,9 +143,10 @@ namespace DiyCmWebAPI.Controllers
         public string update(string id)
         {
             var listOfQuotes = _context.QuoteHeaders;
+            DateTime localDate = DateTime.Now;
             foreach (QuoteHeader quote in listOfQuotes)
             {
-                if (quote.IsAccept == 'Y' || quote.IsAccept == 'y') // check if yes or no but seeded database is wrong, delete
+                if ((quote.IsAccept == 'Y' || quote.IsAccept == 'y') && localDate >= quote.ExpiryDate) // check if yes or no but seeded database is wrong, delete
                 {
                     SupplierInvoiceHeader invoiceHeader = getInvoiceHeader(quote);
                     var listOfValidInvoiceDetails = getInvoiceDetail(quote, invoiceHeader);

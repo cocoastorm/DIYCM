@@ -299,7 +299,7 @@ namespace DiyCmDataModel.Construction
                     Supplier = "John's Plumbing",
                     Date = new DateTime(2016, 1, 1),
                     StartDate = new DateTime(2016, 3, 20),
-                    IsAccept =  'Y',
+                    IsAccept =  'N',
                     ContactName = "John Smith",
                     PhoneNumber = "(604)555-5254",
                     ReferredBy = "Billy",
@@ -317,7 +317,7 @@ namespace DiyCmDataModel.Construction
                     Supplier = "Ideal Homes",
                     Date = new DateTime(2016, 2, 28),
                     StartDate = new DateTime(2016, 6, 18),
-                    IsAccept = 'Y',
+                    IsAccept = 'N',
                     ContactName = "Ching Chong",
                     PhoneNumber = "(604)888-8888",
                     ReferredBy = "Joe",
@@ -335,7 +335,7 @@ namespace DiyCmDataModel.Construction
                     Supplier = "John's Plumbing",
                     Date = new DateTime(2016, 3, 31),
                     StartDate = new DateTime(2016, 9, 21),
-                    IsAccept = 'Y',
+                    IsAccept = 'N',
                     ContactName = "John Smith",
                     PhoneNumber = "(604)555-5254",
                     ReferredBy = "Billy",
@@ -567,7 +567,7 @@ namespace DiyCmDataModel.Construction
             {
                 db.SupplierInvoiceDetails.Add(new SupplierInvoiceDetail()
                 {
-                    InvoiceId = 1,
+                    InvoiceId = "1",
                     LineNumber = 1,
                     PartNumber = "32542",
                     PartDescription = "Chrome Tap",
@@ -581,7 +581,7 @@ namespace DiyCmDataModel.Construction
 
                 db.SupplierInvoiceDetails.Add(new SupplierInvoiceDetail()
                 {
-                    InvoiceId = 1,
+                    InvoiceId = "1",
                     LineNumber = 2,
                     PartNumber = "62584",
                     PartDescription = "Glass Sink",
@@ -595,7 +595,7 @@ namespace DiyCmDataModel.Construction
 
                 db.SupplierInvoiceDetails.Add(new SupplierInvoiceDetail()
                 {
-                    InvoiceId = 1,
+                    InvoiceId = "1",
                     LineNumber = 3,
                     PartNumber = "3DI34",
                     PartDescription = "Sink Stopper",
@@ -608,7 +608,7 @@ namespace DiyCmDataModel.Construction
                 });
                 db.SupplierInvoiceDetails.Add(new SupplierInvoiceDetail()
                 {
-                    InvoiceId = 2,
+                    InvoiceId = "2",
                     LineNumber = 1,
                     PartNumber = "87166",
                     PartDescription = "Bathroom trimming",
@@ -621,7 +621,7 @@ namespace DiyCmDataModel.Construction
                 });
                 db.SupplierInvoiceDetails.Add(new SupplierInvoiceDetail()
                 {
-                    InvoiceId = 2,
+                    InvoiceId = "2",
                     LineNumber = 2,
                     PartNumber = "13456",
                     PartDescription = "Metal drain",
@@ -635,7 +635,7 @@ namespace DiyCmDataModel.Construction
 
                 db.SupplierInvoiceDetails.Add(new SupplierInvoiceDetail()
                 {
-                    InvoiceId = 2,
+                    InvoiceId = "2",
                     LineNumber = 3,
                     PartNumber = "5SL78",
                     PartDescription = "Chisel",
@@ -649,7 +649,7 @@ namespace DiyCmDataModel.Construction
 
                 db.SupplierInvoiceDetails.Add(new SupplierInvoiceDetail()
                 {
-                    InvoiceId = 3,
+                    InvoiceId = "3",
                     LineNumber = 1,
                     PartNumber = "32542",
                     PartDescription = "Bathroom Lavatory Faucet",
@@ -663,7 +663,7 @@ namespace DiyCmDataModel.Construction
 
                 db.SupplierInvoiceDetails.Add(new SupplierInvoiceDetail()
                 {
-                    InvoiceId = 3,
+                    InvoiceId = "3",
                     LineNumber = 2,
                     PartNumber = "65461",
                     PartDescription = "Drain",
@@ -677,7 +677,7 @@ namespace DiyCmDataModel.Construction
 
                 db.SupplierInvoiceDetails.Add(new SupplierInvoiceDetail()
                 {
-                    InvoiceId = 3,
+                    InvoiceId = "3",
                     LineNumber = 3,
                     PartNumber = "3DI34",
                     PartDescription = "Drain Stopper",
