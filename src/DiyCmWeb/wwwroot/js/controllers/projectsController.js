@@ -106,7 +106,7 @@
     ReportsService.getActivities()
         .then(onGetAllComplete, onGetAllError);
 
-// DatePicker
+      // DatePicker
       $scope.today = function() {
         $scope.dt = new Date();
       };
