@@ -4,9 +4,16 @@
 
     var ReportsService = function ($http, $q) {
 
-        var baseUrl = 'http://diycm-api.azurewebsites.net/api/';
-        //var baseUrl = 'http://localhost:49983/api/';
-        
+        // var baseUrl = 'http://diycm-api.azurewebsites.net/api/';
+        var baseUrl = 'http://localhost:5000/api/';
+
+        var _getAllDocuments = function () {
+            return $http.get(baseUrl + "Documents")
+              .then(function (response) {
+                  return response.data;
+              });
+        };
+
         var _getAllQuoteHeaders = function () {
             return $http.get(baseUrl + "QuoteHeaders")
               .then(function (response) {
