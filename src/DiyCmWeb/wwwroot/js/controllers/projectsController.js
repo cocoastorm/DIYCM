@@ -1,4 +1,4 @@
-﻿app.controller('projectsController', ['$scope', '$http', 'ReportsService', function ($scope, $http, ReportsService) {
+﻿app.controller('projectsController', ['$scope', '$http', 'ProjectsService', 'ReportsService', function ($scope, $http, ProjectsService, ReportsService) {
 
     $scope.message = 'Everyone come and look!';
     $scope.editorEnabled = false;
@@ -23,6 +23,7 @@
 
     var onAddProject = function (data) {
       $scope.newProject = data;
+      window.location.reload();
       console.log(data);
     };
 
@@ -58,7 +59,7 @@
         ProjectedEndDate: $scope.project.ProjectedEndDate,
         ActualEndDate: $scope.project.ActualEndDate
       };
-      ReportsService.addProject(data)
+      ProjectsService.addProject(data)
         .then(onAddProject, onAddProjectError);
     };
 
@@ -73,14 +74,14 @@
         ActualFinishDate: $scope.p.ActualFinishDate
       };
       console.log(data);
-      ReportsService.editProject(data, data.ProjectId)
+      ProjectsService.editProject(data, data.ProjectId)
         .then(onEditProject, onEditProjectError);
     };
 
     $scope.deleteProject = function () {
       var ProjectId = $scope.p.ProjectId;
       console.log(ProjectId);
-      ReportsService.deleteProject(ProjectId)
+      ProjectsService.deleteProject(ProjectId)
         .then(onDeleteProject, onDeleteProjectError);
     }
 
@@ -94,7 +95,7 @@
 
     ReportsService.getAllProjectsBudgetActual()
     .then(onGetAllBudgetActual, onGetAllError);
-    ReportsService.getAllProjects()
+    ProjectsService.getAllProjects()
     .then(onGetAllProjects, onGetAllError);
     //ReportsService.getAllProjectsBudgetActual()
     //    .then(onGetAllComplete, onGetAllError);
