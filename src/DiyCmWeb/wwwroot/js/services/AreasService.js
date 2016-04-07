@@ -1,17 +1,17 @@
 (function() {
-  var ProjectsService = function ($http, $q) {
-    var baseUrl = 'http://diycm-api.azurewebsites.net/api/Projects/';
+  var AreasService = function ($http, $q) {
+    var baseUrl = 'http://diycm-api.azurewebsites.net/api/Areas/';
 
     // var baseUrl = 'http://localhost:5000/api/Projects/';
 
-    var _getProject = function (id) {
+    var _getArea = function (id) {
         return $http.get(baseUrl + id)
          .then(function (response) {
              return response.data;
          });
     };
 
-    var _addProject = function (data) {
+    var _addArea = function (data) {
       $.support.cors = true;
        return $http.post(baseUrl, data)
          .then(function (response) {
@@ -19,7 +19,7 @@
          });
    };
 
-   var _editProject = function (data, id) {
+   var _editArea = function (data, id) {
      $.support.cors = true;
       return $http.put(baseUrl + id, data)
         .then(function (response) {
@@ -27,7 +27,7 @@
         });
   };
 
-  var _deleteProject = function (id) {
+  var _deleteArea = function (id) {
     $.support.cors = true;
     return $http.delete(baseUrl + id)
       .then(function (response) {
@@ -35,7 +35,7 @@
       });
   };
 
-    var _getAllProjects = function () {
+    var _getAllAreas = function () {
         return $http.get(baseUrl)
           .then(function (response) {
               return response.data;
@@ -43,13 +43,13 @@
     };
 
     return {
-      getProject: _getProject,
-      addProject: _addProject,
-      editProject: _editProject,
-      getAllProjects: _getAllProjects
+      getArea: _getArea,
+      addArea: _addArea,
+      editArea: _editArea,
+      getAllAreas: _getAllAreas
     };
   };
 
   var module = angular.module("diycm");
-  module.factory("ProjectsService", ['$http', '$q', ProjectsService]);
+  module.factory("AreasService", ['$http', '$q', AreasService]);
 }());
