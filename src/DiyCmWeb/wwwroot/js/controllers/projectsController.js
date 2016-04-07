@@ -78,8 +78,8 @@
         .then(onEditProject, onEditProjectError);
     };
 
-    $scope.deleteProject = function () {
-      var ProjectId = $scope.p.ProjectId;
+    $scope.deleteProject = function (id) {
+      var ProjectId = id;
       console.log(ProjectId);
       ProjectsService.deleteProject(ProjectId)
         .then(onDeleteProject, onDeleteProjectError);
