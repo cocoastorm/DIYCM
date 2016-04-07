@@ -43,7 +43,12 @@
               });
         };
 
-
+        var _getAllDocuments = function () {
+            return $http.get(baseUrl + "Documents")
+              .then(function (response) {
+                  return response.data;
+              });
+        };
         //returns a JSON with project and summed up category budgets for the corresponding project -> charts?
         // | ProjectName | BudgetAmount | ActualAmount |
         var _getAllProjectsBudgetActual = function () {
@@ -215,6 +220,7 @@
             addProject: _addProject,
             editProject: _editProject,
             getAllProjects: _getAllProjects,
+            getAllDocuments: _getAllDocuments,
 
             getAllProjectsBudgetActual: _getAllProjectsBudgetActual,
             getCategoryDetailsAndSummary: _getCategoryDetailsAndSummary,
