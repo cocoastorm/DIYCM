@@ -5,7 +5,7 @@
     var ReportsService = function ($http, $q) {
 
         var baseUrl = 'http://diycm-api.azurewebsites.net/api/';
-        // var baseUrl = 'http://localhost:49983/api/';
+        //var baseUrl = 'http://localhost:49983/api/';
 
         var _getProject = function (id) {
             return $http.get(baseUrl + id)
@@ -15,28 +15,11 @@
         };
 
         var _addProject = function (data) {
-          $.support.cors = true;
            return $http.post(baseUrl + "Projects", data)
              .then(function (response) {
                  return response.data;
              });
        };
-
-       var _editProject = function (data, id) {
-         $.support.cors = true;
-          return $http.put(baseUrl + "Projects/" + id, data)
-            .then(function (response) {
-                return response.data;
-            });
-      };
-
-      var _deleteProject = function (id) {
-        $.support.cors = true;
-        return $http.delete(baseUrl + "Projects/" + id)
-          .then(function (response) {
-            return response.data;
-          });
-      };
 
         var _getAllProjects = function () {
             return $http.get(baseUrl + "Projects")
@@ -51,12 +34,7 @@
               });
         };
 
-        var _getAllDocuments = function () {
-            return $http.get(baseUrl + "Documents")
-              .then(function (response) {
-                  return response.data;
-              });
-        };
+
         //returns a JSON with project and summed up category budgets for the corresponding project -> charts?
         // | ProjectName | BudgetAmount | ActualAmount |
         var _getAllProjectsBudgetActual = function () {
@@ -226,9 +204,7 @@
         return {
             getProject: _getProject,
             addProject: _addProject,
-            editProject: _editProject,
             getAllProjects: _getAllProjects,
-            getAllDocuments: _getAllDocuments,
 
             getAllProjectsBudgetActual: _getAllProjectsBudgetActual,
             getCategoryDetailsAndSummary: _getCategoryDetailsAndSummary,
