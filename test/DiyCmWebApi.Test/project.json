@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
 
   "dependencies": {
@@ -17,8 +17,12 @@
   },
 
   "frameworks": {
-
-    "dnxcore50": { }
+    "dnx451": {
+      "frameworkAssemblies": {
+        "System.Web": "4.0.0.0",
+        "System.Web.Extensions": "4.0.0.0"
+      }
+    }
   },
 
   "exclude": [
