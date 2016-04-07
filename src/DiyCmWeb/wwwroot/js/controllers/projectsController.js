@@ -1,4 +1,4 @@
-﻿app.controller('projectsController', ['$scope', '$http', 'ReportsService', function ($scope, $http, ReportsService) {
+﻿app.controller('projectsController', ['$scope', '$http', 'ProjectsService', 'ReportsService', function ($scope, $http, ProjectsService, ReportsService) {
 
     $scope.message = 'Everyone come and look!';
     $scope.editorEnabled = false;
