@@ -38,6 +38,11 @@ app.config(function ($routeProvider) {
         templateUrl: 'views/subCategories.html',
         controller: 'homeController',
         title: 'All Sub-Categories'
+    })
+    .when('/documents', {
+        templateUrl: 'views/documents.html',
+        controller: 'documentsController',
+        title: 'All Documents'
     });
     $routeProvider.otherwise({ redirectTo: "/home" });
 
