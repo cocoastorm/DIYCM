@@ -30,6 +30,14 @@
             });
       };
 
+      var _deleteProject = function (id) {
+        $.support.cors = true;
+        return $http.delete(baseUrl + "Projects/" + id)
+          .then(function (response) {
+            return response.data;
+          });
+      };
+
         var _getAllProjects = function () {
             return $http.get(baseUrl + "Projects")
               .then(function (response) {
