@@ -46,6 +46,7 @@
       getProject: _getProject,
       addProject: _addProject,
       editProject: _editProject,
+      deleteProject: _deleteProject,
       getAllProjects: _getAllProjects
     };
   };
