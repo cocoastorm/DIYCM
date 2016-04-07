@@ -6,6 +6,14 @@
         $scope.allQuoteHeaders = data;
         console.log(data);
     };
+    var onAddProject = function (data) {
+      $scope.newQuote = data;
+      console.log(data);
+    };
+
+
+
+
 
     var onGetAllComplete = function (data) {
         //console.log(data);
@@ -14,6 +22,10 @@
         console.log(reason);
     };
 
+
+
+    QuotesService.getAllQuoteHeaders()
+    .then(onGetQuoteHeader, onGetAllError);
     QuotesService.getAllQuoteHeaders()
     .then(onGetQuoteHeader, onGetAllError);
 }]);
