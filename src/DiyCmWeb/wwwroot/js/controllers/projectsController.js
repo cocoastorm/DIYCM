@@ -40,6 +40,15 @@
       console.log(reason);
     }
 
+    var onDeleteProject = function (data) {
+      $scope.deletedProject = data;
+      console.log(data);
+    };
+
+    var onDeleteProjectError = function (reason) {
+      console.log(reason);
+    }
+
     $scope.addProject = function () {
       var data = {
         ProjectName: $scope.project.Name,
@@ -67,6 +76,13 @@
       ReportsService.editProject(data, data.ProjectId)
         .then(onEditProject, onEditProjectError);
     };
+
+    $scope.deleteProject = function () {
+      var ProjectId = $scope.p.ProjectId;
+      console.log(ProjectId);
+      ReportsService.deleteProject(ProjectId)
+        .then(onDeleteProject, onDeleteProjectError);
+    }
 
     $scope.enableEditor = function(id) {
       $scope.editorEnabled = id;

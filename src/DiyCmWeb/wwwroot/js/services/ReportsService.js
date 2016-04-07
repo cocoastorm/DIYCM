@@ -5,7 +5,7 @@
     var ReportsService = function ($http, $q) {
 
         var baseUrl = 'http://diycm-api.azurewebsites.net/api/';
-        //var baseUrl = 'http://localhost:49983/api/';
+        // var baseUrl = 'http://localhost:49983/api/';
 
         var _getProject = function (id) {
             return $http.get(baseUrl + id)
@@ -28,6 +28,14 @@
             .then(function (response) {
                 return response.data;
             });
+      };
+
+      var _deleteProject = function (id) {
+        $.support.cors = true;
+        return $http.delete(baseUrl + "Projects/" + id)
+          .then(function (response) {
+            return response.data;
+          });
       };
 
         var _getAllProjects = function () {
