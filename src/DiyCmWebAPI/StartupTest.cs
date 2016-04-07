@@ -10,14 +10,13 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Data.Entity;
 using DiyCmDataModel.Construction;
-using DiyCmDataModel.User;
 
 namespace DiyCmWebAPI
 {
-    public class Startup
+    public class StartupTest
     {
         private IApplicationEnvironment _appEnv;
-        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+        public StartupTest(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
             _appEnv = appEnv;
             // Set up configuration sources.
@@ -44,7 +43,7 @@ namespace DiyCmWebAPI
 
             services.AddMvc();
             services.AddSwaggerGen();
-            
+
             services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()));
 
             var connection = Configuration["Data:DefaultConnection:SQLiteConnectionString"];
@@ -52,11 +51,6 @@ namespace DiyCmWebAPI
             services.AddEntityFramework()
               .AddSqlite()
               .AddDbContext<DiyCmContext>(options => options.UseSqlite(connection));
-
-            services.AddEntityFramework()
-                .AddSqlite()
-                .AddDbContext<UserContext>(options => options.UseSqlite(connection));
-
 
         }
 
@@ -73,10 +67,10 @@ namespace DiyCmWebAPI
             app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseStaticFiles();
-            
+
             app.UseSwaggerGen();
- 			app.UseSwaggerUi();
-            
+            app.UseSwaggerUi();
+
             app.UseMvc();
 
             using (var serviceScope = app.ApplicationServices
@@ -84,30 +78,13 @@ namespace DiyCmWebAPI
               .CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<DiyCmContext>();
-                SeedData.InitializeDocuments(context);
-                SeedData.InitializeAreas(context);
 
-
-                SeedData.InitializeProjects(context);
-                SeedData.InitializeCategories(context);
-                SeedData.InitializeSubCategories(context);
-
-
-
-                SeedData.InitializeQuoteHeaders(context);
-                SeedData.InitializeQuoteDetails(context);
-             
-               
-
-                SeedData.InitializeSupplierInvoiceHeaders(context);
-                SeedData.InitializeSupplierInvoiceDetails(context);
-                var userContext = serviceScope.ServiceProvider.GetService<UserContext>();
-                SeedUser.InitializeUsers(userContext);
+                //normally seeding would take place here
             }
 
         }
 
         // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
+        //public static void Main(string[] args) => WebApplication.Run<StartupTest>(args);
     }
 }
