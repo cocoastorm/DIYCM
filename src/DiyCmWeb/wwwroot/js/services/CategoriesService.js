@@ -43,11 +43,53 @@
           });
     };
 
+    var _getSubCategory = function (id) {
+        return $http.get(subcategoriesUrl + id)
+         .then(function (response) {
+             return response.data;
+         });
+    };
+
+    var _addSubCategory = function (data) {
+      $.support.cors = true;
+       return $http.post(subcategoriesUrl, data)
+         .then(function (response) {
+             return response.data;
+         });
+   };
+
+   var _editSubCategory = function (data, id) {
+     $.support.cors = true;
+      return $http.put(subcategoriesUrl + id, data)
+        .then(function (response) {
+            return response.data;
+        });
+  };
+
+  var _deleteSubCategory = function (id) {
+    $.support.cors = true;
+    return $http.delete(subcategoriesUrl + id)
+      .then(function (response) {
+        return response.data;
+      });
+  };
+
+    var _getSubAllCategories = function () {
+        return $http.get(subcategoriesUrl)
+          .then(function (response) {
+              return response.data;
+          });
+    };
+
     return {
       getCategory: _getCategory,
       addCategory: _addCategory,
       editCategory: _editCategory,
-      getAllCategories: _getAllCategories
+      getAllCategories: _getAllSubCategories
+      getSubCategory: _getSubCategory,
+      addSubCategory: _addSubCategory,
+      editSubCategory: _editSubCategory,
+      getSubAllCategories: _getAllSubCategories
     };
   };
 
