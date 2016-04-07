@@ -1,4 +1,4 @@
-﻿app.controller('quoteheadersController', ['$scope', '$http', 'ReportsService', function ($scope, $http, ReportsService) {
+﻿app.controller('quoteheadersController', ['$scope', '$http', 'QuotesService', function ($scope, $http, QuotesService) {
 
     $scope.message = 'Everyone come and look!';
 
@@ -14,6 +14,6 @@
         console.log(reason);
     };
 
-    ReportsService.getAllQuoteHeaders()
+    QuotesService.getAllQuoteHeaders()
     .then(onGetQuoteHeader, onGetAllError);
 }]);

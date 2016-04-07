@@ -23,6 +23,7 @@
 
     var onAddProject = function (data) {
       $scope.newProject = data;
+      window.location.reload();
       console.log(data);
     };
 

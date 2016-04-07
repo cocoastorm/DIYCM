@@ -4,8 +4,15 @@
 
     var ReportsService = function ($http, $q) {
 
-        var baseUrl = 'http://diycm-api.azurewebsites.net/api/';
-        // var baseUrl = 'http://localhost:49983/api/';
+        // var baseUrl = 'http://diycm-api.azurewebsites.net/api/';
+        var baseUrl = 'http://localhost:5000/api/';
+
+        var _getAllDocuments = function () {
+            return $http.get(baseUrl + "Documents")
+              .then(function (response) {
+                  return response.data;
+              });
+        };
 
         var _getAllQuoteHeaders = function () {
             return $http.get(baseUrl + "QuoteHeaders")
@@ -14,12 +21,7 @@
               });
         };
 
-        var _getAllDocuments = function () {
-            return $http.get(baseUrl + "Documents")
-              .then(function (response) {
-                  return response.data;
-              });
-        };
+
         //returns a JSON with project and summed up category budgets for the corresponding project -> charts?
         // | ProjectName | BudgetAmount | ActualAmount |
         var _getAllProjectsBudgetActual = function () {
