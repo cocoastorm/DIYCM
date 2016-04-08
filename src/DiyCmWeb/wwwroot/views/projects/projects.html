@@ -33,10 +33,12 @@
                             <div id="project-{{p.ProjectId}}" class="project">
                             <!-- Start of 1 Project -->
                                 <a href="javascript:void(0)">
-                                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#{{p.ProjectId}}">
+                                    <div class="panel-heading" ng-attr-data-toggle="{{(editorEnabled == p.ProjectId) && 'none' || 'collapse'}}" ng-attr-data-parent="#accordion" data-target="#{{p.ProjectId}}">
                                         <h4 class="panel-title">
                                           <span ng-hide="editorEnabled == p.ProjectId">{{p.ProjectName}}</span>
-                                          <input type="text" ng-model="p.ProjectName" ng-show="editorEnabled == p.ProjectId" style="color: black;" />
+                                          <div class="form-group">
+                                            <input type="text" class="form-control" ng-model="p.ProjectName" ng-show="editorEnabled == p.ProjectId" style="color: black;" />
+                                          </div>
                                           <span class="pull-right hidden-md hidden-lg"><i class="fa fa-pencil-square"></i></span>
                                         </h4>
                                     </div>
@@ -45,7 +47,9 @@
                                     <div class="panel-body">
                                         <div class="col-md-7">
                                             <p class="project-description" ng-hide="editorEnabled == p.ProjectId">{{p.Description}}</p>
-                                            <input type="text" ng-model="p.Description" ng-show="editorEnabled == p.ProjectId" />
+                                            <div class="form-group">
+                                                <textarea class="form-control" rows="5" ng-model="p.Description" ng-show="editorEnabled == p.ProjectId"></textarea>
+                                            </div>
                                         </div>
                                         <div class="col-md-2 col-md-offset-1 col-xs-6">
                                             <dl>
