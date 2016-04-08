@@ -57,8 +57,8 @@
         Description: $scope.project.Description,
         ProjectedStartDate: $scope.project.ProjectedStartDate,
         ActualStartDate: $scope.project.ActualEndDate,
-        ProjectedEndDate: $scope.project.ProjectedEndDate,
-        ActualEndDate: $scope.project.ActualEndDate
+        ProjectedFinishDate: $scope.project.ProjectedFinishDate,
+        ActualFinishDate: $scope.project.ActualFinishDate
       };
       ProjectsService.addProject(data)
         .then(onAddProject, onAddProjectError);
