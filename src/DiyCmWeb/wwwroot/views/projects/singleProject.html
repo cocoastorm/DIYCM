@@ -23,12 +23,12 @@
         </div><!-- dates -->
         <hr>
 
-        <div class="col-md-6">
+        <div class="col-md-6 main-category">
             <h4 class="text-center">Main Category &nbsp;<span class="btn btn-success"><i class="fa fa-plus"></i></span></h4>
-            <div>
+            <div class="main-category-child">
             <!-- Start of 1 Project -->
                 <a href="javascript:void(0)">
-                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#1">
+                    <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#1">
                         <h4 class="panel-title">
                           <span>First Category</span>
                           <span class="pull-right btn btn-success">Add Sub Cat</span>
@@ -55,10 +55,10 @@
                     </div>
                 </div>
             </div><!-- End of 1 Main Category -->
-            <div>
+            <div class="main-category-child">
             <!-- Start of 2 Project -->
                 <a href="javascript:void(0)">
-                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#2">
+                    <div class="panel-heading nth-2" data-toggle="collapse" data-parent="#accordion" data-target="#2">
                         <h4 class="panel-title">
                           <span>Second Category</span>
                           <span class="pull-right btn btn-success">Add Sub Cat</span>
@@ -88,20 +88,36 @@
         </div>
         <div class="col-md-6">
             <h4 class="text-center">Sub Category</h4>
-            <dl>
-                <dt>Sub Category Name:</dt>
-                <dd></dd>
-                <dt>Description:</dt>
-                <dd></dd>
-                <dt>Budget Amount:</dt>
-                <dd></dd>
-                <dt>Actual Amount:</dt>
-                <dd></dd>
-                <dt>Percentage Complete:</dt>
-                <dd></dd>
-                <dt>Variance Amount:</dt>
-                <dd></dd>
-            </dl>
+            <div class="main-category-child">
+            <!-- Start of 2 Project -->
+                <a href="javascript:void(0)">
+                    <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#2">
+                        <h4 class="panel-title">
+                          <span>Sub Category of 1</span>
+                          <span class="pull-right btn btn-success">Add Sub Cat</span>
+                          <br><br>
+                        </h4>
+                    </div>
+                </a>
+                <div id="2" class="panel-collapse collapse">
+                    <div class="panel-body" style="word-wrap: break-word;">
+                        <dl>
+                            <dt>Sub Category Name:</dt>
+                            <dd></dd>
+                            <dt>Description:</dt>
+                            <dd></dd>
+                            <dt>Budget Amount:</dt>
+                            <dd></dd>
+                            <dt>Actual Amount:</dt>
+                            <dd></dd>
+                            <dt>Percentage Complete:</dt>
+                            <dd></dd>
+                            <dt>Variance Amount:</dt>
+                            <dd></dd>
+                        </dl>
+                    </div>
+                </div>
+            </div><!-- End of 2 Main Category -->
         </div>
 
         <div class="clearfix"></div>
