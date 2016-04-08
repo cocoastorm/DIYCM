@@ -118,9 +118,14 @@
                     </li>
                     <li ng-class="{ active: isActive('/quotes')}">
                         <a href="#/quotes">
-                            <i class="fa fa-gavel"></i> <span>Quotes</span>
+                            <i class="fa fa-book"></i> <span>Quotes</span>
                         </a>
                     </li>
+					<li ng-class="{ active: isActive('/documents')}">
+						<a href="#/documents">
+							<i class="fa fa-file-text"></i> <span>Documents</span>
+						</a>
+					</li>
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -135,22 +140,36 @@
     <div id="notifications-container">
         <h3 class="text-center" style="color:white;">Notifications</h3>
         <br>
-        <button class="notifications-accordion">Invoices</button>
-        <div class="notifications-panel status-info">
-            <p>Lorem ipsum...</p>
-        </div>
-
-        <button class="notifications-accordion">Quotes</button>
+        <button class="notifications-accordion">Projects - Over Budget</button>
         <div class="notifications-panel status-danger">
-            <p>Lorem ipsum...</p>
+            <dl>
+				<dt>My First Projecyt</dt>
+				<dd style="color:red"> -$6,333<span style="color:black"> over budget :(</span></dd>
+			</dl>
         </div>
 
-        <button class="notifications-accordion">Other</button>
-        <div class="notifications-panel status-success">
+        <button class="notifications-accordion">Projects - Close to Budget</button>
+        <div class="notifications-panel status-warning">
+			<ul class="list-unstyled">
+				<li><b>My First Project</b></li>
+				<li>Actual Budget: $96,000</li>
+				<li>Budget: $100,000</li>
+			</ul>
+        </div>
+
+		<button class="notifications-accordion">Unpaid Invoices</button>
+		<div class="notifications-panel status-danger">
+			<ul class="list-unstyled">
+				<li><a href="javascript:void(0)">#4542</a> expires: <b>June 12, 2013</b></li>
+				<li><a href="javascript:void(0)">#123</a> expires: <b>December 21, 2020</b></li>
+			</ul>
+			<p></p>
+		</div>
+
+        <button class="notifications-accordion">Unaccepted Quotes</button>
+        <div class="notifications-panel status-warning">
             <ul class="list-unstyled">
-                <li>Lorem ipsum dolor.</li>
-                <li>Aspernatur, natus, ullam!</li>
-                <li>Possimus, at soluta.</li>
+                <li><a href="javascript:void(0)">#9777</a> Bathroom</li>
             </ul>
         </div>
     </div><!-- notifications -->
@@ -184,12 +203,21 @@
     <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.2.5.js" type="text/javascript"></script>
     <script src="js/diycm.js"></script>
     <script src="js/angular-local-storage.min.js"></script>
+    <script src="js/interceptors/dateInterceptor.js"></script>
+
+    <script src="js/services/AreasService.js"></script>
+    <script src="js/services/CategoriesService.js"></script>
     <script src="js/services/ReportsService.js"></script>
+    <script src="js/services/QuotesService.js"></script>
+    <script src="js/services/InvoicesService.js"></script>
+    <script src="js/services/ProjectsService.js"></script>
+    <script src="js/services/DocumentsService.js"></script>
+
     <script src="js/controllers/sidebarController.js"></script>
     <script src="js/controllers/homeController.js"></script>
     <script src="js/controllers/projectsController.js"></script>
     <script src="js/controllers/quoteheadersController.js"></script>
-
+	<script src="js/controllers/documentsController.js"></script>
 
     <script>
         var notifications; //stores content of notifications ( makes notifications small )

@@ -1,6 +1,7 @@
-﻿app.controller('projectsController', ['$scope', '$http', 'ReportsService', function ($scope, $http, ReportsService) {
+﻿app.controller('projectsController', ['$scope', '$http', 'ProjectsService', 'ReportsService', function ($scope, $http, ProjectsService, ReportsService) {
 
     $scope.message = 'Everyone come and look!';
+    $scope.editorEnabled = false;
 
     var onGetAllBudgetActual = function (data) {
         $scope.tableProjects = data;
@@ -22,10 +23,31 @@
 
     var onAddProject = function (data) {
       $scope.newProject = data;
+      window.location.reload();
       console.log(data);
     };
 
     var onAddProjectError = function (reason) {
+      console.log(reason);
+    }
+
+    var onEditProject = function (data) {
+      $scope.newProject = data;
+      $scope.disableEditor();
+      console.log(data);
+    };
+
+    var onEditProjectError = function (reason) {
+      console.log(reason);
+    }
+
+    var onDeleteProject = function (data) {
+      $scope.deletedProject = data;
+      console.log(data);
+      window.location.reload();
+    };
+
+    var onDeleteProjectError = function (reason) {
       console.log(reason);
     }
 
@@ -38,13 +60,43 @@
         ProjectedEndDate: $scope.project.ProjectedEndDate,
         ActualEndDate: $scope.project.ActualEndDate
       };
-      ReportsService.addProject(data)
+      ProjectsService.addProject(data)
         .then(onAddProject, onAddProjectError);
+    };
+
+    $scope.editProject = function () {
+      var data = {
+        ProjectId: $scope.p.ProjectId,
+        ProjectName: $scope.p.ProjectName,
+        Description: $scope.p.Description,
+        ProjectedStartDate: $scope.p.ProjectedStartDate,
+        ActualStartDate: $scope.p.ActualStartDate,
+        ProjectedFinishDate: $scope.p.ProjectedFinishDate,
+        ActualFinishDate: $scope.p.ActualFinishDate
+      };
+      console.log(data);
+      ProjectsService.editProject(data, data.ProjectId)
+        .then(onEditProject, onEditProjectError);
+    };
+
+    $scope.deleteProject = function (id) {
+      var ProjectId = id;
+      console.log(ProjectId);
+      ProjectsService.deleteProject(ProjectId)
+        .then(onDeleteProject, onDeleteProjectError);
+    }
+
+    $scope.enableEditor = function(id) {
+      $scope.editorEnabled = id;
+    };
+
+    $scope.disableEditor = function() {
+      $scope.editorEnabled = false;
     };
 
     ReportsService.getAllProjectsBudgetActual()
     .then(onGetAllBudgetActual, onGetAllError);
-    ReportsService.getAllProjects()
+    ProjectsService.getAllProjects()
     .then(onGetAllProjects, onGetAllError);
     //ReportsService.getAllProjectsBudgetActual()
     //    .then(onGetAllComplete, onGetAllError);
@@ -55,7 +107,7 @@
     ReportsService.getActivities()
         .then(onGetAllComplete, onGetAllError);
 
-// DatePicker
+      // DatePicker
       $scope.today = function() {
         $scope.dt = new Date();
       };

@@ -1,0 +1,47 @@
+﻿<aside class="right-side" style="margin-right: 20px">
+	<section class="content">
+		<h1>Documents</h1>
+		<div class="row" style="margin-bottom:5px;">
+			<div class="col-md-4">
+				<div class="sm-st clearfix">
+					<span class="sm-st-icon st-red"><i class="fa fa-archive"></i></span>
+					<div class="sm-st-info">
+						<span>{{tableDocuments.length}}</span>
+						Number of Documents
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="sm-st clearfix">
+					<span class="sm-st-icon st-green"><i class="fa fa-plus"></i></span>
+					<div class="sm-st-info">
+						<span>Add A Document</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Main row -->
+		<div class="row col-md-8 table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Type</th>
+						<th>Title</th>
+                        <th>Action</th>
+					</tr>
+				</thead>
+				<tbody ng-repeat="d in tableDocuments">
+					<tr>
+						<td>{{d.DocumentId}}</td>
+						<td>{{d.DocumentType}}</td>
+						<td>{{d.Title}}</td>
+                        <td><a href="{{d.DocumentId}}.{{d.DocumentType}}">View</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section><!-- /.content -->
+</aside><!-- /.right-side -->

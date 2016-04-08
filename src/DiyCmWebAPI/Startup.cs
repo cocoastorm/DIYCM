@@ -45,7 +45,7 @@ namespace DiyCmWebAPI
             services.AddMvc();
             services.AddSwaggerGen();
             
-            services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()));
+            services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
             var connection = Configuration["Data:DefaultConnection:SQLiteConnectionString"];
             connection = connection.Replace("=", "=" + _appEnv.ApplicationBasePath + "/");
