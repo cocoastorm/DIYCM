@@ -114,8 +114,8 @@
         .then(onGetAllComplete, onGetAllError);
     ReportsService.getActivities()
         .then(onGetAllComplete, onGetAllError);
-    CategoriesService.getAllCategoriesByProjectId()
-      .then(onGetAllProjectCategories, onGetAllProjectCategoriesError);
+    // CategoriesService.getAllCategoriesByProjectId()
+    //   .then(onGetAllProjectCategories, onGetAllProjectCategoriesError);
 
       // DatePicker
       $scope.today = function() {
