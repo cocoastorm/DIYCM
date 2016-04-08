@@ -3,9 +3,12 @@ using DiyCmWebAPI;
 using Microsoft.AspNet.TestHost;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using Xunit;
 
 namespace DiyCmWebApi.Test.Controllers
@@ -17,25 +20,110 @@ namespace DiyCmWebApi.Test.Controllers
 
         public ProjectsControllerTests()
         {
-            // Arrange
+            //Arrange
             _server = new TestServer(TestServer.CreateBuilder()
-                .UseStartup<Startup>());
+                .UseStartup<StartupTest>());
             _client = _server.CreateClient();
+            //_client.DefaultRequestHeaders.Clear();
+            //_client.DefaultRequestHeaders.Add("ContentType", "application/json");
         }
 
         [Fact]
-        public async Task ReturnHelloWorld()
+        public async Task Test_get()
         {
-            // Act
-            var response = await _client.GetAsync("/api/projects");
-            response.EnsureSuccessStatusCode();
+            // Arrange
+            Utility.Utility.RefreshDatabase();
 
+            Project project1 = new Project
+            {
+                ProjectName = "Test Project",
+                Description = "Test Description",
+                ProjectedStartDate = new DateTime(2016, 1, 1),
+                ActualStartDate = new DateTime(2016, 1, 1),
+                ProjectedFinishDate = new DateTime(2016, 1, 1),
+                ActualFinishDate = new DateTime(2016, 1, 1)
+            };
+            //convert object to StringContent for POST
+            var javaScriptSerializer = new JavaScriptSerializer();
+            string jsonString = javaScriptSerializer.Serialize(project1);
+            var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            //make a POST
+            var postResponse = await _client.PostAsync("/api/projects", content);
+            postResponse.EnsureSuccessStatusCode();
+
+            // Act
+            var getResponse = await _client.GetAsync("/api/projects");
+            getResponse.EnsureSuccessStatusCode();
+            var responseString = await getResponse.Content.ReadAsStringAsync();
+
+            // Assert
+            Assert.Equal("[{\"ProjectId\":1,\"ProjectName\":\"Test Project\",\"Description\":\"Test Description\",\"ProjectedStartDate\":\"2016-01-01T08:00:00\",\"ActualStartDate\":\"2016-01-01T08:00:00\",\"ProjectedFinishDate\":\"2016-01-01T08:00:00\",\"ActualFinishDate\":\"2016-01-01T08:00:00\"}]",
+                responseString);
+        }
+
+        [Fact]
+        public async Task Test_post()
+        {
+            // Arrange
+            Utility.Utility.RefreshDatabase();
+
+            Project project1 = new Project
+            {
+                ProjectName = "Test Project",
+                Description = "Test Description",
+                ProjectedStartDate = new DateTime(2016, 1, 1),
+                ActualStartDate = new DateTime(2016, 1, 1),
+                ProjectedFinishDate = new DateTime(2016, 1, 1),
+                ActualFinishDate = new DateTime(2016, 1, 1)
+            };
+            //convert object to StringContent for POST
+            var javaScriptSerializer = new JavaScriptSerializer();      
+            string jsonString = javaScriptSerializer.Serialize(project1);
+            var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            // Arrange
+            var response = await _client.PostAsync("/api/projects", content);
+            response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();
 
             // Assert
-            Assert.Equal("[{\"ProjectId\":100,\"ProjectName\":\"First Construction Project\",\"Description\":\"My first construction project with DIYCM\",\"ProjectedStartDate\":\"2016-05-16T00:00:00\",\"ActualStartDate\":\"2016-03-01T00:00:00\",\"ProjectedFinishDate\":\"2015-08-20T00:00:00\",\"ActualFinishDate\":\"0001-01-01T00:00:00\"},{\"ProjectId\":200,\"ProjectName\":\"Test Project\",\"Description\":\"Test Project\",\"ProjectedStartDate\":\"2016-09-10T00:00:00\",\"ActualStartDate\":\"2016-08-09T00:00:00\",\"ProjectedFinishDate\":\"2016-09-09T00:00:00\",\"ActualFinishDate\":\"2016-08-08T00:00:00\"}]",
+            Assert.Equal("{\"ProjectId\":1,\"ProjectName\":\"Test Project\",\"Description\":\"Test Description\",\"ProjectedStartDate\":\"2016-01-01T08:00:00Z\",\"ActualStartDate\":\"2016-01-01T08:00:00Z\",\"ProjectedFinishDate\":\"2016-01-01T08:00:00Z\",\"ActualFinishDate\":\"2016-01-01T08:00:00Z\"}",
+                responseString);
+        }
+
+        [Fact]
+        public async Task Test_delete()
+        {
+            // Arrange
+            Utility.Utility.RefreshDatabase();
+
+            Project project1 = new Project
+            {
+                ProjectName = "Test Project",
+                Description = "Test Description",
+                ProjectedStartDate = new DateTime(2016, 1, 1),
+                ActualStartDate = new DateTime(2016, 1, 1),
+                ProjectedFinishDate = new DateTime(2016, 1, 1),
+                ActualFinishDate = new DateTime(2016, 1, 1)
+            };
+            //convert object to StringContent for POST
+            var javaScriptSerializer = new JavaScriptSerializer();
+            string jsonString = javaScriptSerializer.Serialize(project1);
+            var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            //make a POST
+            var postResponse = await _client.PostAsync("/api/projects", content);
+            postResponse.EnsureSuccessStatusCode();
+
+            // Act
+            var deleteResponse = await _client.DeleteAsync("api/projects/1");    //delete the first item
+            deleteResponse.EnsureSuccessStatusCode();
+            var responseString = await deleteResponse.Content.ReadAsStringAsync();
+
+            // Assert
+            Assert.Equal("{\"ProjectId\":1,\"ProjectName\":\"Test Project\",\"Description\":\"Test Description\",\"ProjectedStartDate\":\"2016-01-01T08:00:00\",\"ActualStartDate\":\"2016-01-01T08:00:00\",\"ProjectedFinishDate\":\"2016-01-01T08:00:00\",\"ActualFinishDate\":\"2016-01-01T08:00:00\"}",
                 responseString);
         }
     }
-
 }
