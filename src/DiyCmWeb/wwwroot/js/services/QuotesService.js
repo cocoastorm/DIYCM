@@ -77,7 +77,7 @@
 
     var _deleteQuoteDetail = function (id) {
       $.support.cors = true;
-      return $http.delete(quoteHeadersUrl + id)
+      return $http.delete(quoteDetailsUrl + id)
         .then(function (response) {
           return response.data;
         });
