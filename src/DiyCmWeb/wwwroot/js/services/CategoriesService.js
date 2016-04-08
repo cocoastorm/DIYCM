@@ -81,15 +81,23 @@
           });
     };
 
+    var _getAllCategoriesByProjectId = function() {
+      $http.get(categoriesUrl).
+        then(function(response) {
+          return response.data;
+        });
+    };
+
     return {
       getCategory: _getCategory,
       addCategory: _addCategory,
       editCategory: _editCategory,
-      getAllCategories: _getAllSubCategories,
+      getAllCategories: _getAllCategories,
       getSubCategory: _getSubCategory,
       addSubCategory: _addSubCategory,
       editSubCategory: _editSubCategory,
-      getSubAllCategories: _getAllSubCategories
+      getSubAllCategories: _getSubAllCategories,
+      getAllCategoriesByProjectId: _getAllCategoriesByProjectId
     };
   };
 

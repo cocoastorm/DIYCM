@@ -1,7 +1,15 @@
-﻿app.controller('projectsController', ['$scope', '$http', 'ProjectsService', 'ReportsService', function ($scope, $http, ProjectsService, ReportsService) {
+﻿app.controller('projectsController', ['$scope', '$http', 'ProjectsService', 'ReportsService', 'CategoriesService', function ($scope, $http, ProjectsService, ReportsService, CategoriesService) {
 
     $scope.message = 'Everyone come and look!';
     $scope.editorEnabled = false;
+
+    var onGetAllProjectCategories = function (data) {
+      console.log(data);
+    };
+
+    var onGetAllProjectCategoriesError = function (reason) {
+      console.log(reason);
+    };
 
     var onGetAllBudgetActual = function (data) {
         $scope.tableProjects = data;
@@ -106,6 +114,8 @@
         .then(onGetAllComplete, onGetAllError);
     ReportsService.getActivities()
         .then(onGetAllComplete, onGetAllError);
+    CategoriesService.getAllCategoriesByProjectId()
+      .then(onGetAllProjectCategories, onGetAllProjectCategoriesError);
 
       // DatePicker
       $scope.today = function() {
