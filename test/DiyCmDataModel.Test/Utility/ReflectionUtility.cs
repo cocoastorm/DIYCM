@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 
 namespace DiyCmDataModel.Test.Utility
@@ -19,6 +20,11 @@ namespace DiyCmDataModel.Test.Utility
         {
             MemberExpression body = (MemberExpression)expression.Body;
             return body.Type.Name;
+        }
+
+        internal static string GetPropertyName(Func<Document, object> p)
+        {
+            throw new NotImplementedException();
         }
     }
 }

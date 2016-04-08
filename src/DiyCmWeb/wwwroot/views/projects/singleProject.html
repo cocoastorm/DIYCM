@@ -1,183 +1,169 @@
-﻿<aside class="right-side">
+﻿<aside class="right-side" ng-controller="singleProjectController">
     <section class="content">
-        <h1>SINGLE PROJECT</h1>
-        <div class="row" style="margin-bottom:5px;">
-            <div class="col-md-3">
-                <div class="sm-st clearfix">
-                    <span class="sm-st-icon st-red"><i class="fa fa-check-square-o"></i></span>
-                    <div class="sm-st-info">
-                        <span>33%</span>
-                        Completion
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="sm-st clearfix">
-                    <span class="sm-st-icon st-violet"><i class="fa fa-paperclip"></i></span>
-                    <div class="sm-st-info">
-                        <span>$5000</span>
-                        Budget Amount
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="sm-st clearfix">
-                    <span class="sm-st-icon st-green"><i class="fa fa-pencil"></i></span>
-                    <div class="sm-st-info">
-                        <span>Edit This Project</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <h1>{{project.ProjectName}}</h1>
+        <h3 class="text-muted">{{project.Description}}</h3>
+        <hr>
         <div class="row">
-            <section class="panel">
-                <header class="panel-heading">
-                    Description
-                </header>
-                <div class="panel-body">
-                    <p>This is a sample description meant to describe what this project is about.</p>
-                </div>
-            </section>
-        </div>
-        <div class="row">
-            <section class="panel">
-                <header class="panel-heading">
-                    Budget
-                </header>
-                <div class="panel-body">
-                    <canvas id="linechart" width="600" height="330"></canvas>
-                </div>
-            </section>
-        </div>
-        <!-- Main row -->
-
-        <div class="row">
-            <div class="col-md-8">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Categories
-                    </header>
-                    <div class="panel-body table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Category</th>
-                                    <th>Budget Amount</th>
-                                    <th>Actual Amount</th>
-                                    <th>Percent Completed</th>
-                                    <th>Variance Amount</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>100</td>
-                                    <td>Design</td>
-                                    <td>$1000</td>
-                                    <td>$1200</td>
-                                    <td>66%</td>
-                                    <td>$100</td>
-                                    <td><a href="#/singleProject"><span class="label label-info">Check Sub-Categories</span></a></td>
-                                </tr>
-                                <tr>
-                                    <td>160</td>
-                                    <td>Framing</td>
-                                    <td>$50000</td>
-                                    <td>$76000</td>
-                                    <td>11%</td>
-                                    <td>$2300</td>
-                                    <td><a href="#/singleProject"><span class="label label-info">Check Sub-Categories</span></a></td>
-                                </tr>
-                                <tr>
-                                    <td>220</td>
-                                    <td>Flooring</td>
-                                    <td>$10000</td>
-                                    <td>$12000</td>
-                                    <td>41%</td>
-                                    <td>$1000</td>
-                                    <td><a href="#/singleProject"><span class="label label-info">Check Sub-Categories</span></a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-            </div><!--end project list -->
-            <div class="col-md-4">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Invoices
-                    </header>
-                    <div class="panel-body" id="noti-box">
-
-                        <div class="alert alert-block alert-danger">
-                            <button data-dismiss="alert" class="close close-sm" type="button">
-                                <i class="fa fa-times"></i>
-                            </button>
-                            <strong>Albert Way</strong> <br />
-                            Yo you owe me money!
-                        </div>
-                        <div class="alert alert-success">
-                            <button data-dismiss="alert" class="close close-sm" type="button">
-                                <i class="fa fa-times"></i>
-                            </button>
-                            <strong>Jarry Mason</strong> <br />
-                            I make money, you make money, I got money under the stairs and the ladies dig me.
-                        </div>
-                        <div class="alert alert-info">
-                            <button data-dismiss="alert" class="close close-sm" type="button">
-                                <i class="fa fa-times"></i>
-                            </button>
-                            <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-                        </div>
-                        <div class="alert alert-warning">
-                            <button data-dismiss="alert" class="close close-sm" type="button">
-                                <i class="fa fa-times"></i>
-                            </button>
-                            <strong>Warning!</strong> Best check yo self, you're not looking too good.
-                        </div>
-                    </div>
-                </section>
+            <div class="col-md-6">
+                <div class="col-md-6"><b>ProjectedStartDate</b></div>
+                <div class="col-md-6">{{ProjectedStartDate}}</div>
             </div>
+            <div class="col-md-6">
+                <div class="col-md-6"><b>ProjectedFinishDate</b></div>
+                <div class="col-md-6">{{ProjectedFinishDate}}</div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6"><b>ActualStartDate</b></div>
+                <div class="col-md-6">{{ActualStartDate}}</div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6"><b>ActualFinishDate</b></div>
+                <div class="col-md-6">{{ActualFinishDate}}</div>
+            </div>
+        </div><!-- dates -->
+        <hr>
 
-        </div><!-- end main row -->
+        <div class="col-md-6 main-category">
+            <h4 class="text-center">Main Category &nbsp;<span class="btn btn-success"><i class="fa fa-plus"></i></span></h4>
+            <div class="main-category-child">
+            <!-- Start of 1 Project -->
+                <a href="javascript:void(0)">
+                    <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#1">
+                        <h4 class="panel-title">
+                          <span>First Category</span>
+                          <span class="pull-right btn btn-success">Add Sub Cat</span>
+                          <br><br>
+                        </h4>
+                    </div>
+                </a>
+                <div id="1" class="panel-collapse collapse">
+                    <div class="panel-body" style="word-wrap: break-word;">
+                        <dl>
+                            <dt>Category Name:</dt>
+                            <dd></dd>
+                            <dt>Description:</dt>
+                            <dd></dd>
+                            <dt>Budget Amount:</dt>
+                            <dd></dd>
+                            <dt>Actual Amount:</dt>
+                            <dd></dd>
+                            <dt>Percentage Complete:</dt>
+                            <dd></dd>
+                            <dt>Variance Amount:</dt>
+                            <dd></dd>
+                        </dl>
+                    </div>
+                </div>
+            </div><!-- End of 1 Main Category -->
+            <div class="main-category-child">
+            <!-- Start of 2 Project -->
+                <a href="javascript:void(0)">
+                    <div class="panel-heading nth-2" data-toggle="collapse" data-parent="#accordion" data-target="#2">
+                        <h4 class="panel-title">
+                          <span>Second Category</span>
+                          <span class="pull-right btn btn-success">Add Sub Cat</span>
+                          <br><br>
+                        </h4>
+                    </div>
+                </a>
+                <div id="2" class="panel-collapse collapse">
+                    <div class="panel-body" style="word-wrap: break-word;">
+                        <dl>
+                            <dt>Category Name:</dt>
+                            <dd></dd>
+                            <dt>Description:</dt>
+                            <dd></dd>
+                            <dt>Budget Amount:</dt>
+                            <dd></dd>
+                            <dt>Actual Amount:</dt>
+                            <dd></dd>
+                            <dt>Percentage Complete:</dt>
+                            <dd></dd>
+                            <dt>Variance Amount:</dt>
+                            <dd></dd>
+                        </dl>
+                    </div>
+                </div>
+            </div><!-- End of 2 Main Category -->
+        </div>
+        <div class="col-md-6">
+            <h4 class="text-center">Sub Category</h4>
+            <div class="main-category-child">
+            <!-- Start of 2 Project -->
+                <a href="javascript:void(0)">
+                    <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#3">
+                        <h4 class="panel-title">
+                          <span>Sub Category of 1</span>
+                          <span class="pull-right btn btn-success">Add Sub Cat</span>
+                          <br><br>
+                        </h4>
+                    </div>
+                </a>
+                <div id="3" class="panel-collapse collapse">
+                    <div class="panel-body" style="word-wrap: break-word;">
+                        <dl>
+                            <dt>Sub Category Name:</dt>
+                            <dd></dd>
+                            <dt>Description:</dt>
+                            <dd></dd>
+                            <dt>Budget Amount:</dt>
+                            <dd></dd>
+                            <dt>Actual Amount:</dt>
+                            <dd></dd>
+                            <dt>Percentage Complete:</dt>
+                            <dd></dd>
+                            <dt>Variance Amount:</dt>
+                            <dd></dd>
+                        </dl>
+                    </div>
+                </div>
+            </div><!-- End of 2 Main Category -->
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="col-md-6">
+            <h4 class="text-center">Quotes</h4>
+            <h5>Quote Detail</h5>
+            <dl>
+                <dt>Part #:</dt>
+                <dd></dd>
+                <dt>Part Description:</dt>
+                <dd></dd>
+                <dt>Actual Amount:</dt>
+                <dd></dd>
+                <dt>Unit Price:</dt>
+                <dd></dd>
+                <dt>Notes:</dt>
+                <dd></dd>
+            </dl>
+            <br>
+            <h5>Area</h5>
+            <dl>
+                <dt>Room:</dt>
+                <dd></dd>
+                <dt>Square Footage:</dt>
+                <dd></dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <h4 class="text-center">Invoices</h4>
+            <div>
+            <!-- Start of 1 Project -->
+                <a href="javascript:void(0)">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <span>Title</span>
+                        </h4>
+                    </div>
+                </a>
+                <div class="panel-collapse collapse">
+                    <div class="panel-body" style="word-wrap: break-word;">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt sunt velit harum natus quis consequatur aut voluptatibus. Labore nemo vel debitis sint temporibus quod, aspernatur officiis dicta accusamus sapiente culpa, aliquid architecto, voluptatem quasi, blanditiis! Sunt dignissimos iusto dolore. Necessitatibus eum non eaque optio.
+                    </div>
+                </div>
+            </div><!-- End of 1 Invoice -->
+        </div>
+
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
-
-<script type="text/javascript">
-    $(function() {
-                "use strict";
-                //BAR CHART
-                var data = {
-                    labels: ["January", "February", "March", "April", "May", "June", "July"],
-                    datasets: [
-                        {
-                            label: "My First dataset",
-                            fillColor: "rgba(220,220,220,0.2)",
-                            strokeColor: "rgba(220,220,220,1)",
-                            pointColor: "rgba(220,220,220,1)",
-                            pointStrokeColor: "#fff",
-                            pointHighlightFill: "#fff",
-                            pointHighlightStroke: "rgba(220,220,220,1)",
-                            data: [65, 59, 80, 81, 56, 55, 40]
-                        },
-                        {
-                            label: "My Second dataset",
-                            fillColor: "rgba(151,187,205,0.2)",
-                            strokeColor: "rgba(151,187,205,1)",
-                            pointColor: "rgba(151,187,205,1)",
-                            pointStrokeColor: "#fff",
-                            pointHighlightFill: "#fff",
-                            pointHighlightStroke: "rgba(151,187,205,1)",
-                            data: [28, 48, 40, 19, 86, 27, 90]
-                        }
-                    ]
-                };
-            new Chart(document.getElementById("linechart").getContext("2d")).Line(data,{
-                responsive : true,
-                maintainAspectRatio: false,
-            });
-
-            });
-            // Chart.defaults.global.responsive = true;
-</script>
