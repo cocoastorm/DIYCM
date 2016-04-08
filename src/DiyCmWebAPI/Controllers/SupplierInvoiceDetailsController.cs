@@ -37,7 +37,7 @@ namespace DiyCmWebAPI.Controllers
                 return HttpBadRequest(ModelState);
             }
 
-            SupplierInvoiceDetail supplierInvoiceDetail = _context.SupplierInvoiceDetails.Single(m => m.InvoiceId == id.ToString());
+            SupplierInvoiceDetail supplierInvoiceDetail = _context.SupplierInvoiceDetails.Single(m => m.InvoiceId == id);
 
             if (supplierInvoiceDetail == null)
             {
@@ -56,12 +56,12 @@ namespace DiyCmWebAPI.Controllers
                 return HttpBadRequest(ModelState);
             }
 
-            if (id.ToString() != supplierInvoiceDetail.InvoiceId)
+            if (id != supplierInvoiceDetail.InvoiceId)
             {
                 return HttpBadRequest();
             }
             // Get the old price so we can check the difference and update accordingly.
-            decimal oldPrice = _context.SupplierInvoiceDetails.Where(i => i.InvoiceId == id.ToString()).FirstOrDefault().UnitPrice;
+            decimal oldPrice = _context.SupplierInvoiceDetails.Where(i => i.InvoiceId == id).FirstOrDefault().UnitPrice;
             decimal deltaPrice = supplierInvoiceDetail.UnitPrice - oldPrice;
             // Update the actual amount
             var subCategory =  _context.SubCategories.Where(s => s.SubCategoryId == supplierInvoiceDetail.SubCategoryId).FirstOrDefault();
@@ -124,7 +124,7 @@ namespace DiyCmWebAPI.Controllers
             }
             catch (DbUpdateException)
             {
-                if (SupplierInvoiceDetailExists(Int32.Parse(supplierInvoiceDetail.InvoiceId)))
+                if (SupplierInvoiceDetailExists(supplierInvoiceDetail.InvoiceId))
                 {
                     return new HttpStatusCodeResult(StatusCodes.Status409Conflict);
                 }
@@ -146,7 +146,7 @@ namespace DiyCmWebAPI.Controllers
                 return HttpBadRequest(ModelState);
             }
 
-            SupplierInvoiceDetail supplierInvoiceDetail = _context.SupplierInvoiceDetails.Single(m => m.InvoiceId == id.ToString());
+            SupplierInvoiceDetail supplierInvoiceDetail = _context.SupplierInvoiceDetails.Single(m => m.InvoiceId == id);
             if (supplierInvoiceDetail == null)
             {
                 return HttpNotFound();
@@ -181,7 +181,7 @@ namespace DiyCmWebAPI.Controllers
 
         private bool SupplierInvoiceDetailExists(int id)
         {
-            return _context.SupplierInvoiceDetails.Count(e => e.InvoiceId == id.ToString()) > 0;
+            return _context.SupplierInvoiceDetails.Count(e => e.InvoiceId == id) > 0;
         }
     }
 }
