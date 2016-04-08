@@ -1,7 +1,9 @@
-﻿app.controller('projectsController', ['$scope', '$http', 'ProjectsService', 'ReportsService', function ($scope, $http, ProjectsService, ReportsService) {
+﻿app.controller('projectsController', ['$scope', '$http', 'ProjectsService', 'ReportsService', 'CategoriesService', function ($scope, $http, ProjectsService, ReportsService, CategoriesService) {
 
     $scope.message = 'Everyone come and look!';
     $scope.editorEnabled = false;
+
+    console.log(CategoriesService.getAllCategoriesByProjectId(100));
 
     var onGetAllBudgetActual = function (data) {
         $scope.tableProjects = data;
