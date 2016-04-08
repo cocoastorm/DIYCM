@@ -44,6 +44,7 @@
     var onDeleteProject = function (data) {
       $scope.deletedProject = data;
       console.log(data);
+      window.location.reload();
     };
 
     var onDeleteProjectError = function (reason) {
