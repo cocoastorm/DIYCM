@@ -124,7 +124,7 @@ namespace DiyCmWebAPI.Controllers
                 {
                     SupplierInvoiceDetail invoiceDetail = new SupplierInvoiceDetail()
                     {
-                        InvoiceId = quote.QuoteHeaderId.ToString(),
+                        InvoiceId = quote.QuoteHeaderId,
                         SupplierInvoiceHeader = invoiceHeader,
                         LineNumber = lineNumber,
                         PartNumber = quoteDetail.PartId,
