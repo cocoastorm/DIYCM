@@ -95,7 +95,8 @@ namespace DiyCmDataModel.Construction
                     CategoryName = "Design",
                     Description = "A category",
                     BudgetAmount = 2000,
-                    ActualAmount = 2400
+                    ActualAmount = 2400,
+                    VarianceAmount = 400
 
                 });
                 db.Categories.Add(new Category
@@ -105,6 +106,7 @@ namespace DiyCmDataModel.Construction
                     CategoryName = "Permits",
                     BudgetAmount = 2500,
                     ActualAmount = 2604,
+                    VarianceAmount = 104
                 });
                 db.Categories.Add(new Category
                 {
@@ -112,7 +114,8 @@ namespace DiyCmDataModel.Construction
                     CategoryId = 120,
                     CategoryName = "Demolition",
                     BudgetAmount = 2200,
-                    ActualAmount = 2240
+                    ActualAmount = 2240,
+                    VarianceAmount = 40
                 });
                 db.Categories.Add(new Category
                 {
@@ -120,7 +123,8 @@ namespace DiyCmDataModel.Construction
                     CategoryId = 130,
                     CategoryName = "Excavation",
                     BudgetAmount = 10000,
-                    ActualAmount = 6000
+                    ActualAmount = 6000,
+                    VarianceAmount = 4000
                 });
                 db.Categories.Add(new Category
                 {
@@ -128,7 +132,8 @@ namespace DiyCmDataModel.Construction
                     CategoryId = 140,
                     CategoryName = "Arborist",
                     BudgetAmount = 2000,
-                    ActualAmount = 5500
+                    ActualAmount = 5500,
+                    VarianceAmount = 3500
                 });
                 db.Categories.Add(new Category
                 {
@@ -136,7 +141,8 @@ namespace DiyCmDataModel.Construction
                     CategoryId = 150,
                     CategoryName = "Foundation",
                     BudgetAmount = 11000,
-                    ActualAmount = 9000
+                    ActualAmount = 9000,
+                    VarianceAmount = 2000
                 });
                 db.Categories.Add(new Category
                 {
@@ -144,7 +150,8 @@ namespace DiyCmDataModel.Construction
                     CategoryId = 160,
                     CategoryName = "Framing",
                     BudgetAmount = 5000,
-                    ActualAmount = 6000
+                    ActualAmount = 6000,
+                    VarianceAmount = 1000
                 });
                 db.Categories.Add(new Category
                 {
@@ -152,7 +159,9 @@ namespace DiyCmDataModel.Construction
                     CategoryId = 170,
                     CategoryName = "Plumbing",
                     BudgetAmount = 12000,
-                    ActualAmount = 9012
+                    ActualAmount = 9012,
+                    VarianceAmount = 2988
+
                 });
                 db.Categories.Add(new Category
                 {
@@ -160,7 +169,9 @@ namespace DiyCmDataModel.Construction
                     CategoryId = 180,
                     CategoryName = "Drywall",
                     BudgetAmount = 9000,
-                    ActualAmount = 10133
+                    ActualAmount = 10133,
+                    VarianceAmount = -1133
+
                 });
                 db.Categories.Add(new Category
                 {
@@ -168,7 +179,9 @@ namespace DiyCmDataModel.Construction
                     CategoryId = 190,
                     CategoryName = "Electrical",
                     BudgetAmount = 13000,
-                    ActualAmount = 11453
+                    ActualAmount = 11453,
+                    VarianceAmount = -153
+
                 });
                 db.Categories.Add(new Category
                 {
@@ -176,7 +189,8 @@ namespace DiyCmDataModel.Construction
                     CategoryId = 200,
                     CategoryName = "Siding",
                     BudgetAmount = 9600,
-                    ActualAmount = 6002
+                    ActualAmount = 6002,
+                    VarianceAmount = 3598
                 });
                 db.Categories.Add(new Category
                 {
@@ -184,7 +198,8 @@ namespace DiyCmDataModel.Construction
                     CategoryId = 210,
                     CategoryName = "Painting",
                     BudgetAmount = 6000,
-                    ActualAmount = 5020
+                    ActualAmount = 5020,
+                    VarianceAmount = 980
                 });
                 db.Categories.Add(new Category
                 {
@@ -192,7 +207,8 @@ namespace DiyCmDataModel.Construction
                     CategoryId = 220,
                     CategoryName = "Flooring",
                     BudgetAmount = 7000,
-                    ActualAmount = 7560
+                    ActualAmount = 7560,
+                    VarianceAmount = 560
                 });
                 db.Categories.Add(new Category
                 {
@@ -200,7 +216,8 @@ namespace DiyCmDataModel.Construction
                     CategoryId = 230,
                     CategoryName = "Security",
                     BudgetAmount = 500,
-                    ActualAmount = 600
+                    ActualAmount = 600,
+                    VarianceAmount = 100
                 });
 
                 db.SaveChanges();
@@ -218,7 +235,8 @@ namespace DiyCmDataModel.Construction
                     SubCategoryName = "Rough In",
                     CategoryId = 170,
                     BudgetAmount = 2000,
-                    ActualAmount = 1000
+                    ActualAmount = 1000,
+                    VarianceAmount = 1000
                 });
                 db.SubCategories.Add(new SubCategory
                 {
@@ -226,7 +244,8 @@ namespace DiyCmDataModel.Construction
                     SubCategoryName = "Faucet",
                     CategoryId = 170,
                     BudgetAmount = 100,
-                    ActualAmount = 100
+                    ActualAmount = 100,
+                    VarianceAmount = 0
                 });
                 db.SubCategories.Add(new SubCategory
                 {
@@ -234,7 +253,8 @@ namespace DiyCmDataModel.Construction
                     SubCategoryName = "Sink",
                     CategoryId = 170,
                     BudgetAmount = 200,
-                    ActualAmount = 110
+                    ActualAmount = 110,
+                    VarianceAmount = 90
                 });
                 db.SubCategories.Add(new SubCategory
                 {
@@ -242,7 +262,8 @@ namespace DiyCmDataModel.Construction
                     SubCategoryName = "Bathtub",
                     CategoryId = 170,
                     BudgetAmount = 600,
-                    ActualAmount = 1000
+                    ActualAmount = 1000,
+                    VarianceAmount = 400
                 });
                 db.SubCategories.Add(new SubCategory
                 {
@@ -250,7 +271,8 @@ namespace DiyCmDataModel.Construction
                     SubCategoryName = "Shower",
                     CategoryId = 170,
                     BudgetAmount = 500,
-                    ActualAmount = 450
+                    ActualAmount = 450,
+                    VarianceAmount = 50
                 });
                 db.SubCategories.Add(new SubCategory
                 {
@@ -258,7 +280,8 @@ namespace DiyCmDataModel.Construction
                     SubCategoryName = "Toilet",
                     CategoryId = 170,
                     BudgetAmount = 200,
-                    ActualAmount = 150
+                    ActualAmount = 150,
+                    VarianceAmount = 50
                 });
                 db.SubCategories.Add(new SubCategory
                 {
@@ -266,7 +289,8 @@ namespace DiyCmDataModel.Construction
                     SubCategoryName = "Bathtub Trim Set",
                     CategoryId = 170,
                     BudgetAmount = 200,
-                    ActualAmount = 100
+                    ActualAmount = 100,
+                    VarianceAmount = 100
                 });
                 db.SubCategories.Add(new SubCategory
                 {
@@ -274,7 +298,8 @@ namespace DiyCmDataModel.Construction
                     SubCategoryName = "Drain",
                     CategoryId = 170,
                     BudgetAmount = 200,
-                    ActualAmount = 100
+                    ActualAmount = 100,
+                    VarianceAmount = 100
                 });
                 db.SubCategories.Add(new SubCategory
                 {
@@ -282,7 +307,8 @@ namespace DiyCmDataModel.Construction
                     SubCategoryName = "Hose Bib",
                     CategoryId = 170,
                     BudgetAmount = 50,
-                    ActualAmount = 55
+                    ActualAmount = 55,
+                    VarianceAmount = -5
                 });
                 db.SaveChanges();
             }
@@ -317,7 +343,7 @@ namespace DiyCmDataModel.Construction
                     Supplier = "Ideal Homes",
                     Date = new DateTime(2016, 2, 28),
                     StartDate = new DateTime(2016, 6, 18),
-                    IsAccept = 'Y',
+                    IsAccept = 'N',
                     ContactName = "Ching Chong",
                     PhoneNumber = "(604)888-8888",
                     ReferredBy = "Joe",
@@ -335,7 +361,7 @@ namespace DiyCmDataModel.Construction
                     Supplier = "John's Plumbing",
                     Date = new DateTime(2016, 3, 31),
                     StartDate = new DateTime(2016, 9, 21),
-                    IsAccept = 'Y',
+                    IsAccept = 'N',
                     ContactName = "John Smith",
                     PhoneNumber = "(604)555-5254",
                     ReferredBy = "Billy",

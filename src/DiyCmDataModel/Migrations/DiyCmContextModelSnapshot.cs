@@ -18,8 +18,7 @@ namespace DiyCmDataModel.Migrations
             modelBuilder.Entity("DiyCmDataModel.Construction.Area", b =>
                 {
                     b.Property<int>("AreaId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("MaxLength", 100);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("AreaRoom")
                         .HasAnnotation("MaxLength", 50);
@@ -56,8 +55,7 @@ namespace DiyCmDataModel.Migrations
             modelBuilder.Entity("DiyCmDataModel.Construction.Document", b =>
                 {
                     b.Property<int>("DocumentId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("MaxLength", 10);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("DocumentType")
                         .HasAnnotation("MaxLength", 15);
@@ -70,8 +68,7 @@ namespace DiyCmDataModel.Migrations
             modelBuilder.Entity("DiyCmDataModel.Construction.Project", b =>
                 {
                     b.Property<int>("ProjectId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("MaxLength", 4);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("ActualFinishDate");
 
@@ -127,8 +124,7 @@ namespace DiyCmDataModel.Migrations
             modelBuilder.Entity("DiyCmDataModel.Construction.QuoteHeader", b =>
                 {
                     b.Property<int>("QuoteHeaderId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("MaxLength", 4);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("AddressCity")
                         .HasAnnotation("MaxLength", 30);
@@ -198,8 +194,7 @@ namespace DiyCmDataModel.Migrations
 
             modelBuilder.Entity("DiyCmDataModel.Construction.SupplierInvoiceDetail", b =>
                 {
-                    b.Property<int>("InvoiceId")
-                        .HasAnnotation("MaxLength", 20);
+                    b.Property<int>("InvoiceId");
 
                     b.Property<int>("LineNumber");
 
@@ -230,8 +225,7 @@ namespace DiyCmDataModel.Migrations
             modelBuilder.Entity("DiyCmDataModel.Construction.SupplierInvoiceHeader", b =>
                 {
                     b.Property<int>("InvoiceId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("MaxLength", 20);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("AddressCity")
                         .HasAnnotation("MaxLength", 30);
