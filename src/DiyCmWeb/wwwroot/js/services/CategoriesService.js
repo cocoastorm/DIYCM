@@ -85,7 +85,7 @@
       getCategory: _getCategory,
       addCategory: _addCategory,
       editCategory: _editCategory,
-      getAllCategories: _getAllSubCategories
+      getAllCategories: _getAllSubCategories,
       getSubCategory: _getSubCategory,
       addSubCategory: _addSubCategory,
       editSubCategory: _editSubCategory,

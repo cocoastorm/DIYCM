@@ -3,53 +3,97 @@
     var areas = null;
 
     var QuotesService = function ($http, $q) {
-        var baseUrl = 'http://diycm-api.azurewebsites.net/api/';
+        var quoteHeadersUrl = 'http://diycm-api.azurewebsites.net/api/QuoteHeaders/';
+        var quoteDetailsUrl = 'http://diycm-api.azurewebsites.net/api/QuoteDetails/';
         // var baseUrl = 'http://localhost:49983/api/';
 
         var _getAllQuoteHeaders = function () {
-            return $http.get(baseUrl + "QuoteHeaders")
+            return $http.get(quoteHeadersUrl)
               .then(function (response) {
                   return response.data;
               });
         };
 
-        var _getQuote = function (id) {
-            return $http.get(baseUrl + id)
+        var _getQuoteHeader = function (id) {
+            return $http.get(quoteHeadersUrl + id)
              .then(function (response) {
                  return response.data;
              });
         };
 
-        var _addQuote = function (data) {
+        var _addQuoteHeader = function (data) {
           $.support.cors = true;
-           return $http.post(baseUrl + "QuoteHeaders", data)
+           return $http.post(quoteHeadersUrl, data)
              .then(function (response) {
                  return response.data;
              });
        };
 
-       var _editQuote = function (data, id) {
+       var _editQuoteHeader = function (data, id) {
          $.support.cors = true;
-          return $http.put(baseUrl + "QuoteHeaders/" + id, data)
+          return $http.put(quoteHeadersUrl + id, data)
             .then(function (response) {
                 return response.data;
             });
       };
 
-      var _deleteQuote = function (id) {
+      var _deleteQuoteHeader = function (id) {
         $.support.cors = true;
-        return $http.delete(baseUrl + "QuoteHeaders/" + id)
+        return $http.delete(quoteHeadersUrl + id)
           .then(function (response) {
             return response.data;
           });
       };
 
+      var _getAllQuoteDetails = function () {
+          return $http.get(quoteDetailsUrl)
+            .then(function (response) {
+                return response.data;
+            });
+      };
+
+      var _getQuoteDetail = function (id) {
+          return $http.get(quoteDetailsUrl + id)
+           .then(function (response) {
+               return response.data;
+           });
+      };
+
+      var _addQuoteDetail = function (data) {
+        $.support.cors = true;
+         return $http.post(quoteDetailsUrl, data)
+           .then(function (response) {
+               return response.data;
+           });
+     };
+
+     var _editQuoteDetail = function (data, id) {
+       $.support.cors = true;
+        return $http.put(quoteDetailsUrl + id, data)
+          .then(function (response) {
+              return response.data;
+          });
+    };
+
+    var _deleteQuoteDetail = function (id) {
+      $.support.cors = true;
+      return $http.delete(quoteHeadersUrl + id)
+        .then(function (response) {
+          return response.data;
+        });
+    };
+
       return {
-          getQuote: _getQuote,
-          addQuote: _addQuote,
-          editQuote: _editQuote,
-          deleteQuote: _deleteQuote,
-          getAllQuoteHeaders: _getAllQuoteHeaders
+          getQuoteHeader: _getQuoteHeader,
+          addQuoteHeader: _addQuoteHeader,
+          editQuoteHeader: _editQuoteHeader,
+          deleteQuoteHeader: _deleteQuoteHeader,
+          getAllQuoteHeaders: _getAllQuoteHeaders,
+          getQuoteDetail: _getQuoteDetail,
+          addQuoteDetail: _addQuoteDetail,
+          editQuoteDetail: _editQuoteDetail,
+          deleteQuoteDetail: _deleteQuoteDetail,
+          getAllQuoteDetails: _getAllQuoteDetails,
       };
     };
     var module = angular.module("diycm");
