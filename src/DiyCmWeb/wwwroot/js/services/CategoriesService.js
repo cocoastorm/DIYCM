@@ -82,9 +82,18 @@
     };
 
     var _getAllCategoriesByProjectId = function() {
-      $http.get(categoriesUrl).
+      return $http.get(categoriesUrl).
         then(function(response) {
-          return response.data;
+          var categories = response.data;
+          var procats = [];
+
+          categories.forEach(function (category) {
+            if(category.ProjectId == 100) {
+              procats.push(category);
+            }
+          });
+
+        return procats;
         });
     };
 
