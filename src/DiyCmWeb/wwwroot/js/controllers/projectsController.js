@@ -3,14 +3,6 @@
     $scope.message = 'Everyone come and look!';
     $scope.editorEnabled = false;
 
-    var onGetAllProjectCategories = function (data) {
-      console.log(data);
-    };
-
-    var onGetAllProjectCategoriesError = function (reason) {
-      console.log(reason);
-    };
-
     var onGetAllBudgetActual = function (data) {
         $scope.tableProjects = data;
         console.log(data);
@@ -65,8 +57,8 @@
         Description: $scope.project.Description,
         ProjectedStartDate: $scope.project.ProjectedStartDate,
         ActualStartDate: $scope.project.ActualEndDate,
-        ProjectedEndDate: $scope.project.ProjectedEndDate,
-        ActualEndDate: $scope.project.ActualEndDate
+        ProjectedFinishDate: $scope.project.ProjectedFinishDate,
+        ActualFinishDate: $scope.project.ActualFinishDate
       };
       ProjectsService.addProject(data)
         .then(onAddProject, onAddProjectError);
@@ -114,8 +106,6 @@
         .then(onGetAllComplete, onGetAllError);
     ReportsService.getActivities()
         .then(onGetAllComplete, onGetAllError);
-    // CategoriesService.getAllCategoriesByProjectId()
-    //   .then(onGetAllProjectCategories, onGetAllProjectCategoriesError);
 
       // DatePicker
       $scope.today = function() {

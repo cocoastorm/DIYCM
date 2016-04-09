@@ -81,20 +81,19 @@
           });
     };
 
-    var _getAllCategoriesByProjectId = function() {
-      return $http.get(categoriesUrl).
-        then(function(response) {
-          var categories = response.data;
-          var procats = [];
+    var _getAllCategoriesByProjectId = function(id) {
+      $http.get(categoriesUrl).then(function(cats) {
+        var categories = cats.data;
+        var projectCategories = [];
 
-          categories.forEach(function (category) {
-            if(category.ProjectId == 100) {
-              procats.push(category);
-            }
-          });
-
-        return procats;
+        categories.forEach(function(category) {
+          if(category.ProjectId == id) {
+            projectCategories.push(category);
+          }
         });
+
+        return projectCategories;
+      });
     };
 
     return {
