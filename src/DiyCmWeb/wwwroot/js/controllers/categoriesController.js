@@ -26,9 +26,18 @@ app.controller('categoriesController', ['$scope', '$http', '$routeParams', 'Cate
       CategoriesService.addCategory(data)
         .then(onAddCategory, onCategoryError);
     };
-
-
-
-
-
+    $scope.addSubCategory = function () {
+      var data = {
+        SubCategoryName: $scope.subcategory.Name,
+        Description: $scope.subcategory.Description,
+        CategoryId: $scope.subcategory.CategoryId,
+        BudgetAmount: $scope.subcategory.BudgetAmount,
+        ActualAmount: $scope.subcategory.ActualAmount,
+        PercentCompleted: $scope.subcategory.PercentCompleted,
+        VarianceAmount: $scope.subcategory.VarianceAmount
+      };
+      console.log(data);
+      CategoriesService.addSubCategory(data)
+        .then(onAddCategory, onCategoryError);
+    };
 }]);
