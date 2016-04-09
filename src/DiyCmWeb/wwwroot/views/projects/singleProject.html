@@ -67,7 +67,7 @@
             <div class="main-category-child" ng-repeat="s in SubCategories">
             <!-- Start of 2 Project -->
                 <a href="javascript:void(0)">
-                    <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#3">
+                    <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#{{s.CategoryName}}">
                         <h4 class="panel-title">
                           <span>SubCategories for {{s.CategoryName}}</span>
                           <!-- <span class="pull-right btn btn-success">Add Sub Cat</span> -->
@@ -75,7 +75,7 @@
                         </h4>
                     </div>
                 </a>
-                <div id="3" class="panel-collapse collapse">
+                <div id="{{s.CategoryName}}" class="panel-collapse collapse">
                     <div class="panel-body" style="word-wrap: break-word;">
                         <dl>
                             <dt>Sub Category Name:</dt>
