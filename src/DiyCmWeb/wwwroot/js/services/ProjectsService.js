@@ -57,7 +57,7 @@
                         var obj = {
                           CategoryId      : category.CategoryId,
                           CategoryName    : category.CategoryName,
-                          Description     : category.CategoryId,
+                          Description     : category.Description,
                           BudgetAmount    : category.BudgetAmount,
                           ActualAmount    : category.ActualAmount,
                           PercentCompleted: category.PercentCompleted,
