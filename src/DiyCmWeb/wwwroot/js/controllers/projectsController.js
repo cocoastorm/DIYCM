@@ -56,7 +56,7 @@
         ProjectName: $scope.project.Name,
         Description: $scope.project.Description,
         ProjectedStartDate: $scope.project.ProjectedStartDate,
-        ActualStartDate: $scope.project.ActualEndDate,
+        ActualStartDate: $scope.project.ActualStartDate,
         ProjectedFinishDate: $scope.project.ProjectedFinishDate,
         ActualFinishDate: $scope.project.ActualFinishDate
       };
