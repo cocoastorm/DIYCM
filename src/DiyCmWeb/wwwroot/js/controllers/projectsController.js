@@ -3,8 +3,6 @@
     $scope.message = 'Everyone come and look!';
     $scope.editorEnabled = false;
 
-    console.log(CategoriesService.getAllCategoriesByProjectId(100));
-
     var onGetAllBudgetActual = function (data) {
         $scope.tableProjects = data;
         console.log(data);
@@ -58,7 +56,7 @@
         ProjectName: $scope.project.Name,
         Description: $scope.project.Description,
         ProjectedStartDate: $scope.project.ProjectedStartDate,
-        ActualStartDate: $scope.project.ActualEndDate,
+        ActualStartDate: $scope.project.ActualStartDate,
         ProjectedFinishDate: $scope.project.ProjectedFinishDate,
         ActualFinishDate: $scope.project.ActualFinishDate
       };

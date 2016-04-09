@@ -94,9 +94,6 @@
 
         return projectCategories;
       });
-
-      // console.log(projectCategories);
-      // return projectCategories;
     };
 
     return {
