@@ -45,14 +45,21 @@
 
     var _ongetProjectCategories = function(id){
           var reqCategories = $http.get(url + 'categories');
+          var reqSubCategories = $http.get(url + 'subcategories');
           var reqProjects = $http.get(url + 'projects/' + id);
-          var arr = new Array();
-          console.log(id);
-          return $q.all([reqCategories, reqProjects]).then(function (values) {
-              var categories = values[0].data;
-              var project = values[1].data;
+          // Both Main Categories + Sub categories
+          var allProjectCategories    = new Array();
+          var allProjectSubCategories = new Array();
+          var allCategories = new Array();
+
+          return $q.all([reqCategories, reqProjects, reqSubCategories]).then(function (values) {
+              var categories    = values[0].data;
+              var project       = values[1].data;
+              var subcategories = values[2].data;
+              //Iterate through each category
               categories.forEach(function (category) {
-              console.log(category.ProjectId)
+                var allSubcategories = new Array();
+                      //Find the corresponding categories for the project
                       if (id == category.ProjectId) {
                         var obj = {
                           CategoryId      : category.CategoryId,
@@ -61,12 +68,46 @@
                           BudgetAmount    : category.BudgetAmount,
                           ActualAmount    : category.ActualAmount,
                           PercentCompleted: category.PercentCompleted,
-                          VarianceAmount  : category.VarianceAmount
+                          VarianceAmount  : category.VarianceAmount,
+                          SubCategories   : allSubcategories
                         };
-                        arr.push(obj);
+                        //Iterate through each subcategory
+                        var subcat = new Array();   //Used to store all subcategories for a main Category
+                        subcategories.forEach(function (subcategory) {
+                          //Find all subcategories for the current category
+                          if(category.CategoryId == subcategory.CategoryId){
+                            var sub = {
+                              SubCategoryId    : subcategory.SubCategoryId,
+                              SubCategoryName  : subcategory.SubCategoryName,
+                              Description      : subcategory.Description,
+                              CategoryId       : subcategory.CategoryId,
+                              CategoryName     : category.CategoryName,
+                              //Category         : subcategory.,
+                              BudgetAmount     : subcategory.BudgetAmount,
+                              ActualAmount     : subcategory.ActualAmount,
+                              VarianceAmount   : subcategory.VarianceAmount,
+                              PercentCompleted : subcategory.PercentCompleted
+                            }
+                            //Add the subcategory to the current main category
+                            subcat.push(sub);
+                            obj.SubCategories.push(sub); //Optional
+                          }
+                        });
+
+                        var SubCategoriesForArray  = {
+                          CategoryName  : category.CategoryName,
+                          SubCategories : subcat
+                        };
+                        //Add the category
+                        allProjectCategories.push(obj);
+                        if(subcat.length > 0)
+                          allProjectSubCategories.push(SubCategoriesForArray);
+
                       }
               });
-              return arr;
+              allCategories.push(allProjectCategories);
+              allCategories.push(allProjectSubCategories);
+              return allCategories;
           });
     }
 

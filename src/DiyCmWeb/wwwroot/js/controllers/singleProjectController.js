@@ -14,7 +14,9 @@
     };
 
     var onGetProjectCategories = function (data) {
-        $scope.Categories = data;
+      console.log(data);
+        $scope.Categories    = data[0];
+        $scope.SubCategories = data[1];
     };
 
 

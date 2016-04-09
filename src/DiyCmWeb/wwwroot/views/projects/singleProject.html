@@ -52,6 +52,10 @@
                             <dd>{{c.PercentCompleted}}</dd>
                             <dt>Variance Amount:</dt>
                             <dd>{{c.VarianceAmount}}</dd>
+                            <dt>Subcategories</dt>
+                            <div ng-repeat="s in c.SubCategories">
+                              <dd>{{s.SubCategoryName}}</dd>
+                            </div>
                         </dl>
                     </div>
                 </div>
@@ -60,12 +64,12 @@
         </div>
         <div class="col-md-6">
             <h4 class="text-center">Sub Category</h4>
-            <div class="main-category-child">
+            <div class="main-category-child" ng-repeat="s in SubCategories">
             <!-- Start of 2 Project -->
                 <a href="javascript:void(0)">
                     <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#3">
                         <h4 class="panel-title">
-                          <span>Sub Category of 1</span>
+                          <span>SubCategories for {{s.CategoryName}}</span>
                           <span class="pull-right btn btn-success">Add Sub Cat</span>
                           <br><br>
                         </h4>
@@ -75,8 +79,10 @@
                     <div class="panel-body" style="word-wrap: break-word;">
                         <dl>
                             <dt>Sub Category Name:</dt>
-                            <dd></dd>
-                            <dt>Description:</dt>
+                            <div ng-repeat="sub in s.SubCategories">
+                              <dd>{{sub.SubCategoryName}}</dd>
+                            </div>
+                            <!-- <dt>Description:</dt>
                             <dd></dd>
                             <dt>Budget Amount:</dt>
                             <dd></dd>
@@ -85,7 +91,7 @@
                             <dt>Percentage Complete:</dt>
                             <dd></dd>
                             <dt>Variance Amount:</dt>
-                            <dd></dd>
+                            <dd></dd> -->
                         </dl>
                     </div>
                 </div>
