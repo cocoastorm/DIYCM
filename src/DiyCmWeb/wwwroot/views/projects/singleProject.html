@@ -22,9 +22,10 @@
             </div>
         </div><!-- dates -->
         <hr>
+        <div ng-include="'views/categories/categoriesModal.html'"></div>
 
         <div class="col-md-6 main-category">
-            <h4 class="text-center">Main Category &nbsp;<span class="btn btn-success"><i class="fa fa-plus"></i></span></h4>
+            <h4 class="text-center">Main Category &nbsp;<span class="btn btn-success"   data-toggle="modal" data-target="#categoryModal"><i class="fa fa-plus"></i></span></h4>
             <div class="main-category-child" ng-repeat="c in Categories">
             <!-- Start of 1 Project -->
                 <a href="javascript:void(0)">
