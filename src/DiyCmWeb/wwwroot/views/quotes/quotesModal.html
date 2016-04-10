@@ -147,6 +147,56 @@
                     </div>
                 </form>
                 <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-4">
+                        <label for="quotedetails-partid" class="control-label">Part Id:</label>
+                        <input type="text" class="form-control" ng-model="quotedetails.PartId">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-8">
+                        <label for="quotedetails-partdescription" class="control-label">Part Description:</label>
+                        <input type="text" class="form-control" ng-model="quotedetails.PartDescription">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-6">
+                        <label for="quotedetails-unitprice" class="control-label">Unit Price:</label>
+                        <input type="text" class="form-control" ng-model="quotedetails.UnitPrice">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-6">
+                        <label for="quotedetails-quantity" class="control-label">Quantity:</label>
+                        <input type="text" class="form-control" ng-model="quotedetails.Quantity">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-8">
+                        <label for="quotedetails-notes" class="control-label">Notes:</label>
+                        <input type="text" class="form-control" ng-model="quotedetails.Notes">
+                    </div>
+                </form>
+                <!-- End of -->
+                <form>
+                    <div class="form-group">
+                        <input type="hidden" ng-init="quotedetails.CategoryId=sub.CategoryId" ng-value="quotedetails.CategoryId">
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <input type="hidden" ng-init="quotedetails.SubCategoryId=sub.SubCategoryId" ng-value="quotedetails.SubCategoryId">
+                    </div>
+                </form>
 
             </div>
             <div class="modal-footer">

@@ -12,12 +12,36 @@
     };
 
     var onComplete = function (data) {
+      console.log("ONADDEDQUOTEDETAIL");
         console.log(data);
         //window.location.reload();
     };
     var onError = function (reason) {
         console.log(reason);
     };
+
+    var onAddQuoteHeaderComplete = function (data){
+      console.log(data);
+      var quoteDetails = {
+        QuoteHeaderId   : data.QuoteHeaderId,
+        //QuoteHeader : ,
+        //LineNumber: ,
+        PartId          : $scope.quotedetails.PartId,
+        PartDescription : $scope.quotedetails.PartDescription,
+        CategoryId      : $scope.quotedetails.CategoryId,
+        //Category: ,
+        SubCategoryId   : $scope.quotedetails.SubCategoryId,
+        //SubCategory: ,
+        AreaId          : 2,
+        //Area: ,
+        UnitPrice       : $scope.quotedetails.UnitPrice,
+        Quantity        : $scope.quotedetails.Quantity,
+        Notes           : $scope.quotedetails.Notes
+      }
+      console.log(quoteDetails);
+      QuotesService.addQuoteDetail(quoteDetails)
+        .then(onComplete, onError);
+    }
 
     $scope.addQuoteHeader = function () {
       var isAcceptValue;
@@ -42,22 +66,14 @@
         IsAccept          : isAcceptValue,
         ContactName       : $scope.quoteheader.ContactName,
         PhoneNumber       : $scope.quoteheader.PhoneNumber
-
       };
       console.log(data);
       QuotesService.addQuoteHeader(data)
-        .then(onComplete, onError);
+        .then(onAddQuoteHeaderComplete, onError);
     };
 
     QuotesService.getAllQuoteHeaders()
     .then(onGetQuoteHeader, onError);
-    QuotesService.getAllQuoteHeaders()
-    .then(onGetQuoteHeader, onError);
-
-
-
-
-
 
           // DatePicker Below
           $scope.today = function() {
