@@ -24,46 +24,56 @@
         <hr>
         <div ng-include="'views/categories/categoriesModal.html'"></div>
         <div class="col-md-6 main-category">
-            <h4 class="text-center">Main Category &nbsp;<span class="btn btn-success"   data-toggle="modal" data-target="#categoryModal"><i class="fa fa-plus"></i></span></h4>
-            <div class="main-category-child" ng-repeat="c in Categories">
-              <div ng-include="'views/subcategories/subCategoriesModal.html'"></div>
-            <!-- Start of 1 Project -->
-                <a href="javascript:void(0)">
+            <h4 class="text-center notification-icon accordian-header" data-toggle="collapse" data-target="#maincategory">
+              <span class="badge text">{{Categories.length}}</span>
+              Main Category &nbsp;
+            </h4>
+
+            <div id="maincategory" class="collapse">
+              <div id="add-main-category" class="text-center btn-success" data-toggle="modal" data-target="#categoryModal">
+                <h5<i class="fa fa-plus"></i> Main Category</h5>
+              </div>
+                <div class="main-category-child" ng-repeat="c in Categories">
+                <div ng-include="'views/subcategories/subCategoriesModal.html'"></div>
+                <!-- Start of 1 Project -->
                     <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#{{c.CategoryId}}">
                         <h4 class="panel-title">
                           <span>{{c.CategoryName}}</span>
-                          <span class="pull-right btn btn-success" data-toggle="modal" data-target="#subCategoriesModal{{c.CategoryId}}">Add Subcat <i class="fa fa-plus"></i></span>
+                          <span class="pull-right btn btn-success" data-toggle="modal" data-target="#subCategoriesModal{{c.CategoryId}}"><i class="fa fa-plus"> Subcategory</i></span>
                           <br><br>
                         </h4>
                     </div>
-                </a>
-                <div id="{{c.CategoryId}}" class="panel-collapse collapse">
-                    <div class="panel-body" style="word-wrap: break-word;">
-                        <dl>
-                            <dt>Category Name:</dt>
-                            <dd>{{c.CategoryName}}</dd>
-                            <dt>Description:</dt>
-                            <dd>{{c.Description}}</dd>
-                            <dt>Budget Amount:</dt>
-                            <dd>{{c.BudgetAmount}}</dd>
-                            <dt>Actual Amount:</dt>
-                            <dd>{{c.ActualAmount}}</dd>
-                            <dt>Percentage Complete:</dt>
-                            <dd>{{c.PercentCompleted}}</dd>
-                            <dt>Variance Amount:</dt>
-                            <dd>{{c.VarianceAmount}}</dd>
-                            <dt>Subcategories</dt>
-                            <div ng-repeat="s in c.SubCategories">
-                              <dd>{{s.SubCategoryName}}</dd>
-                            </div>
-                        </dl>
+                    <div id="{{c.CategoryId}}" class="panel-collapse collapse">
+                        <div class="panel-body" style="word-wrap: break-word;">
+                            <dl>
+                                <dt>Category Name:</dt>
+                                <dd>{{c.CategoryName}}</dd>
+                                <dt>Description:</dt>
+                                <dd>{{c.Description}}</dd>
+                                <dt>Budget Amount:</dt>
+                                <dd>{{c.BudgetAmount}}</dd>
+                                <dt>Actual Amount:</dt>
+                                <dd>{{c.ActualAmount}}</dd>
+                                <dt>Percentage Complete:</dt>
+                                <dd>{{c.PercentCompleted}}</dd>
+                                <dt>Variance Amount:</dt>
+                                <dd>{{c.VarianceAmount}}</dd>
+                                <dt>Subcategories</dt>
+                                <div ng-repeat="s in c.SubCategories">
+                                  <dd>{{s.SubCategoryName}}</dd>
+                                </div>
+                            </dl>
+                        </div>
                     </div>
-                </div>
-            </div><!-- End of 1 Main Category -->
-
+                </div><!-- End of 1 Main Category -->
+            </div>
         </div>
         <div class="col-md-6">
-            <h4 class="text-center">Sub Category</h4>
+            <h4 class="text-center  notification-icon accordian-header"  data-toggle="collapse" data-target="#subcategory">
+              <span class="badge text">{{SubCategories.length}}</span>
+              Subcategory
+            </h4>
+            <div id="subcategory" class="collapse">
             <div class="main-category-child" ng-repeat="s in SubCategories">
             <!-- Start of 2 Project -->
                 <a href="javascript:void(0)">
@@ -96,6 +106,7 @@
                     </div>
                 </div>
             </div><!-- End of 2 Main Category -->
+          </div>
         </div>
 
         <div class="clearfix"></div>
