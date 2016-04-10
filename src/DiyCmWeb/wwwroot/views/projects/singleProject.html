@@ -30,7 +30,7 @@
             </h4>
 
             <div id="maincategory" class="collapse">
-              <div id="add-main-category" class="text-center btn-success" data-toggle="modal" data-target="#categoryModal">
+              <div class="text-center btn-success add-modal" data-toggle="modal" data-target="#categoryModal">
                 <h5<i class="fa fa-plus"></i> Main Category</h5>
               </div>
                 <div class="main-category-child" ng-repeat="c in Categories">
@@ -86,10 +86,14 @@
                     </div>
                 </a>
                 <div id="{{s.CategoryName}}" class="panel-collapse collapse">
+                  <div class="text-center btn-success add-modal" data-toggle="modal" data-target="#quotesModal{{s.CategoryName}}">
+                    <h5<i class="fa fa-plus"></i> Quote</h5>
+                  </div>
                     <div class="panel-body" style="word-wrap: break-word;">
                         <dl>
                             <dt>Sub Category Name:</dt>
                             <div ng-repeat="sub in s.SubCategories">
+                              <div ng-include="'views/quotes/quotesModal.html'"></div>
                               <dd>{{sub.SubCategoryName}}</dd>
                             </div>
                             <!-- <dt>Description:</dt>
