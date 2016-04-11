@@ -1,0 +1,52 @@
+<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel">
+    <div class="modal-dialog" role="document" style="border: solid 1px #000; border-radius: 5px">
+        <div class="modal-content" ng-controller="categoriesController">
+            <div class="modal-header" style="background-color: #5cb85c">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="projectModalLabel" style="color: #ffffff">New Main Category</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="category-name" class="control-label">Main Category Name:</label>
+                        <input type="text" class="form-control" ng-model="category.Name">
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <label for="category-description" class="control-label">Description:</label>
+                        <input type="text" class="form-control" ng-model="category.Description">
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <label for="category-budgetamount" class="control-label">Budget Amount:</label>
+                        <input type="text" class="form-control" ng-model="category.BudgetAmount">
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <label for="category-actualamount" class="control-label">Actual Amount:</label>
+                        <input type="text" class="form-control" ng-model="category.ActualAmount">
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <label for="category-varianceamount" class="control-label">Variance Amount:</label>
+                        <input type="text" class="form-control" ng-model="category.VarianceAmount">
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <label for="category-percentcompleted" class="control-label">Percent Completed:</label>
+                        <input type="text" class="form-control" ng-model="category.PercentCompleted">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-success" ng-click="addCategory()">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
