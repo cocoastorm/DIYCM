@@ -72,6 +72,21 @@
         .then(onAddQuoteHeaderComplete, onError);
     };
 
+    $scope.addQuoteDetails = function () {
+      var data = {
+        PartId          : $scope.quotedetails.PartId,
+        PartDescription : $scope.quotedetails.PartDescription,
+        UnitPrice       : $scope.quotedetails.UnitPrice,
+        Quantity        : $scope.quotedetails.Quantity,
+        AreaId          : $scope.areas.Choice,
+        SubCategoryId   : $scope.quotedetails.SubCategoryId,
+        CategoryId      : $scope.quotedetails.CategoryId
+      };
+      console.log(data);
+    };
+
+
+
     QuotesService.getAllQuoteHeaders()
     .then(onGetQuoteHeader, onError);
 
