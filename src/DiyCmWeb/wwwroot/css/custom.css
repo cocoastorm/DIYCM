@@ -85,10 +85,28 @@ h4.panel-title {
     background: #1C3A3B;
 }
 
+.accordian-header{
+    background: #004d99;
+    padding: 10px 15px;
+    color: white;
+    margin-bottom: 1px;
+}
+.accordian-header:hover{
+    background: #1C3A3B;
+    padding: 10px 15px;
+    color: white;
+}
+.add-modal{
+  padding: 5px 5px;
+  color: white;
+  margin-bottom: 5px;
+
+}
+/*
 .nth-1 {
     background: red;
 }
 
 .nth-2 {
     background: green;
-}
+}*/

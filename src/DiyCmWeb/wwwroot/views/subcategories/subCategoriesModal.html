@@ -1,0 +1,57 @@
+<div class="modal fade" id="subCategoriesModal{{c.CategoryId}}" tabindex="-1" role="dialog" aria-labelledby="subCategoriesModalLabel">
+    <div class="modal-dialog" role="document" style="border: solid 1px #000; border-radius: 5px">
+        <div class="modal-content" ng-controller="categoriesController">
+            <div class="modal-header" style="background-color: #5cb85c">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="projectModalLabel" style="color: #ffffff">New Subcategory for {{c.CategoryName}} ({{c.CategoryId}})</h4>
+            </div>
+            <div class="modal-body">
+              <form>
+                  <div class="form-group">
+                      <input type="hidden" ng-init="subcategory.CategoryId=c.CategoryId" ng-value="subcategory.CategoryId">
+                  </div>
+              </form>
+                <form>
+                    <div class="form-group">
+                        <label for="subcategory-name" class="control-label">Sub Category Name:</label>
+                        <input type="text" class="form-control" ng-model="subcategory.Name">
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <label for="subcategory-description" class="control-label">Description:</label>
+                        <input type="text" class="form-control" ng-model="subcategory.Description">
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <label for="subcategory-budgetamount" class="control-label">Budget Amount:</label>
+                        <input type="text" class="form-control" ng-model="subcategory.BudgetAmount">
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <label for="subcategory-actualamount" class="control-label">Actual Amount:</label>
+                        <input type="text" class="form-control" ng-model="subcategory.ActualAmount">
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <label for="subcategory-varianceamount" class="control-label">Variance Amount:</label>
+                        <input type="text" class="form-control" ng-model="subcategory.VarianceAmount">
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <label for="subcategory-percentcompleted" class="control-label">Percent Completed:</label>
+                        <input type="text" class="form-control" ng-model="subcategory.PercentCompleted">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-success" ng-click="addSubCategory()">Create</button>
+            </div>
+        </div>
+    </div>
+</div>

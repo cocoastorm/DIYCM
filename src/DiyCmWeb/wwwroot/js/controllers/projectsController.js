@@ -1,4 +1,4 @@
-﻿app.controller('projectsController', ['$scope', '$http', 'ProjectsService', 'ReportsService', function ($scope, $http, ProjectsService, ReportsService) {
+﻿app.controller('projectsController', ['$scope', '$http', 'ProjectsService', 'ReportsService', 'CategoriesService', function ($scope, $http, ProjectsService, ReportsService, CategoriesService) {
 
     $scope.message = 'Everyone come and look!';
     $scope.editorEnabled = false;
@@ -56,9 +56,9 @@
         ProjectName: $scope.project.Name,
         Description: $scope.project.Description,
         ProjectedStartDate: $scope.project.ProjectedStartDate,
-        ActualStartDate: $scope.project.ActualEndDate,
-        ProjectedEndDate: $scope.project.ProjectedEndDate,
-        ActualEndDate: $scope.project.ActualEndDate
+        ActualStartDate: $scope.project.ActualStartDate,
+        ProjectedFinishDate: $scope.project.ProjectedFinishDate,
+        ActualFinishDate: $scope.project.ActualFinishDate
       };
       ProjectsService.addProject(data)
         .then(onAddProject, onAddProjectError);

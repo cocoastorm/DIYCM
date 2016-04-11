@@ -22,89 +22,81 @@
             </div>
         </div><!-- dates -->
         <hr>
-
+        <div ng-include="'views/categories/categoriesModal.html'"></div>
         <div class="col-md-6 main-category">
-            <h4 class="text-center">Main Category &nbsp;<span class="btn btn-success"><i class="fa fa-plus"></i></span></h4>
-            <div class="main-category-child">
-            <!-- Start of 1 Project -->
-                <a href="javascript:void(0)">
-                    <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#1">
+            <h4 class="text-center notification-icon accordian-header" data-toggle="collapse" data-target="#maincategory">
+              <span class="badge text">{{Categories.length}}</span>
+              Main Category &nbsp;
+            </h4>
+
+            <div id="maincategory" class="collapse">
+              <div class="text-center btn-success add-modal" data-toggle="modal" data-target="#categoryModal">
+                <h5<i class="fa fa-plus"></i> Main Category</h5>
+              </div>
+                <div class="main-category-child" ng-repeat="c in Categories">
+                <div ng-include="'views/subcategories/subCategoriesModal.html'"></div>
+                <!-- Start of 1 Project -->
+                    <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#{{c.CategoryId}}">
                         <h4 class="panel-title">
-                          <span>First Category</span>
-                          <span class="pull-right btn btn-success">Add Sub Cat</span>
+                          <span>{{c.CategoryName}}</span>
+                          <span class="pull-right btn btn-success" data-toggle="modal" data-target="#subCategoriesModal{{c.CategoryId}}"><i class="fa fa-plus"> Subcategory</i></span>
                           <br><br>
                         </h4>
                     </div>
-                </a>
-                <div id="1" class="panel-collapse collapse">
-                    <div class="panel-body" style="word-wrap: break-word;">
-                        <dl>
-                            <dt>Category Name:</dt>
-                            <dd></dd>
-                            <dt>Description:</dt>
-                            <dd></dd>
-                            <dt>Budget Amount:</dt>
-                            <dd></dd>
-                            <dt>Actual Amount:</dt>
-                            <dd></dd>
-                            <dt>Percentage Complete:</dt>
-                            <dd></dd>
-                            <dt>Variance Amount:</dt>
-                            <dd></dd>
-                        </dl>
+                    <div id="{{c.CategoryId}}" class="panel-collapse collapse">
+                        <div class="panel-body" style="word-wrap: break-word;">
+                            <dl>
+                                <dt>Category Name:</dt>
+                                <dd>{{c.CategoryName}}</dd>
+                                <dt>Description:</dt>
+                                <dd>{{c.Description}}</dd>
+                                <dt>Budget Amount:</dt>
+                                <dd>{{c.BudgetAmount}}</dd>
+                                <dt>Actual Amount:</dt>
+                                <dd>{{c.ActualAmount}}</dd>
+                                <dt>Percentage Complete:</dt>
+                                <dd>{{c.PercentCompleted}}</dd>
+                                <dt>Variance Amount:</dt>
+                                <dd>{{c.VarianceAmount}}</dd>
+                                <dt>Subcategories</dt>
+                                <div ng-repeat="s in c.SubCategories">
+                                  <dd>{{s.SubCategoryName}}</dd>
+                                </div>
+                            </dl>
+                        </div>
                     </div>
-                </div>
-            </div><!-- End of 1 Main Category -->
-            <div class="main-category-child">
-            <!-- Start of 2 Project -->
-                <a href="javascript:void(0)">
-                    <div class="panel-heading nth-2" data-toggle="collapse" data-parent="#accordion" data-target="#2">
-                        <h4 class="panel-title">
-                          <span>Second Category</span>
-                          <span class="pull-right btn btn-success">Add Sub Cat</span>
-                          <br><br>
-                        </h4>
-                    </div>
-                </a>
-                <div id="2" class="panel-collapse collapse">
-                    <div class="panel-body" style="word-wrap: break-word;">
-                        <dl>
-                            <dt>Category Name:</dt>
-                            <dd></dd>
-                            <dt>Description:</dt>
-                            <dd></dd>
-                            <dt>Budget Amount:</dt>
-                            <dd></dd>
-                            <dt>Actual Amount:</dt>
-                            <dd></dd>
-                            <dt>Percentage Complete:</dt>
-                            <dd></dd>
-                            <dt>Variance Amount:</dt>
-                            <dd></dd>
-                        </dl>
-                    </div>
-                </div>
-            </div><!-- End of 2 Main Category -->
+                </div><!-- End of 1 Main Category -->
+            </div>
         </div>
         <div class="col-md-6">
-            <h4 class="text-center">Sub Category</h4>
-            <div class="main-category-child">
+            <h4 class="text-center  notification-icon accordian-header"  data-toggle="collapse" data-target="#subcategory">
+              <span class="badge text">{{SubCategories.length}}</span>
+              Subcategory
+            </h4>
+            <div id="subcategory" class="collapse">
+            <div class="main-category-child" ng-repeat="s in SubCategories">
             <!-- Start of 2 Project -->
                 <a href="javascript:void(0)">
-                    <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#3">
+                    <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#{{s.CategoryName}}">
                         <h4 class="panel-title">
-                          <span>Sub Category of 1</span>
-                          <span class="pull-right btn btn-success">Add Sub Cat</span>
+                          <span>SubCategories for {{s.CategoryName}}</span>
+                          <!-- <span class="pull-right btn btn-success">Add Sub Cat</span> -->
                           <br><br>
                         </h4>
                     </div>
                 </a>
-                <div id="3" class="panel-collapse collapse">
+                <div id="{{s.CategoryName}}" class="panel-collapse collapse">
+                  <div class="text-center btn-success add-modal" data-toggle="modal" data-target="#quotesModal{{s.CategoryName}}">
+                    <h5<i class="fa fa-plus"></i> Quote</h5>
+                  </div>
                     <div class="panel-body" style="word-wrap: break-word;">
                         <dl>
                             <dt>Sub Category Name:</dt>
-                            <dd></dd>
-                            <dt>Description:</dt>
+                            <div ng-repeat="sub in s.SubCategories">
+                              <div ng-include="'views/quotes/quotesModal.html'"></div>
+                              <dd>{{sub.SubCategoryName}} ... {{sub.SubCategoryId}}</dd>
+                            </div>
+                            <!-- <dt>Description:</dt>
                             <dd></dd>
                             <dt>Budget Amount:</dt>
                             <dd></dd>
@@ -113,30 +105,64 @@
                             <dt>Percentage Complete:</dt>
                             <dd></dd>
                             <dt>Variance Amount:</dt>
-                            <dd></dd>
+                            <dd></dd> -->
                         </dl>
                     </div>
                 </div>
             </div><!-- End of 2 Main Category -->
+          </div>
         </div>
 
         <div class="clearfix"></div>
 
         <div class="col-md-6">
-            <h4 class="text-center">Quotes</h4>
-            <h5>Quote Detail</h5>
-            <dl>
-                <dt>Part #:</dt>
-                <dd></dd>
-                <dt>Part Description:</dt>
-                <dd></dd>
-                <dt>Actual Amount:</dt>
-                <dd></dd>
-                <dt>Unit Price:</dt>
-                <dd></dd>
-                <dt>Notes:</dt>
-                <dd></dd>
-            </dl>
+            <h4  class="text-center  notification-icon accordian-header"  data-toggle="collapse" data-target="#quotedetails">
+              <span class="badge text">{{QuoteDetails.length}}</span>
+              Quotes</h4>
+            <div id="quotedetails" class="collapse">
+
+            <div ng-repeat="q in QuoteDetails">
+                <h3>QuoteHeaderId {{q.QuoteHeaderId}}</h3>
+                <table class="table">
+                  <tr>
+                      <th>PartId</th>
+                      <th>Description</th>
+                      <th>CategoryId</th>
+                      <th>Unit Price</th>
+                      <th>Quantity</th>
+                      <th>Notes</th>
+                  </tr>
+                  <tr ng-repeat="qd in q.QuoteDetails">
+                    <td>{{qd.PartId}}</td>
+                    <td> {{qd.PartDescription}}</td>
+                    <td>{{qd.CategoryId}}</td>
+                    <td>{{qd.UnitPrice}}</td>
+                    <td>{{qd.Quantity}}</td>
+                    <td>{{qd.Notes}}</td>
+                  </tr>
+                </table>
+            </div>
+            </div>
+        </div>
+          <div class="col-md-6">
+              <h4 class="text-center">Invoices</h4>
+              <div>
+              <!-- Start of 1 Project -->
+                  <a href="javascript:void(0)">
+                      <div class="panel-heading">
+                          <h4 class="panel-title">
+                            <span>Title</span>
+                          </h4>
+                      </div>
+                  </a>
+                  <div class="panel-collapse collapse">
+                      <div class="panel-body" style="word-wrap: break-word;">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt sunt velit harum natus quis consequatur aut voluptatibus. Labore nemo vel debitis sint temporibus quod, aspernatur officiis dicta accusamus sapiente culpa, aliquid architecto, voluptatem quasi, blanditiis! Sunt dignissimos iusto dolore. Necessitatibus eum non eaque optio.
+                      </div>
+                  </div>
+              </div><!-- End of 1 Invoice -->
+          </div>
+
             <br>
             <h5>Area</h5>
             <dl>
@@ -145,25 +171,7 @@
                 <dt>Square Footage:</dt>
                 <dd></dd>
             </dl>
-        </div>
-        <div class="col-md-6">
-            <h4 class="text-center">Invoices</h4>
-            <div>
-            <!-- Start of 1 Project -->
-                <a href="javascript:void(0)">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                          <span>Title</span>
-                        </h4>
-                    </div>
-                </a>
-                <div class="panel-collapse collapse">
-                    <div class="panel-body" style="word-wrap: break-word;">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt sunt velit harum natus quis consequatur aut voluptatibus. Labore nemo vel debitis sint temporibus quod, aspernatur officiis dicta accusamus sapiente culpa, aliquid architecto, voluptatem quasi, blanditiis! Sunt dignissimos iusto dolore. Necessitatibus eum non eaque optio.
-                    </div>
-                </div>
-            </div><!-- End of 1 Invoice -->
-        </div>
+
 
     </section><!-- /.content -->
 </aside><!-- /.right-side -->

@@ -65,6 +65,26 @@ namespace DiyCmWebAPI.Controllers
             return _context.SupplierInvoiceHeaders;
         }
 
+        [HttpGet]
+        [Route("invoiceUnPaid")]
+        // api/SupplierInvoiceHeaders/invoiceUnPaid
+        public IEnumerable<SupplierInvoiceHeader> getInvoiceUnpaid()
+        {
+            List<SupplierInvoiceHeader> list = new List<SupplierInvoiceHeader>();
+
+            var listOfInvoices = _context.SupplierInvoiceHeaders;
+            foreach(SupplierInvoiceHeader invoice in listOfInvoices)
+            {
+                if(invoice.SH_AMOUNT < invoice.SH_AMOUNT_PAID)
+                {
+                    list.Add(invoice);
+                }
+            }
+
+            return list;
+
+        }
+
         public SupplierInvoiceHeader getInvoiceHeader(QuoteHeader quote)
         {
             var curDay = DateTime.Now.ToString("M/d/yyyy");
@@ -104,7 +124,7 @@ namespace DiyCmWebAPI.Controllers
                 {
                     SupplierInvoiceDetail invoiceDetail = new SupplierInvoiceDetail()
                     {
-                        InvoiceId = quote.QuoteHeaderId.ToString(),
+                        InvoiceId = quote.QuoteHeaderId,
                         SupplierInvoiceHeader = invoiceHeader,
                         LineNumber = lineNumber,
                         PartNumber = quoteDetail.PartId,

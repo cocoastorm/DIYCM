@@ -81,15 +81,31 @@
           });
     };
 
+    var _getAllCategoriesByProjectId = function(id) {
+      $http.get(categoriesUrl).then(function(cats) {
+        var categories = cats.data;
+        var projectCategories = [];
+
+        categories.forEach(function(category) {
+          if(category.ProjectId == id) {
+            projectCategories.push(category);
+          }
+        });
+
+        return projectCategories;
+      });
+    };
+
     return {
       getCategory: _getCategory,
       addCategory: _addCategory,
       editCategory: _editCategory,
-      getAllCategories: _getAllSubCategories,
+      getAllCategories: _getAllCategories,
       getSubCategory: _getSubCategory,
       addSubCategory: _addSubCategory,
       editSubCategory: _editSubCategory,
-      getSubAllCategories: _getAllSubCategories
+      getSubAllCategories: _getSubAllCategories,
+      getAllCategoriesByProjectId: _getAllCategoriesByProjectId
     };
   };
 

@@ -10,9 +10,8 @@ namespace DiyCmDataModel.Construction
     public class SupplierInvoiceDetail
     {
         [Key, Column(Order = 0)]
-        [MaxLength(20)]
         [ForeignKey("SupplierInvoiceHeader")]
-        public string InvoiceId { get; set; }
+        public int InvoiceId { get; set; }
 
         public SupplierInvoiceHeader SupplierInvoiceHeader { get; set; }
 
@@ -25,19 +24,16 @@ namespace DiyCmDataModel.Construction
         [MaxLength(255)]
         public string PartDescription { get; set; }
 
-        [MaxLength(6)]
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
 
         public Category Category { get; set; }
 
-        [MaxLength(4)]
         [ForeignKey("SubCategory")]
         public int SubCategoryId { get; set; }
 
         public SubCategory SubCategory { get; set; }
 
-        [MaxLength(4)]
         [ForeignKey("Area")]
         public int AreaId { get; set; }
 

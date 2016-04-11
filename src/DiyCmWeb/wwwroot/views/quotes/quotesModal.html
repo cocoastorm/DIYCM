@@ -1,0 +1,208 @@
+<div class="modal fade" id="quotesModal{{s.CategoryName}}" tabindex="-1" role="dialog" aria-labelledby="quotesModalLabel">
+    <div class="modal-dialog" role="document" style="border: solid 1px #000; border-radius: 5px">
+        <div class="modal-content" ng-controller="quoteheadersController">
+            <div class="modal-header" style="background-color: #5cb85c">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="projectModalLabel" style="color: #ffffff">New Quote for {{sub.SubCategoryName}})</h4>
+            </div>
+            <div class="modal-body">
+              <!-- Start of Supplier -->
+                <form>
+                    <div class="form-group col-md-12">
+                        <label for="quoteheader-supplier" class="control-label">Supplier:</label>
+                        <input type="text" class="form-control" ng-model="quoteheader.Supplier">
+                    </div>
+                </form>
+                <!-- End of Supplier -->
+                <!-- Start of Date -->
+                <div class="form-group col-md-4">
+                    <label for="QuoteHeaderDate" class="control-label">Date:</label>
+                    <p class="input-group date-picker">
+                      <input type="text" id="QuoteHeaderDate" name="QuoteHeaderDate"
+                             class="form-control" uib-datepicker-popup="{{format}}"
+                             ng-model="quoteheader.Date" is-open="popup1.opened"
+                             datepicker-options="dateOptions" ng-required="true" close-text="Close"
+                             alt-input-formats="altInputFormats" popup-placement="bottom" />
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                    </p>
+                </div>
+                <!-- End of Date -->
+                <!-- Start of StartDate -->
+                <div class="form-group col-md-4"> <!-- QuoteHeader Start Date-->
+                    <label for="QuoteHeaderStartDate" class="control-label">Start Date:</label>
+                    <p class="input-group date-picker">
+                      <input type="text" id="QuoteHeaderStartDate" name="QuoteHeaderStartDate"
+                             class="form-control" uib-datepicker-popup="{{format}}"
+                             ng-model="quoteheader.StartDate" is-open="popup2.opened"
+                             datepicker-options="dateOptions" ng-required="true" close-text="Close"
+                             alt-input-formats="altInputFormats" popup-placement="bottom" />
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                    </p>
+                </div>
+                <!-- End of StartDate -->
+                <!-- Start of ExpiryDate -->
+                <div class="form-group col-md-4"> <!-- QuoteHeader Start Date-->
+                    <label for="QuoteHeaderExpiryDate" class="control-label">Expiry Date:</label>
+                    <p class="input-group date-picker">
+                      <input type="text" id="QuoteHeaderExpiryDate" name="QuoteHeaderExpiryDate"
+                             class="form-control" uib-datepicker-popup="{{format}}"
+                             ng-model="quoteheader.ExpiryDate" is-open="popup3.opened"
+                             datepicker-options="dateOptions" ng-required="true" close-text="Close"
+                             alt-input-formats="altInputFormats" popup-placement="bottom" />
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open3()"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                    </p>
+                </div>
+                <!-- End of ExpiryDate -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-12">
+                        <label for="quoteheader-referredby" class="control-label">Referred By:</label>
+                        <input type="text" class="form-control" ng-model="quoteheader.ReferredBy">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-9">
+                        <label for="quoteheader-addressstreet" class="control-label">Street:</label>
+                        <input type="text" class="form-control" ng-model="quoteheader.AddressStreet">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-3">
+                        <label for="quoteheader-addresspostalcode" class="control-label">Postal Code:</label>
+                        <input type="text" class="form-control" ng-model="quoteheader.AddressPostalCode">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-6">
+                        <label for="quoteheader-addresscity" class="control-label">City:</label>
+                        <input type="text" class="form-control" ng-model="quoteheader.AddressCity">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-6">
+                        <label for="quoteheader-addressprovince" class="control-label">Province:</label>
+                        <input type="text" class="form-control" ng-model="quoteheader.AddressProvince">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-12">
+                        <label for="quoteheader-addresscountry" class="control-label">Country:</label>
+                        <input type="text" class="form-control" ng-model="quoteheader.AddressCountry">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-12">
+                        <label for="quoteheader-contactname" class="control-label">Contact Name</label>
+                        <input type="text" class="form-control" ng-model="quoteheader.ContactName">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-12">
+                        <label for="quoteheader-phonenumber" class="control-label">Phone Number:</label>
+                        <input type="text" class="form-control" ng-model="quoteheader.PhoneNumber">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-12">
+                        <label for="quoteheader-notes" class="control-label">Notes:</label>
+                        <input type="textarea" class="form-control" ng-model="quoteheader.notes">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-6">
+                        <label for="quoteheader-percentdiscount" class="control-label">Discount %:</label>
+                        <input type="text" class="form-control" ng-model="quoteheader.PercentDiscount">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-6">
+                        <label for="quoteheader-isaccept" class="control-label">Accept:</label>
+                        <input type="checkbox" class="form-control" ng-model="quoteheader.IsAccept">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-4">
+                        <label for="quotedetails-partid" class="control-label">Part Id:</label>
+                        <input type="text" class="form-control" ng-model="quotedetails.PartId">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-8">
+                        <label for="quotedetails-partdescription" class="control-label">Part Description:</label>
+                        <input type="text" class="form-control" ng-model="quotedetails.PartDescription">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-6">
+                        <label for="quotedetails-unitprice" class="control-label">Unit Price:</label>
+                        <input type="text" class="form-control" ng-model="quotedetails.UnitPrice">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-6">
+                        <label for="quotedetails-quantity" class="control-label">Quantity:</label>
+                        <input type="text" class="form-control" ng-model="quotedetails.Quantity">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-8">
+                        <label for="quotedetails-notes" class="control-label">Notes:</label>
+                        <input type="text" class="form-control" ng-model="quotedetails.Notes">
+                    </div>
+                </form>
+                <!-- End of -->
+                <form>
+                    <div class="form-group">
+                        <input type="hidden" ng-init="quotedetails.CategoryId=sub.CategoryId" ng-value="quotedetails.CategoryId">
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <input type="hidden" ng-init="quotedetails.SubCategoryId=sub.SubCategoryId" ng-value="quotedetails.SubCategoryId">
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-success" ng-click="addQuoteHeader()">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
