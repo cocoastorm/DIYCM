@@ -119,7 +119,9 @@
                 var quote = {
                   QuoteHeaderId : quoteheader.QuoteHeaderId,
                   QuoteHeader : quoteheader,
-                  QuoteDetails : new Array()
+                  QuoteDetails : new Array(),
+                  SubCategoryId : null,
+                  CategoryId: null
                 }
                 quoteheaderarr.push(quote);
               });
@@ -133,6 +135,8 @@
                                 quote.QuoteHeaderId == quotedetail.QuoteHeaderId){
                                 //console.log(quote.QuoteHeaderId);
                                 quote.QuoteDetails.push(quotedetail);
+                                quote.SubCategoryId = quotedetail.SubCategoryId;
+                                quote.CategoryId = quotedetail.CategoryId;
                           }
                       });
                   });

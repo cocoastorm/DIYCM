@@ -1,0 +1,43 @@
+<div class="modal fade" id="quoteDetailsModal{{q.QuoteHeaderId}}" tabindex="-1" role="dialog" aria-labelledby="quoteDetailsModalLabel">
+    <div class="modal-dialog" role="document" style="border: solid 1px #000; border-radius: 5px">
+        <div class="modal-content" ng-controller="quotedetailsController">
+            <div class="modal-header" style="background-color: #5cb85c">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="projectModalLabel" style="color: #ffffff">New Item for QuoteHeaderId {{q.QuoteHeaderId}}  for MC{{q.CategoryId}} + SC{{q.SubCategoryId}}</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="quotedetails-partid" class="control-label">Part ID:</label>
+                        <input type="text" class="form-control" ng-model="quotedetails.PartId">
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <label for="quotedetails-partdescription" class="control-label">Part Description:</label>
+                        <input type="text" class="form-control" ng-model="quotedetails.PartDescription">
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <label for="quotedetails-unitprice" class="control-label">Unit Price:</label>
+                        <input type="text" class="form-control" ng-model="quotedetails.UnitPrice">
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <label for="quotedetails-quantity" class="control-label">Quantity:</label>
+                        <input type="text" class="form-control" ng-model="quotedetails.Quantity">
+                    </div>
+                </form>
+
+                <!-- Dropdown list for SubCategory and Area ?? -->
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-success" ng-click="">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
