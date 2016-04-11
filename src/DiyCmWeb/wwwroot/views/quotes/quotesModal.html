@@ -187,6 +187,13 @@
                     </div>
                 </form>
                 <!-- End of -->
+                <div class="col-md-6">
+                  <label for="areas-arearoom" class="control-label">Area Room:</label>
+                  <select name="areaSelect" id="areaSelect" ng-model="areas.Choice">
+                    <option ng-repeat="area in Areas | orderBy:'+AreaRoom'" value="{{area.AreaId}}">{{area.AreaRoom}} {{area.AreaSquareFootage}}sq ft</option>
+                  </select>
+                </div>
+
                 <form>
                     <div class="form-group">
                         <input type="hidden" ng-init="quotedetails.CategoryId=sub.CategoryId" ng-value="quotedetails.CategoryId">

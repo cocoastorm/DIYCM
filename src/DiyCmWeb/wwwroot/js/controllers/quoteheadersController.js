@@ -32,7 +32,7 @@
         //Category: ,
         SubCategoryId   : $scope.quotedetails.SubCategoryId,
         //SubCategory: ,
-        AreaId          : 2,
+        AreaId          : $scope.areas.Choice,
         //Area: ,
         UnitPrice       : $scope.quotedetails.UnitPrice,
         Quantity        : $scope.quotedetails.Quantity,
@@ -74,15 +74,20 @@
 
     $scope.addQuoteDetails = function () {
       var data = {
+        QuoteHeaderId   : $scope.quotedetails.QuoteHeaderId,
         PartId          : $scope.quotedetails.PartId,
         PartDescription : $scope.quotedetails.PartDescription,
         UnitPrice       : $scope.quotedetails.UnitPrice,
+        LineNumber      : 1,
         Quantity        : $scope.quotedetails.Quantity,
         AreaId          : $scope.areas.Choice,
         SubCategoryId   : $scope.quotedetails.SubCategoryId,
-        CategoryId      : $scope.quotedetails.CategoryId
+        CategoryId      : $scope.quotedetails.CategoryId,
+        Notes           : $scope.quotedetails.Notes
       };
       console.log(data);
+      QuotesService.addQuoteDetail(data)
+        .then(onComplete, onError);
     };
 
 

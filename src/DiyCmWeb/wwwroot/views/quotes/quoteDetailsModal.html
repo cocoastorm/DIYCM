@@ -48,8 +48,20 @@
                 </div>
 
                 <form>
+                    <div class="form-group col-md-12">
+                      <label for="quotedetails-notes" class="control-label">Notes:</label>
+                        <input type="text" class="form-control" ng-model="quotedetails.Notes">
+                    </div>
+                </form>
+
+                <form>
                     <div class="form-group">
                         <input type="hidden" ng-init="quotedetails.CategoryId=q.CategoryId" ng-value="quotedetails.CategoryId">
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <input type="hidden" ng-init="quotedetails.QuoteHeaderId=q.QuoteHeaderId" ng-value="quotedetails.QuoteHeaderId">
                     </div>
                 </form>
 
