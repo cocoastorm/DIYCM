@@ -5,12 +5,14 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
 using DiyCmDataModel.Construction;
 using Microsoft.AspNet.Cors;
+using Microsoft.AspNet.Authorization;
 
 namespace DiyCmWebAPI.Controllers
 {
     [Produces("application/json")]
     [Route("api/Projects")]
     [EnableCors("AllowAll")]
+    [Authorize("Bearer")]
     public class ProjectsController : Controller
     {
         private DiyCmContext _context;

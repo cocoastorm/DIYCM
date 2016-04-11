@@ -7,6 +7,7 @@ using Microsoft.AspNet.Authorization;
 using System.Security.Principal;
 using Microsoft.AspNet.Authentication.JwtBearer;
 using System.IdentityModel.Tokens.Jwt;
+using DiyCmDataModel.User;
 
 namespace DiyCmWebAPI.Controllers
 {
@@ -14,10 +15,12 @@ namespace DiyCmWebAPI.Controllers
     public class TokenController : Controller
     {
         private readonly TokenAuthOptions tokenOptions;
+        private UserContext _context;
 
-        public TokenController(TokenAuthOptions tokenOptions)
+        public TokenController(TokenAuthOptions tokenOptions, UserContext context)
         {
             this.tokenOptions = tokenOptions;
+            this._context = context;
             //this.bearerOptions = options.Value;
             //this.signingCredentials = signingCredentials;
         }
@@ -29,6 +32,7 @@ namespace DiyCmWebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Authorize("Bearer")]
         public dynamic Get()
         {
             /* 
@@ -77,14 +81,15 @@ namespace DiyCmWebAPI.Controllers
         /// <param name="req"></param>
         /// <returns></returns>
         [HttpPost]
-        public dynamic Post([FromBody] AuthRequest req)
+        public dynamic Post(AuthRequest req)
         {
+            var user = _context.Users.Where(u => u.Username == req.username).FirstOrDefault();
             // Obviously, at this point you need to validate the username and password against whatever system you wish.
-            if ((req.username == "TEST" && req.password == "TEST") || (req.username == "TEST2" && req.password == "TEST"))
+            if (user != null && user.Password == req.password)
             {
                 DateTime? expires = DateTime.UtcNow.AddMinutes(2);
                 var token = GetToken(req.username, expires);
-                return new { authenticated = true, entityId = 1, token = token, tokenExpires = expires };
+                return new { authenticated = true, entityId = user.userid, token = token, tokenExpires = expires };
             }
             return new { authenticated = false };
         }
