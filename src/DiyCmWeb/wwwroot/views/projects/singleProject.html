@@ -1,11 +1,6 @@
 ﻿<aside class="right-side" ng-controller="singleProjectController">
     <section class="content">
         <h1>{{project.ProjectName}}</h1>
-        <div ng-repeat="s in SubCategories | filter:{'CategoryId': 170}:true ">
-          <div ng-repeat="subcat in s.SubCategories">
-              {{subcat.SubCategoryName}}
-          </div>
-        </div>
         <h3 class="text-muted">{{project.Description}}</h3>
         <hr>
         <div class="row">
