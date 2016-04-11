@@ -26,25 +26,37 @@
                 <form>
                     <div class="form-group">
                         <label for="subcategory-budgetamount" class="control-label">Budget Amount:</label>
-                        <input type="text" class="form-control" ng-model="subcategory.BudgetAmount">
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" ng-model="subcategory.BudgetAmount">
+                        </div>
                     </div>
                 </form>
                 <form>
                     <div class="form-group">
                         <label for="subcategory-actualamount" class="control-label">Actual Amount:</label>
-                        <input type="text" class="form-control" ng-model="subcategory.ActualAmount">
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" ng-model="subcategory.ActualAmount">
+                        </div>
                     </div>
                 </form>
                 <form>
                     <div class="form-group">
                         <label for="subcategory-varianceamount" class="control-label">Variance Amount:</label>
-                        <input type="text" class="form-control" ng-model="subcategory.VarianceAmount">
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" ng-model="subcategory.VarianceAmount">
+                        </div>
                     </div>
                 </form>
                 <form>
                     <div class="form-group">
                         <label for="subcategory-percentcompleted" class="control-label">Percent Completed:</label>
-                        <input type="text" class="form-control" ng-model="subcategory.PercentCompleted">
+                        <div class="input-group">
+                            <input type="number" value="0" min="0" max="100" step="1" data-number-to-fixed="2" class="form-control" data-number-stepfactor="100" ng-model="subcategory.PercentCompleted">
+                            <span class="input-group-addon">%</span>
+                        </div>
                     </div>
                 </form>
             </div>

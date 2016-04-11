@@ -21,25 +21,37 @@
                 <form>
                     <div class="form-group">
                         <label for="category-budgetamount" class="control-label">Budget Amount:</label>
-                        <input type="text" class="form-control" ng-model="category.BudgetAmount">
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" ng-model="category.BudgetAmount">
+                        </div>
                     </div>
                 </form>
                 <form>
                     <div class="form-group">
                         <label for="category-actualamount" class="control-label">Actual Amount:</label>
-                        <input type="text" class="form-control" ng-model="category.ActualAmount">
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" ng-model="category.ActualAmount">
+                        </div>
                     </div>
                 </form>
                 <form>
                     <div class="form-group">
                         <label for="category-varianceamount" class="control-label">Variance Amount:</label>
-                        <input type="text" class="form-control" ng-model="category.VarianceAmount">
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" ng-model="category.VarianceAmount">
+                        </div>
                     </div>
                 </form>
                 <form>
                     <div class="form-group">
                         <label for="category-percentcompleted" class="control-label">Percent Completed:</label>
-                        <input type="text" class="form-control" ng-model="category.PercentCompleted">
+                        <div class="input-group">
+                            <input type="number"  value="0" min="0" max="100" step="1" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control" ng-model="category.PercentCompleted">
+                            <span class="input-group-addon">%</span>
+                        </div>
                     </div>
                 </form>
             </div>
