@@ -75,7 +75,7 @@
     $scope.addQuoteDetails = function () {
       var data = {
         PartId          : $scope.quotedetails.PartId,
-        PartDescription : $scope.quotedetails.PartDecription,
+        PartDescription : $scope.quotedetails.PartDescription,
         UnitPrice       : $scope.quotedetails.UnitPrice,
         Quantity        : $scope.quotedetails.Quantity,
         AreaId          : $scope.areas.Choice
