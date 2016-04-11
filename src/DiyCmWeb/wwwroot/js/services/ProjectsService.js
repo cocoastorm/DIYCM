@@ -44,18 +44,25 @@
     };
 
     var _ongetProjectCategories = function(id){
-          var reqCategories = $http.get(url + 'categories');
+          var reqCategories    = $http.get(url + 'categories');
           var reqSubCategories = $http.get(url + 'subcategories');
-          var reqProjects = $http.get(url + 'projects/' + id);
+          var reqProjects      = $http.get(url + 'projects/' + id);
+          var reqQuoteDetails  = $http.get(url + 'quotedetails/');
+          var reqQuoteHeaders  = $http.get(url + 'quoteheaders/');
+
           // Both Main Categories + Sub categories
           var allProjectCategories    = new Array();
           var allProjectSubCategories = new Array();
-          var allCategories = new Array();
+          var allCategories           = new Array();
+          var allQuoteDetails         = new Array();
+          var allQuoteHeaders         = new Array();
 
-          return $q.all([reqCategories, reqProjects, reqSubCategories]).then(function (values) {
+          return $q.all([reqCategories, reqProjects, reqSubCategories, reqQuoteDetails, reqQuoteHeaders]).then(function (values) {
               var categories    = values[0].data;
               var project       = values[1].data;
               var subcategories = values[2].data;
+              var quotedetails  = values[3].data;
+              var quoteheaders  = values[4].data;
               //Iterate through each category
               categories.forEach(function (category) {
                 var allSubcategories = new Array();
@@ -105,8 +112,46 @@
 
                       }
               });
+
+              //All QuoteHeaders
+              var quoteheaderarr = new Array();
+              quoteheaders.forEach(function (quoteheader) {
+                var quote = {
+                  QuoteHeaderId : quoteheader.QuoteHeaderId,
+                  QuoteHeader : quoteheader,
+                  QuoteDetails : new Array()
+                }
+                quoteheaderarr.push(quote);
+              });
+
+
+              quoteheaderarr.forEach(function (quote){
+                allProjectSubCategories.forEach(function (sub) {
+                  sub.SubCategories.forEach(function (subcat) {
+                      quotedetails.forEach(function (quotedetail){
+                          if(subcat.SubCategoryId == quotedetail.SubCategoryId &&
+                                quote.QuoteHeaderId == quotedetail.QuoteHeaderId){
+                                //console.log(quote.QuoteHeaderId);
+                                quote.QuoteDetails.push(quotedetail);
+                          }
+                      });
+                  });
+                });
+              });
+
+              //Remove any quoteheaders without any quotedetails
+              var finalquoteheaderarr = new Array();
+              quoteheaderarr.forEach(function (quo){
+                if(quo.QuoteDetails.length != 0){
+                  finalquoteheaderarr.push(quo);
+                }
+              });
+
+
+
               allCategories.push(allProjectCategories);
               allCategories.push(allProjectSubCategories);
+              allCategories.push(finalquoteheaderarr);
               return allCategories;
           });
     }

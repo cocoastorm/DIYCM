@@ -4,7 +4,7 @@
 
     var onGetQuoteHeader = function (data) {
         $scope.allQuoteHeaders = data;
-        console.log(data);
+        //console.log(data);
     };
     var onAddProject = function (data) {
       $scope.newQuote = data;
@@ -25,7 +25,7 @@
       var quoteDetails = {
         QuoteHeaderId   : data.QuoteHeaderId,
         //QuoteHeader : ,
-        //LineNumber: ,
+        LineNumber      : 1,
         PartId          : $scope.quotedetails.PartId,
         PartDescription : $scope.quotedetails.PartDescription,
         CategoryId      : $scope.quotedetails.CategoryId,

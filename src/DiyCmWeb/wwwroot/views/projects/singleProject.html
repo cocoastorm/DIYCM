@@ -116,20 +116,53 @@
         <div class="clearfix"></div>
 
         <div class="col-md-6">
-            <h4 class="text-center">Quotes</h4>
-            <h5>Quote Detail</h5>
-            <dl>
-                <dt>Part #:</dt>
-                <dd></dd>
-                <dt>Part Description:</dt>
-                <dd></dd>
-                <dt>Actual Amount:</dt>
-                <dd></dd>
-                <dt>Unit Price:</dt>
-                <dd></dd>
-                <dt>Notes:</dt>
-                <dd></dd>
-            </dl>
+            <h4  class="text-center  notification-icon accordian-header"  data-toggle="collapse" data-target="#quotedetails">
+              <span class="badge text">{{QuoteDetails.length}}</span>
+              Quotes</h4>
+            <div id="quotedetails" class="collapse">
+
+            <div ng-repeat="q in QuoteDetails">
+                <h3>QuoteHeaderId {{q.QuoteHeaderId}}</h3>
+                <table class="table">
+                  <tr>
+                      <th>PartId</th>
+                      <th>Description</th>
+                      <th>CategoryId</th>
+                      <th>Unit Price</th>
+                      <th>Quantity</th>
+                      <th>Notes</th>
+                  </tr>
+                  <tr ng-repeat="qd in q.QuoteDetails">
+                    <td>{{qd.PartId}}</td>
+                    <td> {{qd.PartDescription}}</td>
+                    <td>{{qd.CategoryId}}</td>
+                    <td>{{qd.UnitPrice}}</td>
+                    <td>{{qd.Quantity}}</td>
+                    <td>{{qd.Notes}}</td>
+                  </tr>
+                </table>
+            </div>
+            </div>
+        </div>
+          <div class="col-md-6">
+              <h4 class="text-center">Invoices</h4>
+              <div>
+              <!-- Start of 1 Project -->
+                  <a href="javascript:void(0)">
+                      <div class="panel-heading">
+                          <h4 class="panel-title">
+                            <span>Title</span>
+                          </h4>
+                      </div>
+                  </a>
+                  <div class="panel-collapse collapse">
+                      <div class="panel-body" style="word-wrap: break-word;">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt sunt velit harum natus quis consequatur aut voluptatibus. Labore nemo vel debitis sint temporibus quod, aspernatur officiis dicta accusamus sapiente culpa, aliquid architecto, voluptatem quasi, blanditiis! Sunt dignissimos iusto dolore. Necessitatibus eum non eaque optio.
+                      </div>
+                  </div>
+              </div><!-- End of 1 Invoice -->
+          </div>
+
             <br>
             <h5>Area</h5>
             <dl>
@@ -138,25 +171,7 @@
                 <dt>Square Footage:</dt>
                 <dd></dd>
             </dl>
-        </div>
-        <div class="col-md-6">
-            <h4 class="text-center">Invoices</h4>
-            <div>
-            <!-- Start of 1 Project -->
-                <a href="javascript:void(0)">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                          <span>Title</span>
-                        </h4>
-                    </div>
-                </a>
-                <div class="panel-collapse collapse">
-                    <div class="panel-body" style="word-wrap: break-word;">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt sunt velit harum natus quis consequatur aut voluptatibus. Labore nemo vel debitis sint temporibus quod, aspernatur officiis dicta accusamus sapiente culpa, aliquid architecto, voluptatem quasi, blanditiis! Sunt dignissimos iusto dolore. Necessitatibus eum non eaque optio.
-                    </div>
-                </div>
-            </div><!-- End of 1 Invoice -->
-        </div>
+
 
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
