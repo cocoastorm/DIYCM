@@ -78,7 +78,8 @@
         PartDescription : $scope.quotedetails.PartDescription,
         UnitPrice       : $scope.quotedetails.UnitPrice,
         Quantity        : $scope.quotedetails.Quantity,
-        AreaId          : $scope.areas.Choice
+        AreaId          : $scope.areas.Choice,
+        SubCategoryId   : $scope.quotedetails.SubCategoryId
       };
       console.log(data);
     };

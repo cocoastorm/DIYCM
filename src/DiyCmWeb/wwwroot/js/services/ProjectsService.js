@@ -106,6 +106,7 @@
 
                         var SubCategoriesForArray  = {
                           CategoryName  : category.CategoryName,
+                          CategoryId    : category.CategoryId,
                           SubCategories : subcat
                         };
                         //Add the category

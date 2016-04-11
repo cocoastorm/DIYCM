@@ -32,14 +32,24 @@
                 </form>
 
                 <!-- Dropdown list for SubCategory and Area ?? -->
-                <form>
+                <div class="col-md-6">
                   <label for="areas-arearoom" class="control-label">Area Room:</label>
                   <select name="areaSelect" id="areaSelect" ng-model="areas.Choice">
                     <option ng-repeat="area in Areas" value="{{area.AreaId}}">{{area.AreaRoom}} {{area.AreaSquareFootage}}sq ft</option>
                   </select>
-                </form>
+                </div>
+                <div class="col-md-6">
+                  <label for="quotedetails-subcategory" class="control-label">Subcategory:</label>
+                  <div ng-repeat="s in SubCategories | filter:{'CategoryId': q.CategoryId}:true ">
+                    <select name="SubCategorySelect" id="SubCategorySelect" ng-model="quotedetails.SubCategoryId">
+                      <option ng-repeat="sub in s.SubCategories" value="{{sub.SubCategoryId}}">{{sub.SubCategoryName}}</option>
+                    </select>
+                  </div>
+                </div>
 
               </div>
+
+
               <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                   <button type="submit" class="btn btn-success" ng-click="addQuoteDetails()">Create</button>
