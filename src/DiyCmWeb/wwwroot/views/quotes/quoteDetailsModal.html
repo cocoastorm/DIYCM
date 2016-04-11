@@ -21,7 +21,10 @@
                 <form>
                     <div class="form-group col-md-6">
                         <label for="quotedetails-unitprice" class="control-label">Unit Price:</label>
-                        <input type="text" class="form-control" ng-model="quotedetails.UnitPrice">
+                        <div class="input-group">
+                          <span class="input-group-addon">$</span>
+                          <input type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" ng-model="quotedetails.UnitPrice">
+                        </div>
                     </div>
                 </form>
                 <form>
@@ -34,14 +37,14 @@
                 <!-- Dropdown list for SubCategory and Area ?? -->
                 <div class="col-md-6">
                   <label for="areas-arearoom" class="control-label">Area Room:</label>
-                  <select name="areaSelect" id="areaSelect" ng-model="areas.Choice">
+                  <select name="areaSelect" id="areaSelect" class="form-control" ng-model="areas.Choice">
                     <option ng-repeat="area in Areas | orderBy:'+AreaRoom'" value="{{area.AreaId}}">{{area.AreaRoom}} {{area.AreaSquareFootage}}sq ft</option>
                   </select>
                 </div>
                 <div class="col-md-6">
                   <label for="quotedetails-subcategory" class="control-label">Subcategory:</label>
                   <div ng-repeat="s in SubCategories | filter:{'CategoryId': q.CategoryId}:true ">
-                    <select name="SubCategorySelect" id="SubCategorySelect" ng-model="quotedetails.SubCategoryId">
+                    <select name="SubCategorySelect" id="SubCategorySelect" class="form-control" ng-model="quotedetails.SubCategoryId">
                       <option ng-repeat="sub in s.SubCategories" value="{{sub.SubCategoryId}}">{{sub.SubCategoryName}}</option>
                     </select>
                   </div>
