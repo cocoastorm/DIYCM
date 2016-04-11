@@ -49,6 +49,7 @@
           var reqProjects      = $http.get(url + 'projects/' + id);
           var reqQuoteDetails  = $http.get(url + 'quotedetails/');
           var reqQuoteHeaders  = $http.get(url + 'quoteheaders/');
+          var reqAreas         = $http.get(url + 'areas/');
 
           // Both Main Categories + Sub categories
           var allProjectCategories    = new Array();
@@ -56,13 +57,15 @@
           var allCategories           = new Array();
           var allQuoteDetails         = new Array();
           var allQuoteHeaders         = new Array();
+          var allAreas                = new Array();
 
-          return $q.all([reqCategories, reqProjects, reqSubCategories, reqQuoteDetails, reqQuoteHeaders]).then(function (values) {
+          return $q.all([reqCategories, reqProjects, reqSubCategories, reqQuoteDetails, reqQuoteHeaders, reqAreas]).then(function (values) {
               var categories    = values[0].data;
               var project       = values[1].data;
               var subcategories = values[2].data;
               var quotedetails  = values[3].data;
               var quoteheaders  = values[4].data;
+              var areas         = values[5].data;
               //Iterate through each category
               categories.forEach(function (category) {
                 var allSubcategories = new Array();
@@ -152,10 +155,20 @@
               });
 
 
+              areas.forEach(function (area) {
+                var a = {
+                  AreaId            : area.AreaId,
+                  AreaRoom          : area.AreaRoom,
+                  AreaSquareFootage : area.AreaSquareFootage
+                }
+                allAreas.push(a);
+              });
+
 
               allCategories.push(allProjectCategories);
               allCategories.push(allProjectSubCategories);
               allCategories.push(finalquoteheaderarr);
+              allCategories.push(allAreas);
               return allCategories;
           });
     }
