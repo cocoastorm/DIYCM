@@ -14,7 +14,7 @@
     var onComplete = function (data) {
       console.log("ONADDEDQUOTEDETAIL");
         console.log(data);
-        //window.location.reload();
+        window.location.reload();
     };
     var onError = function (reason) {
         console.log(reason);
