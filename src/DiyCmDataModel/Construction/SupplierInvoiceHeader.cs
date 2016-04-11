@@ -15,7 +15,6 @@ namespace DiyCmDataModel.Construction
         [MaxLength(50)]
         public string SupplierName { get; set; }
 
-        [MaxLength(4)]
         [ForeignKey("QuoteHeader")]
         public int QuoteHeaderId { get; set; }
 
