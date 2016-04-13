@@ -1,9 +1,9 @@
 <div class="modal fade" id="quotesModal{{s.CategoryName}}" tabindex="-1" role="dialog" aria-labelledby="quotesModalLabel">
     <div class="modal-dialog" role="document" style="border: solid 1px #000; border-radius: 5px">
-        <div class="modal-content" ng-controller="quoteheadersController">
+        <div class="modal-content" ng-controller="quoteheadersController" data-ng-init="getAreas()">
             <div class="modal-header" style="background-color: #5cb85c">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="projectModalLabel" style="color: #ffffff">New Quote for {{sub.SubCategoryName}})</h4>
+                <h4 class="modal-title" id="projectModalLabel" style="color: #ffffff">New Quote for {{sub.SubCategoryName}}</h4>
             </div>
             <div class="modal-body">
               <!-- Start of Supplier -->
@@ -184,6 +184,17 @@
                     <div class="form-group col-md-8">
                         <label for="quotedetails-notes" class="control-label">Notes:</label>
                         <input type="text" class="form-control" ng-model="quotedetails.Notes">
+                    </div>
+                </form>
+                <!-- End of -->
+                <!-- Start of -->
+                <form>
+                    <div class="form-group col-md-8">
+                        <label for="quotedetails-areas" class="control-label">Areas:</label>
+                        <select name="singleSelect" ng-model="quotedetails.AreaId" required>
+                            <option value="">Please Select an Area</option>
+                            <option ng-repeat="area in areas" value="{{area.AreaId}}">{{area.AreaRoom}}</option>
+                        </select>
                     </div>
                 </form>
                 <!-- End of -->
