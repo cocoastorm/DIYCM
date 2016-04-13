@@ -167,18 +167,18 @@
                           <tr>
                               <th>PartId</th>
                               <th>Description</th>
-                              <th>CategoryId</th>
-                              <th>SubCategoryId</th>
+                              <th>Subcategory Name</th>
                               <th>Unit Price</th>
                               <th>Quantity</th>
+                              <th>Area Room</th>
                           </tr>
                           <tr ng-repeat="qd in q.QuoteDetails">
                             <td>{{qd.PartId}}</td>
                             <td> {{qd.PartDescription}}</td>
-                            <td>{{qd.CategoryId}}</td>
-                            <td>{{qd.SubCategoryId}}</td>
-                            <td>{{qd.UnitPrice}}</td>
-                            <td>{{qd.Quantity}}</td>
+                            <td>{{qd.SubCategoryName}}</td>
+                            <td>${{qd.UnitPrice}}</td>
+                            <td>x{{qd.Quantity}}</td>
+                            <td>{{qd.AreaRoom}}</td>
                           </tr>
                         </table>
                     </div>
