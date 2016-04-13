@@ -125,7 +125,9 @@
                   QuoteHeader : quoteheader,
                   QuoteDetails : new Array(),
                   SubCategoryId : null,
-                  CategoryId: null
+                  CategoryId: null,
+                  CategoryName: null,
+                  SubCategoryName: null
                 }
                 quoteheaderarr.push(quote);
               });
@@ -141,6 +143,8 @@
                                 quote.QuoteDetails.push(quotedetail);
                                 quote.SubCategoryId = quotedetail.SubCategoryId;
                                 quote.CategoryId = quotedetail.CategoryId;
+                                quote.CategoryName = subcat.CategoryName;
+                                quote.SubCategoryName = subcat.SubCategoryName;
                           }
                       });
                   });
