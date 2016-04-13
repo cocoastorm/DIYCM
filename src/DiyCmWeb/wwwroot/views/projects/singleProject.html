@@ -116,34 +116,48 @@
         <div class="clearfix"></div>
 
         <div class="col-md-6">
+
             <h4  class="text-center  notification-icon accordian-header"  data-toggle="collapse" data-target="#quotedetails">
               <span class="badge text">{{QuoteDetails.length}}</span>
-              Quotes</h4>
-            <div id="quotedetails" class="collapse">
+              Quotes
+            </h4>
 
-            <div ng-repeat="q in QuoteDetails">
-                <h3>QuoteHeaderId {{q.QuoteHeaderId}}</h3>
-                <table class="table">
-                  <tr>
-                      <th>PartId</th>
-                      <th>Description</th>
-                      <th>CategoryId</th>
-                      <th>Unit Price</th>
-                      <th>Quantity</th>
-                      <th>Notes</th>
-                  </tr>
-                  <tr ng-repeat="qd in q.QuoteDetails">
-                    <td>{{qd.PartId}}</td>
-                    <td> {{qd.PartDescription}}</td>
-                    <td>{{qd.CategoryId}}</td>
-                    <td>{{qd.UnitPrice}}</td>
-                    <td>{{qd.Quantity}}</td>
-                    <td>{{qd.Notes}}</td>
-                  </tr>
-                </table>
-            </div>
+            <div id="quotedetails" class="collapse">
+                <div ng-repeat="q in QuoteDetails">
+                    <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#quoteheader{{q.QuoteHeaderId}}">
+                        <h4 class="panel-title">
+                          QuoteHeaderId {{q.QuoteHeaderId}}
+                          <br><br>
+                        </h4>
+                    </div>
+                    <div id="quoteheader{{q.QuoteHeaderId}}" class="panel-collapse collapse">
+                      <div ng-include="'views/quotes/quoteDetailsModal.html'"></div>
+                      <div class="text-center btn-success add-modal" data-toggle="modal" data-target="#quoteDetailsModal{{q.QuoteHeaderId}}">
+                        <h5<i class="fa fa-plus"></i> Item</h5>
+                      </div>
+                        <table class="table">
+                          <tr>
+                              <th>PartId</th>
+                              <th>Description</th>
+                              <th>CategoryId</th>
+                              <th>SubCategoryId</th>
+                              <th>Unit Price</th>
+                              <th>Quantity</th>
+                          </tr>
+                          <tr ng-repeat="qd in q.QuoteDetails">
+                            <td>{{qd.PartId}}</td>
+                            <td> {{qd.PartDescription}}</td>
+                            <td>{{qd.CategoryId}}</td>
+                            <td>{{qd.SubCategoryId}}</td>
+                            <td>{{qd.UnitPrice}}</td>
+                            <td>{{qd.Quantity}}</td>
+                          </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
+
 
         <div class="col-md-6">
             <h4 class="text-center  notification-icon accordian-header" data-toggle="collapse" data-target="#invoices">

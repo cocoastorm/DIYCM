@@ -18,6 +18,7 @@
         $scope.Categories    = data[0];
         $scope.SubCategories = data[1];
         $scope.QuoteDetails  = data[2];
+        $scope.Areas         = data[3];
     };
 
 

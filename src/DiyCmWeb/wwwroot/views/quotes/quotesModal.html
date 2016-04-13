@@ -181,23 +181,20 @@
                 <!-- End of -->
                 <!-- Start of -->
                 <form>
-                    <div class="form-group col-md-8">
+                    <div class="form-group col-md-12">
                         <label for="quotedetails-notes" class="control-label">Notes:</label>
                         <input type="text" class="form-control" ng-model="quotedetails.Notes">
                     </div>
                 </form>
                 <!-- End of -->
-                <!-- Start of -->
-                <form>
-                    <div class="form-group col-md-8">
-                        <label for="quotedetails-areas" class="control-label">Areas:</label>
-                        <select name="singleSelect" ng-model="quotedetails.AreaId" required>
-                            <option value="">Please Select an Area</option>
-                            <option ng-repeat="area in areas" value="{{area.AreaId}}">{{area.AreaRoom}}</option>
-                        </select>
-                    </div>
-                </form>
-                <!-- End of -->
+                <div class="col-md-6">
+                  <label for="areas-arearoom" class="control-label">Area Room:</label>
+                  <select name="areaSelect" id="areaSelect" ng-model="areas.Choice">
+                    <option value="">Please select an area</option>
+                    <option ng-repeat="area in Areas | orderBy:'+AreaRoom'" value="{{area.AreaId}}">{{area.AreaRoom}} {{area.AreaSquareFootage}}sq ft</option>
+                  </select>
+                </div>
+
                 <form>
                     <div class="form-group">
                         <input type="hidden" ng-init="quotedetails.CategoryId=sub.CategoryId" ng-value="quotedetails.CategoryId">
