@@ -142,13 +142,13 @@
         <br>
         <button class="notifications-accordion">Projects - Over Budget</button>
         <div class="notifications-panel status-danger">
-          <div ng-repeat="t in overBudgetProjects">
-              {{t.ProjectName}}
+          <div ng-repeat="t in overBudgetProjects | filter:'-'">
+              {{t.ProjectName}}<br>
+              <div style="padding-left: 2em">
+                  <div style="color:red">Above by: ${{t.BudgetAmount - t.ActualAmount}}</div>
+              </div>
           </div>
-          <dl>
-			      	<dt>My First Projecyt</dt>
-			    	<dd style="color:red"> -$6,333<span style="color:black"> over budget :(</span></dd>
-			    </dl>
+
         </div>
 
         <button class="notifications-accordion">Projects - Close to Budget</button>

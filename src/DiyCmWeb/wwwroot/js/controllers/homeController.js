@@ -29,10 +29,10 @@ app.controller('homeController', ['$scope', '$http', 'ReportsService', function 
 
     var getProjectsOverBudget = function(data){
         //filter projects over their budget
-
+        
         $scope.overBudgetProjects = data;
         console.log(data);
-    }
+    };
 
     ReportsService.getAllProjectsBudgetActual()
         .then(onGetAllBudgetActual, onGetAllError);
