@@ -3,66 +3,62 @@ using System.Linq;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
-using DiyCmDataModel.Construction;
-using Microsoft.AspNet.Cors;
-using Microsoft.AspNet.Authorization;
+using DiyCmDataModel.User;
 
 namespace DiyCmWebAPI.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Projects")]
-    [EnableCors("AllowAll")]
-    [Authorize("Bearer")]
-    public class ProjectsController : Controller
+    [Route("api/Users")]
+    public class UsersController : Controller
     {
-        private DiyCmContext _context;
+        private UserContext _context;
 
-        public ProjectsController(DiyCmContext context)
+        public UsersController(UserContext context)
         {
             _context = context;
         }
 
-        // GET: api/Projects
+        // GET: api/Users
         [HttpGet]
-        public IEnumerable<Project> GetProjects()
+        public IEnumerable<User> GetUsers()
         {
-            return _context.Projects;
+            return _context.Users;
         }
 
-        // GET: api/Projects/5
-        [HttpGet("{id}", Name = "GetProject")]
-        public IActionResult GetProject([FromRoute] int id)
+        // GET: api/Users/5
+        [HttpGet("{id}", Name = "GetUser")]
+        public IActionResult GetUser([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return HttpBadRequest(ModelState);
             }
 
-            Project project = _context.Projects.Single(m => m.ProjectId == id);
+            User user = _context.Users.Single(m => m.userid == id);
 
-            if (project == null)
+            if (user == null)
             {
                 return HttpNotFound();
             }
 
-            return Ok(project);
+            return Ok(user);
         }
 
-        // PUT: api/Projects/5
+        // PUT: api/Users/5
         [HttpPut("{id}")]
-        public IActionResult PutProject(int id, [FromBody] Project project)
+        public IActionResult PutUser(int id, [FromBody] User user)
         {
             if (!ModelState.IsValid)
             {
                 return HttpBadRequest(ModelState);
             }
 
-            if (id != project.ProjectId)
+            if (id != user.userid)
             {
                 return HttpBadRequest();
             }
 
-            _context.Entry(project).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
 
             try
             {
@@ -70,7 +66,7 @@ namespace DiyCmWebAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProjectExists(id))
+                if (!UserExists(id))
                 {
                     return HttpNotFound();
                 }
@@ -83,23 +79,23 @@ namespace DiyCmWebAPI.Controllers
             return new HttpStatusCodeResult(StatusCodes.Status204NoContent);
         }
 
-        // POST: api/Projects
+        // POST: api/Users
         [HttpPost]
-        public IActionResult PostProject([FromBody] Project project)
+        public IActionResult PostUser([FromBody] User user)
         {
             if (!ModelState.IsValid)
             {
                 return HttpBadRequest(ModelState);
             }
 
-            _context.Projects.Add(project);
+            _context.Users.Add(user);
             try
             {
                 _context.SaveChanges();
             }
             catch (DbUpdateException)
             {
-                if (ProjectExists(project.ProjectId))
+                if (UserExists(user.userid))
                 {
                     return new HttpStatusCodeResult(StatusCodes.Status409Conflict);
                 }
@@ -109,35 +105,28 @@ namespace DiyCmWebAPI.Controllers
                 }
             }
 
-            return CreatedAtRoute("GetProject", new { id = project.ProjectId }, project);
+            return CreatedAtRoute("GetUser", new { id = user.userid }, user);
         }
 
-        // DELETE: api/Projects/5
+        // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteProject(int id)
+        public IActionResult DeleteUser(int id)
         {
             if (!ModelState.IsValid)
             {
                 return HttpBadRequest(ModelState);
             }
 
-            Project project = _context.Projects.Single(m => m.ProjectId == id);
-            if (project == null)
+            User user = _context.Users.Single(m => m.userid == id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
 
-            _context.Projects.Remove(project);
+            _context.Users.Remove(user);
             _context.SaveChanges();
 
-            return Ok(project);
-        }
-
-        // GET: api/Homepage
-        [HttpGet]
-        [Route("api/Homepage")]
-        public IEnumerable<Project> GetHomepage() {
-            return _context.Projects;
+            return Ok(user);
         }
 
         protected override void Dispose(bool disposing)
@@ -149,9 +138,9 @@ namespace DiyCmWebAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ProjectExists(int id)
+        private bool UserExists(int id)
         {
-            return _context.Projects.Count(e => e.ProjectId == id) > 0;
+            return _context.Users.Count(e => e.userid == id) > 0;
         }
     }
 }
