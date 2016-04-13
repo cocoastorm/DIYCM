@@ -208,11 +208,15 @@
                         <input type="hidden" ng-init="quotedetails.CategoryId=sub.CategoryId" ng-value="quotedetails.CategoryId">
                     </div>
                 </form>
-                <form>
-                    <div class="form-group">
-                        <input type="hidden" ng-init="quotedetails.SubCategoryId=sub.SubCategoryId" ng-value="quotedetails.SubCategoryId">
-                    </div>
-                </form>
+                <div class="col-md-6">
+                  <label for="quotedetails-subcategory" class="control-label">Subcategory:</label>
+                  <div ng-repeat="s in SubCategories | filter:{'CategoryId': sub.CategoryId}:true ">
+                    <select name="SubCategorySelect" id="SubCategorySelect" class="form-control" ng-model="quotedetails.SubCategoryId">
+                      <option value="">Please select a subcategory</option>
+                      <option ng-repeat="sub in s.SubCategories" value="{{sub.SubCategoryId}}">{{sub.SubCategoryName}}</option>
+                    </select>
+                  </div>
+                </div>
 
             </div>
             <div class="modal-footer">

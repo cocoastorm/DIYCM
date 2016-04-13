@@ -38,6 +38,7 @@
                 <div class="col-md-6">
                   <label for="areas-arearoom" class="control-label">Area Room:</label>
                   <select name="areaSelect" id="areaSelect" class="form-control" ng-model="areas.Choice">
+                    <option value="">Please select an area</option>
                     <option ng-repeat="area in Areas | orderBy:'+AreaRoom'" value="{{area.AreaId}}">{{area.AreaRoom}} {{area.AreaSquareFootage}}sq ft</option>
                   </select>
                 </div>
@@ -45,6 +46,7 @@
                   <label for="quotedetails-subcategory" class="control-label">Subcategory:</label>
                   <div ng-repeat="s in SubCategories | filter:{'CategoryId': q.CategoryId}:true ">
                     <select name="SubCategorySelect" id="SubCategorySelect" class="form-control" ng-model="quotedetails.SubCategoryId">
+                      <option value="">Please select a subcategory</option>
                       <option ng-repeat="sub in s.SubCategories" value="{{sub.SubCategoryId}}">{{sub.SubCategoryName}}</option>
                     </select>
                   </div>
