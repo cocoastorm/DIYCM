@@ -6,12 +6,14 @@ using Microsoft.Data.Entity;
 using DiyCmDataModel.Construction;
 using Microsoft.AspNet.Cors;
 using System;
+using Microsoft.AspNet.Authorization;
 
 namespace DiyCmWebAPI.Controllers
 {
     [Produces("application/json")]
     [Route("api/SupplierInvoiceDetails")]
     [EnableCors("AllowAll")]
+    [Authorize("Bearer")]
     public class SupplierInvoiceDetailsController : Controller
     {
         private DiyCmContext _context;
