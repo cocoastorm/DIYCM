@@ -135,7 +135,10 @@
                 <form>
                     <div class="form-group col-md-6">
                         <label for="quoteheader-percentdiscount" class="control-label">Discount %:</label>
-                        <input type="text" class="form-control" ng-model="quoteheader.PercentDiscount">
+                        <div class="input-group">
+                            <input type="number" value="0" min="0" max="100" step="1" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control" ng-model="quoteheader.PercentDiscount">
+                            <span class="input-group-addon">%</span>
+                        </div>
                     </div>
                 </form>
                 <!-- End of -->
@@ -167,7 +170,10 @@
                 <form>
                     <div class="form-group col-md-6">
                         <label for="quotedetails-unitprice" class="control-label">Unit Price:</label>
-                        <input type="text" class="form-control" ng-model="quotedetails.UnitPrice">
+                        <div class="input-group">
+                          <span class="input-group-addon">$</span>
+                          <input type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" ng-model="quotedetails.UnitPrice">
+                        </div>
                     </div>
                 </form>
                 <!-- End of -->
@@ -189,22 +195,28 @@
                 <!-- End of -->
                 <div class="col-md-6">
                   <label for="areas-arearoom" class="control-label">Area Room:</label>
-                  <select name="areaSelect" id="areaSelect" ng-model="areas.Choice">
+                  <select name="areaSelect" id="areaSelect" class="form-control" ng-model="areas.Choice">
                     <option value="">Please select an area</option>
                     <option ng-repeat="area in Areas | orderBy:'+AreaRoom'" value="{{area.AreaId}}">{{area.AreaRoom}} {{area.AreaSquareFootage}}sq ft</option>
                   </select>
                 </div>
+
+
 
                 <form>
                     <div class="form-group">
                         <input type="hidden" ng-init="quotedetails.CategoryId=sub.CategoryId" ng-value="quotedetails.CategoryId">
                     </div>
                 </form>
-                <form>
-                    <div class="form-group">
-                        <input type="hidden" ng-init="quotedetails.SubCategoryId=sub.SubCategoryId" ng-value="quotedetails.SubCategoryId">
-                    </div>
-                </form>
+                <div class="col-md-6">
+                  <label for="quotedetails-subcategory" class="control-label">Subcategory:</label>
+                  <div ng-repeat="s in SubCategories | filter:{'CategoryId': sub.CategoryId}:true ">
+                    <select name="SubCategorySelect" id="SubCategorySelect" class="form-control" ng-model="quotedetails.SubCategoryId">
+                      <option value="">Please select a subcategory</option>
+                      <option ng-repeat="sub in s.SubCategories" value="{{sub.SubCategoryId}}">{{sub.SubCategoryName}}</option>
+                    </select>
+                  </div>
+                </div>
 
             </div>
             <div class="modal-footer">

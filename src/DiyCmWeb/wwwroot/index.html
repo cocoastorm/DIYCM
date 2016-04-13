@@ -142,13 +142,13 @@
         <br>
         <button class="notifications-accordion">Projects - Over Budget</button>
         <div class="notifications-panel status-danger">
-          <div ng-repeat="t in overBudgetProjects">
-              {{t.ProjectName}}
+          <div ng-repeat="t in overBudgetProjects" ng-if="t.ActualAmount - t.BudgetAmount > 0">
+              {{t.ProjectName}}<br>
+              <div style="padding-left: 2em">
+                  <div style="color:red">Above by: ${{t.ActualAmount - t.BudgetAmount}}</div>
+              </div>
           </div>
-          <dl>
-			      	<dt>My First Projecyt</dt>
-			    	<dd style="color:red"> -$6,333<span style="color:black"> over budget :(</span></dd>
-			    </dl>
+
         </div>
 
         <button class="notifications-accordion">Projects - Close to Budget</button>
@@ -224,7 +224,6 @@
     <script src="js/controllers/quoteheadersController.js"></script>
 	  <script src="js/controllers/documentsController.js"></script>
     <script src="js/controllers/categoriesController.js"></script>
-
 
     <script>
         var notifications; //stores content of notifications ( makes notifications small )
