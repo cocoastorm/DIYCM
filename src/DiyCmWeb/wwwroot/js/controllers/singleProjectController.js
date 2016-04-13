@@ -1,4 +1,4 @@
-﻿app.controller('singleProjectController', ['$scope', '$http', '$routeParams', 'ProjectsService', function ($scope, $http, $routeParams, ProjectsService) {
+﻿app.controller('singleProjectController', ['$scope', '$http', '$routeParams', 'ProjectsService', 'QuotesService', function ($scope, $http, $routeParams, ProjectsService, QuotesService) {
     $scope.message = 'Everyone come and look!';
 
     var ProjectId = $routeParams["id"];
@@ -30,4 +30,6 @@
         .then(onGetProject, onGetProjectError);
     ProjectsService.getProjectCategories(ProjectId)
         .then(onGetProjectCategories, onGetProjectError);
+
+
 }]);
