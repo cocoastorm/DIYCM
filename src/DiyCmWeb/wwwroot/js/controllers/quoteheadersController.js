@@ -49,6 +49,12 @@
         console.log(reason);
     };
 
+    var onAddQuoteDetailsComplete = function(){
+      window.location.reload();
+    };
+
+    //Adding a quotedetail to a quoteheader
+    //Quote> +item
     $scope.addQuoteDetails = function () {
       var data = {
         QuoteHeaderId   : $scope.quotedetails.QuoteHeaderId,
@@ -64,11 +70,12 @@
       };
       console.log(data);
       QuotesService.addQuoteDetail(data)
-        .then(onComplete, onError);
+        .then(onAddQuoteDetailsComplete, onError);
     };
 
 
     //Adding quote details
+    //After creating a quoteheader add the quotedetail
     var onAddQuoteHeaderComplete = function (data){
       console.log(data);
       var quoteDetails = {
@@ -93,6 +100,7 @@
     }
 
     //Adding quote header
+    //Subcategories>add QuoteHeader
     $scope.addQuoteHeader = function () {
       var isAcceptValue;
       if($scope.quoteheader.IsAccept == true){
