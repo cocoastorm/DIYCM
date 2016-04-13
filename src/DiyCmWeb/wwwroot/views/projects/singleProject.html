@@ -77,7 +77,7 @@
             <div class="main-category-child" ng-repeat="s in SubCategories">
             <!-- Start of 2 Project -->
                 <a href="javascript:void(0)">
-                    <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#{{s.CategoryName}}">
+                    <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#{{s.CategoryId}}{{$index + 1}}">
                         <h4 class="panel-title">
                           <span>SubCategories for {{s.CategoryName}}</span>
                           <!-- <span class="pull-right btn btn-success">Add Sub Cat</span> -->
@@ -85,7 +85,7 @@
                         </h4>
                     </div>
                 </a>
-                <div id="{{s.CategoryName}}" class="panel-collapse collapse">
+                <div id="{{s.CategoryId}}{{$index + 1}}" class="panel-collapse collapse">
                   <div class="text-center btn-success add-modal" data-toggle="modal" data-target="#quotesModal{{s.CategoryName}}">
                     <h5<i class="fa fa-plus"></i> Quote</h5>
                   </div>
