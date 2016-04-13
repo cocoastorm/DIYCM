@@ -137,15 +137,18 @@
         </div>
     </div><!-- ./wrapper -->
 
-    <div id="notifications-container">
+    <div id="notifications-container" ng-controller="homeController">
         <h3 class="text-center" style="color:white;">Notifications</h3>
         <br>
         <button class="notifications-accordion">Projects - Over Budget</button>
         <div class="notifications-panel status-danger">
-            <dl>
-				<dt>My First Projecyt</dt>
-				<dd style="color:red"> -$6,333<span style="color:black"> over budget :(</span></dd>
-			</dl>
+          <div ng-repeat="t in overBudgetProjects">
+              {{t.ProjectName}}
+          </div>
+          <dl>
+			      	<dt>My First Projecyt</dt>
+			    	<dd style="color:red"> -$6,333<span style="color:black"> over budget :(</span></dd>
+			    </dl>
         </div>
 
         <button class="notifications-accordion">Projects - Close to Budget</button>

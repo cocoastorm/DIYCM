@@ -27,6 +27,13 @@ app.controller('homeController', ['$scope', '$http', 'ReportsService', function 
         console.log(reason);
     };
 
+    var getProjectsOverBudget = function(data){
+        //filter projects over their budget
+
+        $scope.overBudgetProjects = data;
+        console.log(data);
+    }
+
     ReportsService.getAllProjectsBudgetActual()
         .then(onGetAllBudgetActual, onGetAllError);
     ReportsService.getCategoryDetailsAndSummary()
@@ -35,4 +42,6 @@ app.controller('homeController', ['$scope', '$http', 'ReportsService', function 
         .then(onGetAllSubCategories, onGetAllError);
     ReportsService.getActivities()
         .then(onGetAllActivities, onGetAllError);
+    ReportsService.getAllProjectsBudgetActual()
+        .then(getProjectsOverBudget, onGetAllError);
 }]);
