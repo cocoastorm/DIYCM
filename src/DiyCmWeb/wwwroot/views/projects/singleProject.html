@@ -82,6 +82,7 @@
                 <a href="javascript:void(0)">
                     <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#{{s.CategoryId}}{{$index + 1}}">
                         <h4 class="panel-title">
+                          <span class="badge text">{{s.SubCategories.length}}</span>
                           <span>SubCategories for {{s.CategoryName}}</span>
                           <!-- <span class="pull-right btn btn-success">Add Sub Cat</span> -->
                           <br><br>
@@ -98,6 +99,8 @@
                             <div ng-repeat="sub in s.SubCategories">
                               <div ng-include="'views/quotes/quotesModal.html'"></div>
                               <dd>{{sub.SubCategoryName}} ... {{sub.SubCategoryId}}</dd>
+                              <div ng-include="'views/subcategories/deleteSubCategoryModal.html'"></div>
+                              <span class="pull-right btn btn-default delete-btn"><i class="fa fa-trash fa-4x"  data-toggle="modal" data-target="#deleteSubCategoryModal{{sub.SubCategoryId}}"></i></span>
                             </div>
                             <!-- <dt>Description:</dt>
                             <dd></dd>
@@ -127,6 +130,7 @@
                 <div ng-repeat="q in QuoteDetails">
                     <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#quoteheader{{q.QuoteHeaderId}}">
                         <h4 class="panel-title">
+                          <span class="badge text">{{q.QuoteDetails.length}}</span>
                           QuoteHeader#{{q.QuoteHeaderId}} - {{q.QuoteHeader.Supplier}}
                           <br><br>
                         </h4>

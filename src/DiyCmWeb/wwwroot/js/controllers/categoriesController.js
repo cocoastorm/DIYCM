@@ -40,7 +40,14 @@ app.controller('categoriesController', ['$scope', '$http', '$routeParams', 'Cate
       console.log(CategoryId);
       CategoriesService.deleteCategory(CategoryId)
         .then(onSuccess, onError);
-    }
+    };
+    $scope.deleteSubCategory = function (id) {
+      var SubCategoryId = id;
+      console.log(SubCategoryId);
+      CategoriesService.deleteSubCategory(SubCategoryId)
+        .then(onSuccess, onError);
+    };
+
 
 
     $scope.addSubCategory = function () {

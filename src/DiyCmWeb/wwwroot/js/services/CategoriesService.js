@@ -105,6 +105,7 @@
       getSubCategory: _getSubCategory,
       addSubCategory: _addSubCategory,
       editSubCategory: _editSubCategory,
+      deleteSubCategory: _deleteSubCategory,
       getSubAllCategories: _getSubAllCategories,
       getAllCategoriesByProjectId: _getAllCategoriesByProjectId
     };
