@@ -116,12 +116,10 @@
         <div class="clearfix"></div>
 
         <div class="col-md-6">
-
-            <h4  class="text-center  notification-icon accordian-header"  data-toggle="collapse" data-target="#quotedetails">
+            <h4 class="text-center  notification-icon accordian-header"  data-toggle="collapse" data-target="#quotedetails">
               <span class="badge text">{{QuoteDetails.length}}</span>
               Quotes
             </h4>
-
             <div id="quotedetails" class="collapse">
                 <div ng-repeat="q in QuoteDetails">
                     <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#quoteheader{{q.QuoteHeaderId}}">
@@ -137,7 +135,7 @@
                       </div>
                       <div>
                         <p>{{q.CategoryName}}({{q.CategoryId}})>{{q.SubCategoryName}}({{q.SubCategoryId}})</p>
-                        <dl  class="col-md-6">
+                        <dl class="col-md-6">
                             <dt>Street:</dt>
                             <dd>{{q.QuoteHeader.AddressStreet}}</dd>
                             <dt>City:</dt>
@@ -149,7 +147,7 @@
                             <dt>Country:</dt>
                             <dd>{{q.QuoteHeader.AddressCountry}}</dd>
                         </dl>
-                        <dl  class="col-md-6">
+                        <dl class="col-md-6">
                             <dt>Contact Name:</dt>
                             <dd>{{q.QuoteHeader.ContactName}}</dd>
                             <dt>Phone Number:</dt>
@@ -161,24 +159,23 @@
                             <dt>Accepted:</dt>
                             <dd>{{q.QuoteHeader.IsAccept}}</dd>
                         </dl>
-
                       </div>
                         <table class="table">
                           <tr>
                               <th>PartId</th>
                               <th>Description</th>
-                              <th>CategoryId</th>
-                              <th>SubCategoryId</th>
+                              <th>Subcategory Name</th>
                               <th>Unit Price</th>
                               <th>Quantity</th>
+                              <th>Area Room</th>
                           </tr>
                           <tr ng-repeat="qd in q.QuoteDetails">
                             <td>{{qd.PartId}}</td>
                             <td> {{qd.PartDescription}}</td>
-                            <td>{{qd.CategoryId}}</td>
-                            <td>{{qd.SubCategoryId}}</td>
-                            <td>{{qd.UnitPrice}}</td>
-                            <td>{{qd.Quantity}}</td>
+                            <td>{{qd.SubCategoryName}}</td>
+                            <td>${{qd.UnitPrice}}</td>
+                            <td>x{{qd.Quantity}}</td>
+                            <td>{{qd.AreaRoom}}</td>
                           </tr>
                         </table>
                     </div>
@@ -186,14 +183,12 @@
             </div>
         </div>
 
-
         <div class="col-md-6">
-            <h4 class="text-center  notification-icon accordian-header" data-toggle="collapse" data-target="#invoices">
+            <h4 class="text-center notification-icon accordian-header" data-toggle="collapse" data-target="#invoices">
                 <span class="badge text">{{invoices.length}}</span>
                 Invoices
             </h4>
             <div id="invoices" class="collapse">
-
                 <div ng-repeat="i in invoices">
                     <h3>QuoteHeaderId {{i.InvoiceId}}</h3>
                     <table class="table">
@@ -207,22 +202,56 @@
                             <th>Unit Price</th>
                             <th>Notes</th>
                         </tr>
-
                         <tr ng-repeat="ins in i.invoices">
                             <td>{{ins.LineNumber}}</td>
-                            <td> {{ins.PartNumber}}</td>
+                            <td>{{ins.PartNumber}}</td>
                             <td>{{ins.PartDescription}}</td>
                             <td>{{ins.CategoryId}}</td>
                             <td>{{ins.SubCategoryId}}</td>
                             <td>{{ins.AreaId}}</td>
                             <td>{{ins.UnitPrice}}</td>
                             <td>{{ins.Notes}}</td>
-
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
+        <div class="clearfix"></div>
+
+        <div ng-include="'views/areas/areasModal.html'"></div>
+        <div class="col-md-6">
+          <h4 class="text-center notification-icon accordian-header" data-toggle="collapse" data-target="#areas">
+              <span class="badge text">{{Areas.length}}</span>
+              Areas
+          </h4>
+          <div id="areas" class="collapse">
+
+              <div class="text-center btn-success add-modal" data-toggle="modal" data-target="#areaModal">
+                <h5<i class="fa fa-plus"></i> Area</h5>
+              </div>
+              <div ng-repeat="a in Areas" ng-controller="areasController">
+                <div  class="panel-heading nth-1" ng-attr-data-toggle="{{(editorEnabled == a.AreaId) && 'none' || 'collapse'}}" ng-attr-data-parent="#accordion"  data-target="#area{{a.AreaId}}">
+                  <h4 class="panel-title" ng-hide="editorEnabled == a.AreaId">{{a.AreaRoom}}
+                    <span style="float: right">{{a.AreaSquareFootage}}sqft</span>
+                  </h4>
+                  <div class="form-group">
+                    <input type="text" style="float: left" ng-model="a.AreaRoom" ng-show="editorEnabled == a.AreaId" style="color: black;" />
+                    <input type="text" style="float: right" ng-model="a.AreaSquareFootage" ng-show="editorEnabled == a.AreaId" style="color: black;" />
+                  </div>
+                </div>
+                <div ng-include="'views/areas/deleteAreaModal.html'"></div>
+                <div id="area{{a.AreaId}}" class="panel-collapse collapse">
+                  <div class="panel-body" style="word-wrap: break-word;">
+
+                    <span class="pull-right btn btn-default project-btn" data-id="{{a.AreaId}}" ng-hide="editorEnabled == a.AreaId" ng-click="enableEditor(a.AreaId)"><i class="fa fa-pencil-square fa-4x"></i></span>
+                    <span class="pull-right btn btn-default project-btn" data-id="{{a.AreaId}}" ng-show="editorEnabled == a.AreaId" ng-click="editArea()"><i class="fa fa-floppy-o fa-4x"></i></span>
+                    <span class="pull-right btn btn-default delete-btn"><i class="fa fa-trash fa-4x"  data-toggle="modal" data-target="#deleteAreaModal{{a.AreaId}}"></i></span>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
 
     </section><!-- /.content -->
 </aside><!-- /.right-side -->

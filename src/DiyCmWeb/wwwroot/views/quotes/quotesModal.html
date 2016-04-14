@@ -10,7 +10,7 @@
                 <form>
                     <div class="form-group col-md-12">
                         <label for="quoteheader-supplier" class="control-label">Supplier:</label>
-                        <input type="text" class="form-control" ng-model="quoteheader.Supplier">
+                        <input id="quoteheader-supplier" type="text" class="form-control" ng-model="quoteheader.Supplier">
                     </div>
                 </form>
                 <!-- End of Supplier -->
@@ -63,7 +63,7 @@
                 <form>
                     <div class="form-group col-md-12">
                         <label for="quoteheader-referredby" class="control-label">Referred By:</label>
-                        <input type="text" class="form-control" ng-model="quoteheader.ReferredBy">
+                        <input id="quoteheader-referredby" type="text" class="form-control" ng-model="quoteheader.ReferredBy">
                     </div>
                 </form>
                 <!-- End of -->
@@ -71,7 +71,7 @@
                 <form>
                     <div class="form-group col-md-9">
                         <label for="quoteheader-addressstreet" class="control-label">Street:</label>
-                        <input type="text" class="form-control" ng-model="quoteheader.AddressStreet">
+                        <input id="quoteheader-addressstreet" type="text" class="form-control" ng-model="quoteheader.AddressStreet">
                     </div>
                 </form>
                 <!-- End of -->
@@ -79,7 +79,7 @@
                 <form>
                     <div class="form-group col-md-3">
                         <label for="quoteheader-addresspostalcode" class="control-label">Postal Code:</label>
-                        <input type="text" class="form-control" ng-model="quoteheader.AddressPostalCode">
+                        <input id="quoteheader-addresspostalcode" type="text" class="form-control" ng-model="quoteheader.AddressPostalCode">
                     </div>
                 </form>
                 <!-- End of -->
@@ -87,7 +87,7 @@
                 <form>
                     <div class="form-group col-md-6">
                         <label for="quoteheader-addresscity" class="control-label">City:</label>
-                        <input type="text" class="form-control" ng-model="quoteheader.AddressCity">
+                        <input id="quoteheader-addresscity" type="text" class="form-control" ng-model="quoteheader.AddressCity">
                     </div>
                 </form>
                 <!-- End of -->
@@ -95,7 +95,7 @@
                 <form>
                     <div class="form-group col-md-6">
                         <label for="quoteheader-addressprovince" class="control-label">Province:</label>
-                        <input type="text" class="form-control" ng-model="quoteheader.AddressProvince">
+                        <input id="quoteheader-addressprovince" type="text" class="form-control" ng-model="quoteheader.AddressProvince">
                     </div>
                 </form>
                 <!-- End of -->
@@ -103,7 +103,7 @@
                 <form>
                     <div class="form-group col-md-12">
                         <label for="quoteheader-addresscountry" class="control-label">Country:</label>
-                        <input type="text" class="form-control" ng-model="quoteheader.AddressCountry">
+                        <input id="quoteheader-addresscountry" type="text" class="form-control" ng-model="quoteheader.AddressCountry">
                     </div>
                 </form>
                 <!-- End of -->
@@ -111,7 +111,7 @@
                 <form>
                     <div class="form-group col-md-12">
                         <label for="quoteheader-contactname" class="control-label">Contact Name</label>
-                        <input type="text" class="form-control" ng-model="quoteheader.ContactName">
+                        <input id="quoteheader-contactname" type="text" class="form-control" ng-model="quoteheader.ContactName">
                     </div>
                 </form>
                 <!-- End of -->
@@ -119,7 +119,7 @@
                 <form>
                     <div class="form-group col-md-12">
                         <label for="quoteheader-phonenumber" class="control-label">Phone Number:</label>
-                        <input type="text" class="form-control" ng-model="quoteheader.PhoneNumber">
+                        <input id="quoteheader-phonenumber" type="text" class="form-control" ng-model="quoteheader.PhoneNumber">
                     </div>
                 </form>
                 <!-- End of -->
@@ -127,7 +127,7 @@
                 <form>
                     <div class="form-group col-md-12">
                         <label for="quoteheader-notes" class="control-label">Notes:</label>
-                        <input type="textarea" class="form-control" ng-model="quoteheader.notes">
+                        <input id="quoteheader-notes" type="textarea" class="form-control" ng-model="quoteheader.notes">
                     </div>
                 </form>
                 <!-- End of -->
@@ -136,7 +136,7 @@
                     <div class="form-group col-md-6">
                         <label for="quoteheader-percentdiscount" class="control-label">Discount %:</label>
                         <div class="input-group">
-                            <input type="number" value="0" min="0" max="100" step="1" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control" ng-model="quoteheader.PercentDiscount">
+                            <input id="quoteheader-percentdiscount" type="number" value="0" min="0" max="100" step="1" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control" ng-model="quoteheader.PercentDiscount">
                             <span class="input-group-addon">%</span>
                         </div>
                     </div>
@@ -146,7 +146,7 @@
                 <form>
                     <div class="form-group col-md-6">
                         <label for="quoteheader-isaccept" class="control-label">Accept:</label>
-                        <input type="checkbox" class="form-control" ng-model="quoteheader.IsAccept">
+                        <input id="quoteheader-isaccept" type="checkbox" class="form-control" ng-model="quoteheader.IsAccept">
                     </div>
                 </form>
                 <!-- End of -->
@@ -154,7 +154,7 @@
                 <form>
                     <div class="form-group col-md-4">
                         <label for="quotedetails-partid" class="control-label">Part Id:</label>
-                        <input type="text" class="form-control" ng-model="quotedetails.PartId">
+                        <input id="quotedetails-partid" type="text" class="form-control" ng-model="quotedetails.PartId">
                     </div>
                 </form>
                 <!-- End of -->
@@ -162,7 +162,7 @@
                 <form>
                     <div class="form-group col-md-8">
                         <label for="quotedetails-partdescription" class="control-label">Part Description:</label>
-                        <input type="text" class="form-control" ng-model="quotedetails.PartDescription">
+                        <input id="quotedetails-partdescription" type="text" class="form-control" ng-model="quotedetails.PartDescription">
                     </div>
                 </form>
                 <!-- End of -->
@@ -172,7 +172,7 @@
                         <label for="quotedetails-unitprice" class="control-label">Unit Price:</label>
                         <div class="input-group">
                           <span class="input-group-addon">$</span>
-                          <input type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" ng-model="quotedetails.UnitPrice">
+                          <input id="quotedetails-unitprice" type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" ng-model="quotedetails.UnitPrice">
                         </div>
                     </div>
                 </form>
@@ -181,7 +181,7 @@
                 <form>
                     <div class="form-group col-md-6">
                         <label for="quotedetails-quantity" class="control-label">Quantity:</label>
-                        <input type="text" class="form-control" ng-model="quotedetails.Quantity">
+                        <input id="quotedetails-quantity" type="text" class="form-control" ng-model="quotedetails.Quantity">
                     </div>
                 </form>
                 <!-- End of -->
@@ -189,13 +189,13 @@
                 <form>
                     <div class="form-group col-md-12">
                         <label for="quotedetails-notes" class="control-label">Notes:</label>
-                        <input type="text" class="form-control" ng-model="quotedetails.Notes">
+                        <input id="quotedetails-notes" type="text" class="form-control" ng-model="quotedetails.Notes">
                     </div>
                 </form>
                 <!-- End of -->
                 <div class="col-md-6">
                   <label for="areas-arearoom" class="control-label">Area Room:</label>
-                  <select name="areaSelect" id="areaSelect" class="form-control" ng-model="areas.Choice">
+                  <select name="areaSelect" id="areas-arearoom" class="form-control" ng-model="areas.Choice">
                     <option value="">Please select an area</option>
                     <option ng-repeat="area in Areas | orderBy:'+AreaRoom'" value="{{area.AreaId}}">{{area.AreaRoom}} {{area.AreaSquareFootage}}sq ft</option>
                   </select>
