@@ -22,6 +22,12 @@
             </div>
         </div><!-- dates -->
         <hr>
+        <div ng-include="'views/areas/areasModal.html'"></div>
+        <div class="col-md-12">
+          <div class="text-center btn-success add-modal" data-toggle="modal" data-target="#areaModal">
+            <h5<i class="fa fa-plus"></i> Area</h5>
+          </div>
+        </div>
         <div ng-include="'views/categories/categoriesModal.html'"></div>
         <div class="col-md-6 main-category">
             <h4 class="text-center notification-icon accordian-header" data-toggle="collapse" data-target="#maincategory">
@@ -223,6 +229,7 @@
                 </div>
             </div>
         </div>
+
 
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
