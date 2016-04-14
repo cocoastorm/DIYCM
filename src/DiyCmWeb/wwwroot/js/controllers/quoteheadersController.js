@@ -141,6 +141,12 @@
       QuotesService.deleteQuoteHeader(QuoteHeaderId)
         .then(onSuccess, onError);
     };
+    $scope.deleteQuoteDetails = function (id) {
+      var QuoteDetailId = id;
+      console.log(QuoteDetailId);
+      QuotesService.deleteQuoteDetail(QuoteDetailId)
+        .then(onSuccess, onError);
+    };
 
     QuotesService.getAllQuoteHeaders()
     .then(onGetQuoteHeader, onError);

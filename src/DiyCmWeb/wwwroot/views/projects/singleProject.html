@@ -177,6 +177,7 @@
                               <th>Unit Price</th>
                               <th>Quantity</th>
                               <th>Area Room</th>
+                              <th></th>
                           </tr>
                           <tr ng-repeat="qd in q.QuoteDetails">
                             <td>{{qd.PartId}}</td>
@@ -185,6 +186,10 @@
                             <td>${{qd.UnitPrice}}</td>
                             <td>x{{qd.Quantity}}</td>
                             <td>{{qd.AreaRoom}}</td>
+                            <td>
+                              <div ng-include="'views/quotes/deleteQuoteDetailsModal.html'"></div>
+                              <span class="pull-right btn btn-default delete-btn"><i class="fa fa-trash fa-2x"  data-toggle="modal" data-target="#deleteQuoteDetailsModal{{qd.QuoteDetailId}}"></i></span>
+                            </td>
                           </tr>
                         </table>
                     </div>
