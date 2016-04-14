@@ -137,7 +137,7 @@
         </div>
     </div><!-- ./wrapper -->
 
-    <div id="notifications-container" ng-controller="homeController">
+    <div id="notifications-container" ng-controller="homeController" style="overflow-y: auto">
         <h3 class="text-center" style="color:white;">Notifications</h3>
         <br>
         <button class="notifications-accordion">Projects - Over Budget</button>
@@ -145,7 +145,7 @@
           <div ng-repeat="t in overBudgetProjects" ng-if="t.ActualAmount - t.BudgetAmount > 0">
               {{t.ProjectName}}<br>
               <div style="padding-left: 2em">
-                  <div style="color:red">Above by: ${{t.ActualAmount - t.BudgetAmount}}</div>
+                  <div style="color:red">Over by: ${{t.ActualAmount - t.BudgetAmount}}</div>
               </div>
           </div>
 
@@ -153,11 +153,13 @@
 
         <button class="notifications-accordion">Projects - Close to Budget</button>
         <div class="notifications-panel status-warning">
-			<ul class="list-unstyled">
-				<li><b>My First Project</b></li>
-				<li>Actual Budget: $96,000</li>
-				<li>Budget: $100,000</li>
-			</ul>
+            <div ng-repeat="t in overBudgetProjects" ng-if="t.ActualAmount / t.BudgetAmount >= 0.9 && t.ActualAmount / t.BudgetAmount <= 1">
+                {{t.ProjectName}}<br>
+                <div style="padding-left: 2em">
+                    <div style="color:blue">Budget: ${{t.BudgetAmount}}</div>
+                    <div style="color:green">Budget: ${{t.ActualAmount}}</div>
+                </div>
+            </div>
         </div>
 
 		<button class="notifications-accordion">Unpaid Invoices</button>
@@ -170,10 +172,13 @@
 		</div>
 
         <button class="notifications-accordion">Unaccepted Quotes</button>
-        <div class="notifications-panel status-warning">
-            <ul class="list-unstyled">
-                <li><a href="javascript:void(0)">#9777</a> Bathroom</li>
-            </ul>
+        <div class="notifications-panel status-warning" >
+            <div ng-repeat="q in tableQuotes" ng-if="q.IsAccept == 'N'">
+                {{q.ProjectName}}<br>
+                <div style="padding-left: 2em">
+                    <div style="color:blue">QuoteHeaderId: #{{q.QuoteHeaderId}}</div>
+                </div>
+            </div>
         </div>
     </div><!-- notifications -->
 
