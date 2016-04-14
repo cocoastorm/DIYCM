@@ -62,6 +62,9 @@
                                 <div ng-repeat="s in c.SubCategories">
                                   <dd>{{s.SubCategoryName}}</dd>
                                 </div>
+                                <div ng-include="'views/categories/deleteCategoryModal.html'"></div>
+                                <span class="pull-right btn btn-default delete-btn"><i class="fa fa-trash fa-4x"  data-toggle="modal" data-target="#deleteCategoryModal{{c.CategoryId}}"></i></span>
+
                             </dl>
                         </div>
                     </div>

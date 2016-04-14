@@ -3,6 +3,14 @@ app.controller('categoriesController', ['$scope', '$http', '$routeParams', 'Cate
     var ProjectId = $routeParams["id"];
     var baseUrl = 'http://diycm-api.azurewebsites.net/api/';
 
+    var onError = function (reason) {
+        console.log(reason);
+    };
+    var onSuccess = function (data){
+      window.location.reload();
+      console.log(data);
+    };
+
     var onAddCategory = function (data) {
       window.location.reload();
       console.log(data);
@@ -26,6 +34,15 @@ app.controller('categoriesController', ['$scope', '$http', '$routeParams', 'Cate
       CategoriesService.addCategory(data)
         .then(onAddCategory, onCategoryError);
     };
+
+    $scope.deleteCategory = function (id) {
+      var CategoryId = id;
+      console.log(CategoryId);
+      CategoriesService.deleteCategory(CategoryId)
+        .then(onSuccess, onError);
+    }
+
+
     $scope.addSubCategory = function () {
       var data = {
         SubCategoryName: $scope.subcategory.Name,
@@ -40,4 +57,7 @@ app.controller('categoriesController', ['$scope', '$http', '$routeParams', 'Cate
       CategoriesService.addSubCategory(data)
         .then(onAddCategory, onCategoryError);
     };
+
+
+
 }]);
