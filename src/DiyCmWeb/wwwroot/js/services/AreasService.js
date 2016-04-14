@@ -46,6 +46,7 @@
       getArea: _getArea,
       addArea: _addArea,
       editArea: _editArea,
+      deleteArea: _deleteArea,
       getAllAreas: _getAllAreas
     };
   };
