@@ -62,6 +62,9 @@
                                 <div ng-repeat="s in c.SubCategories">
                                   <dd>{{s.SubCategoryName}}</dd>
                                 </div>
+                                <div ng-include="'views/categories/deleteCategoryModal.html'"></div>
+                                <span class="pull-right btn btn-default delete-btn"><i class="fa fa-trash fa-4x"  data-toggle="modal" data-target="#deleteCategoryModal{{c.CategoryId}}"></i></span>
+
                             </dl>
                         </div>
                     </div>
@@ -79,6 +82,7 @@
                 <a href="javascript:void(0)">
                     <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#{{s.CategoryId}}{{$index + 1}}">
                         <h4 class="panel-title">
+                          <span class="badge text">{{s.SubCategories.length}}</span>
                           <span>SubCategories for {{s.CategoryName}}</span>
                           <!-- <span class="pull-right btn btn-success">Add Sub Cat</span> -->
                           <br><br>
@@ -95,6 +99,8 @@
                             <div ng-repeat="sub in s.SubCategories">
                               <div ng-include="'views/quotes/quotesModal.html'"></div>
                               <dd>{{sub.SubCategoryName}} ... {{sub.SubCategoryId}}</dd>
+                              <div ng-include="'views/subcategories/deleteSubCategoryModal.html'"></div>
+                              <span class="pull-right btn btn-default delete-btn"><i class="fa fa-trash fa-4x"  data-toggle="modal" data-target="#deleteSubCategoryModal{{sub.SubCategoryId}}"></i></span>
                             </div>
                             <!-- <dt>Description:</dt>
                             <dd></dd>
@@ -124,6 +130,7 @@
                 <div ng-repeat="q in QuoteDetails">
                     <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#quoteheader{{q.QuoteHeaderId}}">
                         <h4 class="panel-title">
+                          <span class="badge text">{{q.QuoteDetails.length}}</span>
                           QuoteHeader#{{q.QuoteHeaderId}} - {{q.QuoteHeader.Supplier}}
                           <br><br>
                         </h4>
@@ -159,6 +166,8 @@
                             <dt>Accepted:</dt>
                             <dd>{{q.QuoteHeader.IsAccept}}</dd>
                         </dl>
+                        <div ng-include="'views/quotes/deleteQuoteHeaderModal.html'"></div>
+                        <span class="pull-right btn btn-default delete-btn"><i class="fa fa-trash fa-4x"  data-toggle="modal" data-target="#deleteQuoteHeaderModal{{q.QuoteHeader.QuoteHeaderId}}"></i></span>
                       </div>
                         <table class="table">
                           <tr>
@@ -168,6 +177,7 @@
                               <th>Unit Price</th>
                               <th>Quantity</th>
                               <th>Area Room</th>
+                              <th></th>
                           </tr>
                           <tr ng-repeat="qd in q.QuoteDetails">
                             <td>{{qd.PartId}}</td>
@@ -176,6 +186,10 @@
                             <td>${{qd.UnitPrice}}</td>
                             <td>x{{qd.Quantity}}</td>
                             <td>{{qd.AreaRoom}}</td>
+                            <td>
+                              <div ng-include="'views/quotes/deleteQuoteDetailsModal.html'"></div>
+                              <span class="pull-right btn btn-default delete-btn"><i class="fa fa-trash fa-2x"  data-toggle="modal" data-target="#deleteQuoteDetailsModal{{qd.QuoteDetailId}}"></i></span>
+                            </td>
                           </tr>
                         </table>
                     </div>

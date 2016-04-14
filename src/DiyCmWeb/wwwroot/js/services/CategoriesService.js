@@ -100,10 +100,12 @@
       getCategory: _getCategory,
       addCategory: _addCategory,
       editCategory: _editCategory,
+      deleteCategory: _deleteCategory,
       getAllCategories: _getAllCategories,
       getSubCategory: _getSubCategory,
       addSubCategory: _addSubCategory,
       editSubCategory: _editSubCategory,
+      deleteSubCategory: _deleteSubCategory,
       getSubAllCategories: _getSubAllCategories,
       getAllCategoriesByProjectId: _getAllCategoriesByProjectId
     };
