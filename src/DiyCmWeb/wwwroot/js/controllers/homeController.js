@@ -3,7 +3,7 @@
 //    $scope.message = 'Everyone come and look!';
 //});
 
-app.controller('homeController', ['$scope', '$http', 'ReportsService', function ($scope, $http, ReportsService) {
+app.controller('homeController', ['$scope', '$http', 'QuotesService', 'ReportsService', function ($scope, $http, QuotesService, ReportsService) {
 
     $scope.message = 'Everyone come and look!';
 
@@ -27,6 +27,18 @@ app.controller('homeController', ['$scope', '$http', 'ReportsService', function 
         console.log(reason);
     };
 
+    var getProjectsOverBudget = function(data){
+        //filter projects over their budget
+        
+        $scope.overBudgetProjects = data;
+        console.log(data);
+    };
+    var getAllQuotes = function(quotelist){
+        $scope.tableQuotes = quotelist;
+        console.log("QUOTES:");
+        console.log(quotelist);
+    };
+
     ReportsService.getAllProjectsBudgetActual()
         .then(onGetAllBudgetActual, onGetAllError);
     ReportsService.getCategoryDetailsAndSummary()
@@ -35,4 +47,8 @@ app.controller('homeController', ['$scope', '$http', 'ReportsService', function 
         .then(onGetAllSubCategories, onGetAllError);
     ReportsService.getActivities()
         .then(onGetAllActivities, onGetAllError);
+    ReportsService.getAllProjectsBudgetActual()
+        .then(getProjectsOverBudget, onGetAllError);
+    QuotesService.getAllQuoteHeaders()
+        .then(getAllQuotes, onGetAllError);
 }]);

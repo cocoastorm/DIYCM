@@ -62,6 +62,9 @@
                                 <div ng-repeat="s in c.SubCategories">
                                   <dd>{{s.SubCategoryName}}</dd>
                                 </div>
+                                <div ng-include="'views/categories/deleteCategoryModal.html'"></div>
+                                <span class="pull-right btn btn-default delete-btn"><i class="fa fa-trash fa-4x"  data-toggle="modal" data-target="#deleteCategoryModal{{c.CategoryId}}"></i></span>
+
                             </dl>
                         </div>
                     </div>
@@ -77,16 +80,17 @@
             <div class="main-category-child" ng-repeat="s in SubCategories">
             <!-- Start of 2 Project -->
                 <a href="javascript:void(0)">
-                    <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#{{s.CategoryName}}">
+                    <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#{{s.CategoryId}}{{$index + 1}}">
                         <h4 class="panel-title">
+                          <span class="badge text">{{s.SubCategories.length}}</span>
                           <span>SubCategories for {{s.CategoryName}}</span>
                           <!-- <span class="pull-right btn btn-success">Add Sub Cat</span> -->
                           <br><br>
                         </h4>
                     </div>
                 </a>
-                <div id="{{s.CategoryName}}" class="panel-collapse collapse">
-                  <div class="text-center btn-success add-modal" data-toggle="modal" data-target="#quotesModal{{s.CategoryName}}">
+                <div id="{{s.CategoryId}}{{$index + 1}}" class="panel-collapse collapse">
+                  <div class="text-center btn-success add-modal" data-toggle="modal" data-target="#quotesModal{{s.CategoryId}}{{$index + 1}}">
                     <h5<i class="fa fa-plus"></i> Quote</h5>
                   </div>
                     <div class="panel-body" style="word-wrap: break-word;">
@@ -95,6 +99,8 @@
                             <div ng-repeat="sub in s.SubCategories">
                               <div ng-include="'views/quotes/quotesModal.html'"></div>
                               <dd>{{sub.SubCategoryName}} ... {{sub.SubCategoryId}}</dd>
+                              <div ng-include="'views/subcategories/deleteSubCategoryModal.html'"></div>
+                              <span class="pull-right btn btn-default delete-btn"><i class="fa fa-trash fa-4x"  data-toggle="modal" data-target="#deleteSubCategoryModal{{sub.SubCategoryId}}"></i></span>
                             </div>
                             <!-- <dt>Description:</dt>
                             <dd></dd>
@@ -116,17 +122,16 @@
         <div class="clearfix"></div>
 
         <div class="col-md-6">
-
-            <h4  class="text-center  notification-icon accordian-header"  data-toggle="collapse" data-target="#quotedetails">
+            <h4 class="text-center  notification-icon accordian-header"  data-toggle="collapse" data-target="#quotedetails">
               <span class="badge text">{{QuoteDetails.length}}</span>
               Quotes
             </h4>
-
             <div id="quotedetails" class="collapse">
                 <div ng-repeat="q in QuoteDetails">
                     <div class="panel-heading nth-1" data-toggle="collapse" data-parent="#accordion" data-target="#quoteheader{{q.QuoteHeaderId}}">
                         <h4 class="panel-title">
-                          QuoteHeaderId {{q.QuoteHeaderId}}
+                          <span class="badge text">{{q.QuoteDetails.length}}</span>
+                          QuoteHeader#{{q.QuoteHeaderId}} - {{q.QuoteHeader.Supplier}}
                           <br><br>
                         </h4>
                     </div>
@@ -135,60 +140,131 @@
                       <div class="text-center btn-success add-modal" data-toggle="modal" data-target="#quoteDetailsModal{{q.QuoteHeaderId}}">
                         <h5<i class="fa fa-plus"></i> Item</h5>
                       </div>
+                      <div>
+                        <p>{{q.CategoryName}}({{q.CategoryId}})>{{q.SubCategoryName}}({{q.SubCategoryId}})</p>
+                        <dl class="col-md-6">
+                            <dt>Street:</dt>
+                            <dd>{{q.QuoteHeader.AddressStreet}}</dd>
+                            <dt>City:</dt>
+                            <dd>{{q.QuoteHeader.AddressCity}}</dd>
+                            <dt>Province:</dt>
+                            <dd>{{q.QuoteHeader.AddressProvince}}</dd>
+                            <dt>Postal Code:</dt>
+                            <dd>{{q.QuoteHeader.AddressPostalCode}}</dd>
+                            <dt>Country:</dt>
+                            <dd>{{q.QuoteHeader.AddressCountry}}</dd>
+                        </dl>
+                        <dl class="col-md-6">
+                            <dt>Contact Name:</dt>
+                            <dd>{{q.QuoteHeader.ContactName}}</dd>
+                            <dt>Phone Number:</dt>
+                            <dd>{{q.QuoteHeader.PhoneNumber}}</dd>
+                            <dt>Discount:</dt>
+                            <dd>{{q.QuoteHeader.PercentDiscount}}%</dd>
+                            <dt>Notes:</dt>
+                            <dd>{{q.QuoteHeader.Notes}}</dd>
+                            <dt>Accepted:</dt>
+                            <dd>{{q.QuoteHeader.IsAccept}}</dd>
+                        </dl>
+                        <div ng-include="'views/quotes/deleteQuoteHeaderModal.html'"></div>
+                        <span class="pull-right btn btn-default delete-btn"><i class="fa fa-trash fa-4x"  data-toggle="modal" data-target="#deleteQuoteHeaderModal{{q.QuoteHeader.QuoteHeaderId}}"></i></span>
+                      </div>
                         <table class="table">
                           <tr>
                               <th>PartId</th>
                               <th>Description</th>
-                              <th>CategoryId</th>
-                              <th>SubCategoryId</th>
+                              <th>Subcategory Name</th>
                               <th>Unit Price</th>
                               <th>Quantity</th>
+                              <th>Area Room</th>
+                              <th></th>
                           </tr>
                           <tr ng-repeat="qd in q.QuoteDetails">
                             <td>{{qd.PartId}}</td>
                             <td> {{qd.PartDescription}}</td>
-                            <td>{{qd.CategoryId}}</td>
-                            <td>{{qd.SubCategoryId}}</td>
-                            <td>{{qd.UnitPrice}}</td>
-                            <td>{{qd.Quantity}}</td>
+                            <td>{{qd.SubCategoryName}}</td>
+                            <td>${{qd.UnitPrice}}</td>
+                            <td>x{{qd.Quantity}}</td>
+                            <td>{{qd.AreaRoom}}</td>
+                            <td>
+                              <div ng-include="'views/quotes/deleteQuoteDetailsModal.html'"></div>
+                              <span class="pull-right btn btn-default delete-btn"><i class="fa fa-trash fa-2x"  data-toggle="modal" data-target="#deleteQuoteDetailsModal{{qd.QuoteDetailId}}"></i></span>
+                            </td>
                           </tr>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-          <div class="col-md-6">
-            <h4  class="text-center  notification-icon accordian-header"  data-toggle="collapse" data-target="#invoices">
-              <span class="badge text">0</span>
-              Invoices
+
+        <div class="col-md-6">
+            <h4 class="text-center notification-icon accordian-header" data-toggle="collapse" data-target="#invoices">
+                <span class="badge text">{{invoices.length}}</span>
+                Invoices
             </h4>
-
             <div id="invoices" class="collapse">
-              <!-- Start of 1 Project -->
-                  <a href="javascript:void(0)">
-                      <div class="panel-heading">
-                          <h4 class="panel-title">
-                            <span>Title</span>
-                          </h4>
-                      </div>
-                  </a>
-                  <div class="panel-collapse collapse">
-                      <div class="panel-body" style="word-wrap: break-word;">
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt sunt velit harum natus quis consequatur aut voluptatibus. Labore nemo vel debitis sint temporibus quod, aspernatur officiis dicta accusamus sapiente culpa, aliquid architecto, voluptatem quasi, blanditiis! Sunt dignissimos iusto dolore. Necessitatibus eum non eaque optio.
-                      </div>
-                  </div>
-              </div><!-- End of 1 Invoice -->
-          </div>
+                <div ng-repeat="i in invoices">
+                    <h3>QuoteHeaderId {{i.InvoiceId}}</h3>
+                    <table class="table">
+                        <tr>
+                            <th>LineNumber</th>
+                            <th>PartNumber</th>
+                            <th>PartDescription</th>
+                            <th>CategoryId</th>
+                            <th>SubCategoryId</th>
+                            <th>AreaId</th>
+                            <th>Unit Price</th>
+                            <th>Notes</th>
+                        </tr>
+                        <tr ng-repeat="ins in i.invoices">
+                            <td>{{ins.LineNumber}}</td>
+                            <td>{{ins.PartNumber}}</td>
+                            <td>{{ins.PartDescription}}</td>
+                            <td>{{ins.CategoryId}}</td>
+                            <td>{{ins.SubCategoryId}}</td>
+                            <td>{{ins.AreaId}}</td>
+                            <td>{{ins.UnitPrice}}</td>
+                            <td>{{ins.Notes}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
 
-          <div class="col-md-12">
-            <h5>Area</h5>
-            <dl>
-                <dt>Room:</dt>
-                <dd></dd>
-                <dt>Square Footage:</dt>
-                <dd></dd>
-            </dl>
+        <div ng-include="'views/areas/areasModal.html'"></div>
+        <div class="col-md-6">
+          <h4 class="text-center notification-icon accordian-header" data-toggle="collapse" data-target="#areas">
+              <span class="badge text">{{Areas.length}}</span>
+              Areas
+          </h4>
+          <div id="areas" class="collapse">
+
+              <div class="text-center btn-success add-modal" data-toggle="modal" data-target="#areaModal">
+                <h5<i class="fa fa-plus"></i> Area</h5>
+              </div>
+              <div ng-repeat="a in Areas" ng-controller="areasController">
+                <div  class="panel-heading nth-1" ng-attr-data-toggle="{{(editorEnabled == a.AreaId) && 'none' || 'collapse'}}" ng-attr-data-parent="#accordion"  data-target="#area{{a.AreaId}}">
+                  <h4 class="panel-title" ng-hide="editorEnabled == a.AreaId">{{a.AreaRoom}}
+                    <span style="float: right">{{a.AreaSquareFootage}}sqft</span>
+                  </h4>
+                  <div class="form-group">
+                    <input type="text" style="float: left" ng-model="a.AreaRoom" ng-show="editorEnabled == a.AreaId" style="color: black;" />
+                    <input type="text" style="float: right" ng-model="a.AreaSquareFootage" ng-show="editorEnabled == a.AreaId" style="color: black;" />
+                  </div>
+                </div>
+                <div ng-include="'views/areas/deleteAreaModal.html'"></div>
+                <div id="area{{a.AreaId}}" class="panel-collapse collapse">
+                  <div class="panel-body" style="word-wrap: break-word;">
+
+                    <span class="pull-right btn btn-default project-btn" data-id="{{a.AreaId}}" ng-hide="editorEnabled == a.AreaId" ng-click="enableEditor(a.AreaId)"><i class="fa fa-pencil-square fa-4x"></i></span>
+                    <span class="pull-right btn btn-default project-btn" data-id="{{a.AreaId}}" ng-show="editorEnabled == a.AreaId" ng-click="editArea()"><i class="fa fa-floppy-o fa-4x"></i></span>
+                    <span class="pull-right btn btn-default delete-btn"><i class="fa fa-trash fa-4x"  data-toggle="modal" data-target="#deleteAreaModal{{a.AreaId}}"></i></span>
+                  </div>
+                </div>
+              </div>
           </div>
+        </div>
 
 
     </section><!-- /.content -->

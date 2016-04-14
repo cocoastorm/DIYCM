@@ -1,6 +1,9 @@
-﻿app.controller('quoteheadersController', ['$scope', '$http', 'QuotesService', function ($scope, $http, QuotesService) {
+﻿app.controller('quoteheadersController', ['$scope', '$http', 'QuotesService', 'AreasService', function ($scope, $http, QuotesService, AreasService) {
 
     $scope.message = 'Everyone come and look!';
+    var isAcceptValue;
+    var quoteDetails;
+    var quoteHeader;
 
     var onGetQuoteHeader = function (data) {
         $scope.allQuoteHeaders = data;
@@ -13,13 +16,70 @@
 
     var onComplete = function (data) {
       console.log("ONADDEDQUOTEDETAIL");
-        console.log(data);
-        window.location.reload();
+      console.log(data);
+        //if quote added was accepted
+          if ($scope.quoteheader.IsAccept == true) {
+              var supplierHeader = {
+                  SupplierName     : $scope.quoteheader.Supplier,
+                  QuoteHeaderId    : data.QuoteHeaderId,
+                  Date             : $scope.quoteheader.Date,
+                  ContactName      : $scope.quoteheader.ContactName,
+                  PhoneNumber      : $scope.quoteheader.PhoneNumber,
+                  ReferredBy       : $scope.quoteheader.ReferredBy,
+                  AddressStreet    : $scope.quoteheader.AddressStreet,
+                  AddressCity      : $scope.quoteheader.AddressCity,
+                  AddressProvince  : $scope.quoteheader.AddressProvince,
+                  AddressPostalCode: $scope.quoteheader.AddressPostalCode,
+                  AddressCountry   : $scope.quoteheader.AddressCountry,
+                  AmountPaid       : "N",
+                  PaymentDate      : $scope.quoteheader.ExpiryDate,
+                  SH_AMOUNT        : ($scope.quotedetails.UnitPrice * $scope.quotedetails.Quantity),
+                  SH_AMOUNT_PAID   : 0.0
+              };
+              console.log("ADDING INVOICE");
+              console.log(supplierHeader);
+              QuotesService.addSupplierHeader(supplierHeader)
+              .then(onSupplierInvoiceHeaderAddComplete, onError);
+          } else {
+              window.location.reload();
+          }
     };
+
     var onError = function (reason) {
         console.log(reason);
     };
+    var onSuccess = function (data){
+      window.location.reload();
+      console.log(data);
+    };
 
+    var onAddQuoteDetailsComplete = function(){
+      window.location.reload();
+    };
+
+    //Adding a quotedetail to a quoteheader
+    //Quote> +item
+    $scope.addQuoteDetails = function () {
+      var data = {
+        QuoteHeaderId   : $scope.quotedetails.QuoteHeaderId,
+        PartId          : $scope.quotedetails.PartId,
+        PartDescription : $scope.quotedetails.PartDescription,
+        UnitPrice       : $scope.quotedetails.UnitPrice,
+        LineNumber      : 1,
+        Quantity        : $scope.quotedetails.Quantity,
+        AreaId          : $scope.areas.Choice,
+        SubCategoryId   : $scope.quotedetails.SubCategoryId,
+        CategoryId      : $scope.quotedetails.CategoryId,
+        Notes           : $scope.quotedetails.Notes
+      };
+      console.log(data);
+      QuotesService.addQuoteDetail(data)
+        .then(onAddQuoteDetailsComplete, onError);
+    };
+
+
+    //Adding quote details
+    //After creating a quoteheader add the quotedetail
     var onAddQuoteHeaderComplete = function (data){
       console.log(data);
       var quoteDetails = {
@@ -43,6 +103,8 @@
         .then(onComplete, onError);
     }
 
+    //Adding quote header
+    //Subcategories>add QuoteHeader
     $scope.addQuoteHeader = function () {
       var isAcceptValue;
       if($scope.quoteheader.IsAccept == true){
@@ -72,25 +134,19 @@
         .then(onAddQuoteHeaderComplete, onError);
     };
 
-    $scope.addQuoteDetails = function () {
-      var data = {
-        QuoteHeaderId   : $scope.quotedetails.QuoteHeaderId,
-        PartId          : $scope.quotedetails.PartId,
-        PartDescription : $scope.quotedetails.PartDescription,
-        UnitPrice       : $scope.quotedetails.UnitPrice,
-        LineNumber      : 1,
-        Quantity        : $scope.quotedetails.Quantity,
-        AreaId          : $scope.areas.Choice,
-        SubCategoryId   : $scope.quotedetails.SubCategoryId,
-        CategoryId      : $scope.quotedetails.CategoryId,
-        Notes           : $scope.quotedetails.Notes
-      };
-      console.log(data);
-      QuotesService.addQuoteDetail(data)
-        .then(onComplete, onError);
+
+    $scope.deleteQuoteHeader = function (id) {
+      var QuoteHeaderId = id;
+      console.log(QuoteHeaderId);
+      QuotesService.deleteQuoteHeader(QuoteHeaderId)
+        .then(onSuccess, onError);
     };
-
-
+    $scope.deleteQuoteDetails = function (id) {
+      var QuoteDetailId = id;
+      console.log(QuoteDetailId);
+      QuotesService.deleteQuoteDetail(QuoteDetailId)
+        .then(onSuccess, onError);
+    };
 
     QuotesService.getAllQuoteHeaders()
     .then(onGetQuoteHeader, onError);
@@ -197,4 +253,41 @@
 
             return '';
           }
+
+    //add invoice details
+          var onSupplierInvoiceHeaderAddComplete = function (data) {
+
+              var supplierDetails = {
+                InvoiceId       : data.InvoiceId,
+                PartNumber      : $scope.quotedetails.PartId,
+                PartDescription : $scope.quotedetails.PartDescription,
+                UnitPrice       : $scope.quotedetails.UnitPrice,
+                LineNumber      : 1,
+                Quantity        : $scope.quotedetails.Quantity,
+                AreaId          : $scope.areas.Choice,
+                SubCategoryId   : $scope.quotedetails.SubCategoryId,
+                CategoryId      : $scope.quotedetails.CategoryId,
+                Notes           : $scope.quotedetails.Notes
+              };
+              QuotesService.addSupplierDetail(supplierDetails)
+                .then(onAddSupplierComplete, onError);
+          }
+
+          $scope.getAreas = function () {
+              AreasService.getAllAreas()
+                .then(onGetAreas, onError);
+          }
+
+
+        var onGetAreas = function (data) {
+            $scope.areas = data;
+            //console.log(data);
+        };
+
+
+        var onAddSupplierComplete = function (data) {
+          console.log("ADDEDSUPPLIERHEADER");
+          console.log(data);
+          window.location.reload();
+        }
 }]);

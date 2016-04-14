@@ -125,9 +125,20 @@
                   QuoteHeader : quoteheader,
                   QuoteDetails : new Array(),
                   SubCategoryId : null,
-                  CategoryId: null
+                  CategoryId: null,
+                  CategoryName: null,
+                  SubCategoryName: null
                 }
                 quoteheaderarr.push(quote);
+              });
+
+              areas.forEach(function (area) {
+                var a = {
+                  AreaId            : area.AreaId,
+                  AreaRoom          : area.AreaRoom,
+                  AreaSquareFootage : area.AreaSquareFootage
+                }
+                allAreas.push(a);
               });
 
 
@@ -138,9 +149,16 @@
                           if(subcat.SubCategoryId == quotedetail.SubCategoryId &&
                                 quote.QuoteHeaderId == quotedetail.QuoteHeaderId){
                                 //console.log(quote.QuoteHeaderId);
+                                quotedetail['SubCategoryName'] = subcat.SubCategoryName;
                                 quote.QuoteDetails.push(quotedetail);
                                 quote.SubCategoryId = quotedetail.SubCategoryId;
                                 quote.CategoryId = quotedetail.CategoryId;
+                                quote.CategoryName = subcat.CategoryName;
+                                quote.SubCategoryName = subcat.SubCategoryName;
+                                allAreas.forEach(function (a) {
+                                if(quotedetail.AreaId == a.AreaId)
+                                  quotedetail['AreaRoom'] = a.AreaRoom;
+                                });
                           }
                       });
                   });
@@ -156,14 +174,7 @@
               });
 
 
-              areas.forEach(function (area) {
-                var a = {
-                  AreaId            : area.AreaId,
-                  AreaRoom          : area.AreaRoom,
-                  AreaSquareFootage : area.AreaSquareFootage
-                }
-                allAreas.push(a);
-              });
+
 
 
               allCategories.push(allProjectCategories);
