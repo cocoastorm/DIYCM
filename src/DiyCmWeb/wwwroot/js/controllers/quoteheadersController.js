@@ -48,6 +48,10 @@
     var onError = function (reason) {
         console.log(reason);
     };
+    var onSuccess = function (data){
+      window.location.reload();
+      console.log(data);
+    };
 
     var onAddQuoteDetailsComplete = function(){
       window.location.reload();
@@ -128,6 +132,14 @@
       console.log(data);
       QuotesService.addQuoteHeader(data)
         .then(onAddQuoteHeaderComplete, onError);
+    };
+
+
+    $scope.deleteQuoteHeader = function (id) {
+      var QuoteHeaderId = id;
+      console.log(QuoteHeaderId);
+      QuotesService.deleteQuoteHeader(QuoteHeaderId)
+        .then(onSuccess, onError);
     };
 
     QuotesService.getAllQuoteHeaders()

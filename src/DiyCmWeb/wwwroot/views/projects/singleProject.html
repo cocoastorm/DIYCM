@@ -166,6 +166,8 @@
                             <dt>Accepted:</dt>
                             <dd>{{q.QuoteHeader.IsAccept}}</dd>
                         </dl>
+                        <div ng-include="'views/quotes/deleteQuoteHeaderModal.html'"></div>
+                        <span class="pull-right btn btn-default delete-btn"><i class="fa fa-trash fa-4x"  data-toggle="modal" data-target="#deleteQuoteHeaderModal{{q.QuoteHeader.QuoteHeaderId}}"></i></span>
                       </div>
                         <table class="table">
                           <tr>
